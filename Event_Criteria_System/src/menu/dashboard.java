@@ -3,16 +3,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package menu;
+import com.mysql.cj.xdevapi.Statement;
+import com.sun.jdi.connect.spi.Connection;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.SQLException;
+import javax.swing.UIManager;
+import event_criteria_system.Login;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
+
+
+import javax.swing.table.DefaultTableModel;
+import static menu.registration_user.password;
+import static menu.registration_user.username;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
+import java.sql.DriverManager;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author Administrator
  */
 public class dashboard extends javax.swing.JFrame {
-
+public static String confirmpassword;
+private DefaultTableModel model;
     /**
      * Creates new form dashboard
      */
@@ -81,7 +111,7 @@ public class dashboard extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         label5 = new java.awt.Label();
         searchingbar = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        addev = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         label6 = new java.awt.Label();
         jPanel12 = new PanelRound();
@@ -90,13 +120,13 @@ public class dashboard extends javax.swing.JFrame {
         jPanel15 = new PanelRound();
         jPanel16 = new javax.swing.JPanel();
         label7 = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
+        User = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        confirmpass = new javax.swing.JPasswordField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        Pass = new javax.swing.JPasswordField();
         jLabel25 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         clear = new javax.swing.JButton();
@@ -348,11 +378,16 @@ public class dashboard extends javax.swing.JFrame {
         events.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
         events.add(searchingbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 240, 40));
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 51));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-plus-32.png"))); // NOI18N
-        jButton4.setText("Create a event");
-        events.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 170, 40));
+        addev.setBackground(new java.awt.Color(0, 153, 51));
+        addev.setForeground(new java.awt.Color(255, 255, 255));
+        addev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-plus-32.png"))); // NOI18N
+        addev.setText("Create a event");
+        addev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addevActionPerformed(evt);
+            }
+        });
+        events.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 170, 40));
 
         jTabbedPane1.addTab("tab2", events);
 
@@ -398,8 +433,14 @@ public class dashboard extends javax.swing.JFrame {
         jPanel16.add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 190, 50));
         label7.getAccessibleContext().setAccessibleName("Admin");
 
-        jTextField1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPanel16.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 50));
+        User.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        User.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserActionPerformed(evt);
+            }
+        });
+        jPanel16.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 50));
+        User.getAccessibleContext().setAccessibleName("");
 
         jLabel22.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
@@ -410,8 +451,8 @@ public class dashboard extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Judge" }));
         jPanel16.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 290, 40));
 
-        jPasswordField1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPanel16.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 310, 50));
+        confirmpass.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jPanel16.add(confirmpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 310, 50));
 
         jLabel23.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -423,8 +464,8 @@ public class dashboard extends javax.swing.JFrame {
         jLabel24.setText("Password");
         jPanel16.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 20));
 
-        jPasswordField2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPanel16.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 310, 50));
+        Pass.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jPanel16.add(Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 310, 50));
 
         jLabel25.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -470,18 +511,78 @@ public class dashboard extends javax.swing.JFrame {
         label8.setText("Admin");
         jPanel14.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "id", "Username", "Role", "Password"
+        // Create a table model with button columns
+        model = new DefaultTableModel() {
+            public Class<?> getColumnClass(int column) {
+                if (column == 4 || column == 5) { // Assuming delete is column 4 and edit is column 5
+                    return JButton.class;
+                } else {
+                    return Object.class;
+                }
             }
-        ));
+        };
+
+        model.addColumn("ID");
+        model.addColumn("Username");
+        model.addColumn("Password");
+        model.addColumn("Role");
+        model.addColumn("Delete");
+        model.addColumn("Edit");
+        jTable1.setModel(model
+        );
+        jTable1.getColumn("Delete").setCellRenderer(new ButtonRenderer());
+        jTable1.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox()));
+        jTable1.getColumn("Edit").setCellRenderer(new ButtonRenderer());
+        jTable1.getColumn("Edit").setCellEditor(new ButtonEditor(new JCheckBox()));
+
+        // Create a custom editor for the column containing buttons
         jScrollPane1.setViewportView(jTable1);
+        try {
+            // Establish a database connection
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "");
+
+            // Create a statement and execute a SELECT query
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT id, username, role, password from user");
+
+            // Populate the DefaultTableModel with data from the ResultSet
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String username = resultSet.getString("username");
+                String role = resultSet.getString("password");
+                String password = resultSet.getString("role");
+
+                // Create buttons for delete and edit
+                JButton deleteButton = new JButton("Delete");
+                JButton editButton = new JButton("Edit");
+
+                // Add action listeners to the buttons
+                deleteButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    }
+                });
+
+                editButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Handle edit button click
+                        int selectedRow = jTable1.getSelectedRow();
+                        // Implement your edit logic here using the selectedRow
+                        // For example, you can retrieve the ID from the model
+                        int idToEdit = (int) model.getValueAt(selectedRow, 0);
+                        System.out.println("Edit button clicked for ID: " + idToEdit);
+                    }
+                });
+
+                // Add data to the model, including buttons
+                model.addRow(new Object[]{id, username, password, role, "Delete", "Edit"});
+            }
+
+            // Close the database connection
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         jPanel14.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 730, 910));
 
@@ -491,7 +592,106 @@ public class dashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+  // Custom button renderer for JTable
+   class ButtonRenderer extends JButton implements TableCellRenderer {
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
 
+        public Component getTableCellRendererComponent(JTable jTable1, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            if (isSelected) {
+                setForeground(jTable1.getSelectionForeground());
+                setBackground(jTable1.getSelectionBackground());
+            } else {
+                setForeground(jTable1.getForeground());
+                setBackground(UIManager.getColor("Button.background"));
+            }
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+
+    // Custom button editor for JTable
+    class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+        private String label;
+        private boolean isPushed;
+
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton();
+   
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable jTable1, Object value, boolean isSelected, int row, int column) {
+            if (isSelected) {
+                button.setForeground(jTable1.getSelectionForeground());
+                button.setBackground(jTable1.getSelectionBackground());
+            } else {
+                button.setForeground(jTable1.getForeground());
+                button.setBackground(jTable1.getBackground());
+            }
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            isPushed = true;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+             if (isPushed) {
+            // Perform your action here based on the button click
+            // In this example, we perform the database deletion
+            if (label.equals("Delete")) {
+                int row = jTable1.getSelectedRow();
+                if (row >= 0) {
+                    int idToDelete = (int) model.getValueAt(row, 0);
+                    int confirmResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this user?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+                    if (confirmResult == JOptionPane.YES_OPTION) {
+                        model.removeRow(row);
+                        try {
+                            String deleteQuery = "DELETE FROM user WHERE id = ?";
+                            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "");
+                            java.sql.PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
+                            deleteStatement.setInt(1, idToDelete);
+                            int rowsDeleted = deleteStatement.executeUpdate();
+                            if (rowsDeleted > 0) {
+                                System.out.println("User with ID " + idToDelete + " deleted from the database.");
+                            } else {
+                                System.out.println("User deletion failed.");
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+        isPushed = false;
+        return label;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        @Override
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+    }
+
+   
+     
     private void AdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminActionPerformed
         // TODO add your handling code here:
          jTabbedPane1.setSelectedIndex(3);
@@ -511,6 +711,8 @@ public class dashboard extends javax.swing.JFrame {
 
 if (result == JOptionPane.YES_OPTION) {
   // Delete the file.
+    new Login().setVisible(true);
+       dispose();
 } else if (result == JOptionPane.NO_OPTION) {
   // Cancel the operation.
 } else {
@@ -534,12 +736,12 @@ if (result == JOptionPane.YES_OPTION) {
         // Check if the checkbox is selected.
         if (jCheckBox1.isSelected()) {
             // Set the JPasswordField to echo the password.
-            jPasswordField1.setEchoChar((char) 0);
-            jPasswordField2.setEchoChar((char) 0);
+            confirmpass.setEchoChar((char) 0);
+            Pass.setEchoChar((char) 0);
         } else {
             // Set the JPasswordField to not echo the password.
-            jPasswordField1.setEchoChar('*');
-            jPasswordField2.setEchoChar('*');
+            confirmpass.setEchoChar('*');
+            Pass.setEchoChar('*');
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
@@ -550,7 +752,60 @@ if (result == JOptionPane.YES_OPTION) {
 
     private void adduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adduserActionPerformed
         // TODO add your handling code here:
+      
+    username = User.getText();
+    password = new String(Pass.getPassword());
+    confirmpassword = new String(confirmpass.getPassword());
+    if (username.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Username cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+} else {
+       if(password.isEmpty() || confirmpassword.isEmpty()){
+             JOptionPane.showMessageDialog(null, "Empty Password!", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+       else {
+           if (!password.equals(confirmpassword)) {
+        JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        if (verifyPasswordLength(confirmpassword)) {
+            boolean hasCapsLock = false;
+            boolean hasSpecialCharacters = false;
+
+            for (char character : confirmpassword.toCharArray()) {
+                if (Character.isUpperCase(character)) {
+                    hasCapsLock = true;
+                } else if (!Character.isLetterOrDigit(character)) {
+                    hasSpecialCharacters = true;
+                }
+            }
+
+            if (!hasCapsLock || !hasSpecialCharacters) {
+                JOptionPane.showMessageDialog(null, "The password must contain at least one uppercase letter and one special character.");
+            } else {
+                try {
+                    registration_user user = new registration_user();
+                    user.create();
+                } catch (NoSuchAlgorithmException | InvalidKeySpecException | ClassNotFoundException ex) {
+                    Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+       }
+    }
+    
     }//GEN-LAST:event_adduserActionPerformed
+
+    private void addevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addevActionPerformed
+        // TODO add your handling code here:
+          create_event dialog = new create_event(new java.awt.Frame(), true);
+    dialog.showDialog();
+     dialog.setTitle("Create Event");
+         
+    }//GEN-LAST:event_addevActionPerformed
+
+    private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -586,11 +841,18 @@ if (result == JOptionPane.YES_OPTION) {
             }
         });
     }
-
+public static boolean verifyPasswordLength(String password) {
+    int length = password.length();
+    return length >= 8 && length <= 20;
+} 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Admin;
+    public static javax.swing.JPasswordField Pass;
+    public static javax.swing.JTextField User;
+    private javax.swing.JButton addev;
     private javax.swing.JButton adduser;
     private javax.swing.JButton clear;
+    public static javax.swing.JPasswordField confirmpass;
     private javax.swing.JButton dash;
     private javax.swing.JPanel dashboards;
     private javax.swing.JButton evb;
@@ -599,10 +861,9 @@ if (result == JOptionPane.YES_OPTION) {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    public static javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -642,12 +903,9 @@ if (result == JOptionPane.YES_OPTION) {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
