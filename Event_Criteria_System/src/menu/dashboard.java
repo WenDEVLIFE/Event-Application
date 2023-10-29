@@ -3,50 +3,89 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package menu;
-import com.mysql.cj.xdevapi.Statement;
-import com.sun.jdi.connect.spi.Connection;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
 import java.sql.SQLException;
 import javax.swing.UIManager;
 import event_criteria_system.Login;
 import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
-
-
 import javax.swing.table.DefaultTableModel;
 import static menu.registration_user.password;
 import static menu.registration_user.username;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 /**
  *
  * @author Administrator
  */
 public class dashboard extends javax.swing.JFrame {
-public static String confirmpassword;
+
+    /**
+     *
+     */
+    public static String confirmpassword;
 private DefaultTableModel model;
+ public static String username;
+    public static String password;
     /**
      * Creates new form dashboard
      */
+    
+      /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+                                    
+				 dashboard meow =  new dashboard();
+                                 meow.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	
+      
+    }
+    
     public dashboard() {
+
         initComponents();
           // to set icons of your titlebar
            Image iconImage = Toolkit.getDefaultToolkit().getImage("pictures/sports.png");
@@ -133,7 +172,7 @@ private DefaultTableModel model;
         adduser = new javax.swing.JButton();
         label8 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PWC Event Criteria System");
@@ -447,9 +486,9 @@ private DefaultTableModel model;
         jLabel22.setText("Roles");
         jPanel16.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, 20));
 
-        jComboBox1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Judge" }));
-        jPanel16.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 290, 40));
+        jPanel16.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 310, 40));
 
         confirmpass.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jPanel16.add(confirmpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 310, 50));
@@ -524,19 +563,20 @@ private DefaultTableModel model;
 
         model.addColumn("ID");
         model.addColumn("Username");
-        model.addColumn("Password");
         model.addColumn("Role");
         model.addColumn("Delete");
         model.addColumn("Edit");
-        jTable1.setModel(model
+        jTable.setModel(model
         );
-        jTable1.getColumn("Delete").setCellRenderer(new ButtonRenderer());
-        jTable1.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox()));
-        jTable1.getColumn("Edit").setCellRenderer(new ButtonRenderer());
-        jTable1.getColumn("Edit").setCellEditor(new ButtonEditor(new JCheckBox()));
+        jTable.getColumn("Delete").setCellRenderer(new ButtonRenderer());
+        jTable.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));
+
+        // For the "Edit" column
+        jTable.getColumn("Edit").setCellRenderer(new ButtonRenderer());
+        jTable.getColumn("Edit").setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));
 
         // Create a custom editor for the column containing buttons
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
         try {
             // Establish a database connection
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "");
@@ -549,8 +589,7 @@ private DefaultTableModel model;
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String username = resultSet.getString("username");
-                String role = resultSet.getString("password");
-                String password = resultSet.getString("role");
+                String role = resultSet.getString("role");
 
                 // Create buttons for delete and edit
                 JButton deleteButton = new JButton("Delete");
@@ -566,7 +605,7 @@ private DefaultTableModel model;
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Handle edit button click
-                        int selectedRow = jTable1.getSelectedRow();
+                        int selectedRow = jTable.getSelectedRow();
                         // Implement your edit logic here using the selectedRow
                         // For example, you can retrieve the ID from the model
                         int idToEdit = (int) model.getValueAt(selectedRow, 0);
@@ -575,7 +614,7 @@ private DefaultTableModel model;
                 });
 
                 // Add data to the model, including buttons
-                model.addRow(new Object[]{id, username, password, role, "Delete", "Edit"});
+                model.addRow(new Object[]{id, username, role, "Delete", "Edit"});
             }
 
             // Close the database connection
@@ -590,105 +629,131 @@ private DefaultTableModel model;
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, -30, 1110, 1030));
 
+        getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
   // Custom button renderer for JTable
-   class ButtonRenderer extends JButton implements TableCellRenderer {
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable jTable1, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (isSelected) {
-                setForeground(jTable1.getSelectionForeground());
-                setBackground(jTable1.getSelectionBackground());
-            } else {
-                setForeground(jTable1.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
-            }
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
+   
+class ButtonRenderer extends JButton implements TableCellRenderer {
+    public ButtonRenderer() {
+        setOpaque(true);
     }
 
-    // Custom button editor for JTable
-    class ButtonEditor extends DefaultCellEditor {
-        protected JButton button;
-        private String label;
-        private boolean isPushed;
-
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-   
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
+    public Component getTableCellRendererComponent(JTable jTable, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        if (isSelected) {
+            setForeground(jTable.getSelectionForeground());
+            setBackground(jTable.getSelectionBackground());
+        } else {
+            setForeground(jTable.getForeground());
+            setBackground(UIManager.getColor("Button.background"));
         }
+        setText((value == null) ? "" : value.toString());
+        return this;
+    }
+}
 
-        public Component getTableCellEditorComponent(JTable jTable1, Object value, boolean isSelected, int row, int column) {
-            if (isSelected) {
-                button.setForeground(jTable1.getSelectionForeground());
-                button.setBackground(jTable1.getSelectionBackground());
-            } else {
-                button.setForeground(jTable1.getForeground());
-                button.setBackground(jTable1.getBackground());
-            }
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            isPushed = true;
-            return button;
+public class ButtonEditor extends DefaultCellEditor {
+    
+    protected JButton button;
+    private String label;
+    private boolean isPushed;
+    private int selectedRow;
+    private JTable jTable;
+    private DefaultTableModel model;
+
+    public ButtonEditor(JCheckBox checkBox, JTable jTable, DefaultTableModel model) {
+        super(checkBox);
+        button = new JButton();
+        button.setOpaque(true);
+        button.addActionListener((ActionEvent e) -> {
+            fireEditingStopped();
+        });
+        this.jTable = jTable;
+        this.model = model;
+    }
+
+    @Override
+    public Component getTableCellEditorComponent(JTable jTable, Object value, boolean isSelected, int row, int column) {
+        if (isSelected) {
+            button.setForeground(jTable.getSelectionForeground());
+            button.setBackground(jTable.getSelectionBackground());
+        } else {
+            button.setForeground(jTable.getForeground());
+            button.setBackground(jTable.getBackground());
         }
+        label = (value == null) ? "" : value.toString();
+        isPushed = true;
+        selectedRow = row;
+        return button;
+    }
 
-        @Override
-        public Object getCellEditorValue() {
-             if (isPushed) {
-            // Perform your action here based on the button click
-            // In this example, we perform the database deletion
+    @Override
+    public Object getCellEditorValue() {
+        if (isPushed) {
             if (label.equals("Delete")) {
-                int row = jTable1.getSelectedRow();
-                if (row >= 0) {
-                    int idToDelete = (int) model.getValueAt(row, 0);
-                    int confirmResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this user?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
-                    if (confirmResult == JOptionPane.YES_OPTION) {
-                        model.removeRow(row);
-                        try {
+                if (selectedRow >= 0 && selectedRow < model.getRowCount()) {
+                    try {
+                        int idToDelete = (int) model.getValueAt(selectedRow, 0);
+
+                        int confirmResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this user?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+                        if (confirmResult == JOptionPane.YES_OPTION) {
                             String deleteQuery = "DELETE FROM user WHERE id = ?";
-                            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "");
-                            java.sql.PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
-                            deleteStatement.setInt(1, idToDelete);
-                            int rowsDeleted = deleteStatement.executeUpdate();
-                            if (rowsDeleted > 0) {
-                                System.out.println("User with ID " + idToDelete + " deleted from the database.");
-                            } else {
-                                System.out.println("User deletion failed.");
+                            try (java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "");
+                                 java.sql.PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+                                deleteStatement.setInt(1, idToDelete);
+                                int rowsDeleted = deleteStatement.executeUpdate();
+                                if (rowsDeleted > 0) {
+                                    System.out.println("User with ID " + idToDelete + " deleted from the database.");
+                                   
+                                    dispose();
+                                     new dashboard().setVisible(true);
+                                         jTabbedPane1.setSelectedIndex(3);
+                                } else {
+                                    System.out.println("User deletion failed.");
+                                }
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
                             }
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
+
+                            model.removeRow(selectedRow);
+                            // You may also remove the item from your data source here
                         }
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        ex.printStackTrace();
                     }
                 }
             }
         }
         isPushed = false;
         return label;
-        }
-
-        @Override
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        @Override
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
     }
+
+    // Method to remove marked rows
+    public void removeMarkedRows(List<Integer> rowsToDelete) {
+        for (int i = rowsToDelete.size() - 1; i >= 0; i--) {
+            int rowToDelete = rowsToDelete.get(i);
+            model.removeRow(rowToDelete);
+            // Update your data source here
+        }
+
+        rowsToDelete.clear();
+        model.fireTableDataChanged();
+    }
+
+    @Override
+    public boolean stopCellEditing() {
+        isPushed = false;
+        return super.stopCellEditing();
+    }
+
+   
+    @Override
+    protected void fireEditingStopped() {
+        super.fireEditingStopped();
+    }
+
+}
 
    
      
@@ -747,6 +812,9 @@ if (result == JOptionPane.YES_OPTION) {
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         // TODO add your handling code here:
+           User.setText("");
+            Pass.setText("");
+            confirmpass.setText("");
     
     }//GEN-LAST:event_clearActionPerformed
 
@@ -781,13 +849,10 @@ if (result == JOptionPane.YES_OPTION) {
             if (!hasCapsLock || !hasSpecialCharacters) {
                 JOptionPane.showMessageDialog(null, "The password must contain at least one uppercase letter and one special character.");
             } else {
-                try {
-                    registration_user user = new registration_user();
-                    user.create();
-                } catch (NoSuchAlgorithmException | InvalidKeySpecException | ClassNotFoundException ex) {
-                    Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+                UserExist meow = new UserExist();
+                meow.user_identification();
+          
+              }
         }
     }
        }
@@ -807,40 +872,7 @@ if (result == JOptionPane.YES_OPTION) {
         // TODO add your handling code here:
     }//GEN-LAST:event_UserActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new dashboard().setVisible(true);
-            }
-        });
-    }
+  
 public static boolean verifyPasswordLength(String password) {
     int length = password.length();
     return length >= 8 && length <= 20;
@@ -904,8 +936,8 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;

@@ -6,6 +6,9 @@
     <Property name="title" type="java.lang.String" value="PWC Event Criteria System"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
+  <AccessibilityProperties>
+    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+  </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
@@ -167,6 +170,9 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="170" y="-30" width="1110" height="1030"/>
@@ -906,6 +912,9 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel()"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab4">
@@ -1015,7 +1024,7 @@
                 <Component class="javax.swing.JComboBox" name="jComboBox1">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Verdana" size="12" style="0"/>
+                      <Font name="Verdana" size="18" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="2">
@@ -1030,7 +1039,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="20" y="420" width="290" height="40"/>
+                      <AbsoluteConstraints x="20" y="420" width="310" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1205,17 +1214,17 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="jTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="model&#xa;    " type="code"/>
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;            // Establish a database connection&#xa;             java.sql.Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/eventsystem_db&quot;, &quot;root&quot;, &quot;&quot;);&#xa;&#xa;            // Create a statement and execute a SELECT query&#xa;            java.sql.Statement statement = connection.createStatement();&#xa;             java.sql.ResultSet resultSet = statement.executeQuery(&quot;SELECT id, username, role, password from user&quot;);&#xa;&#xa;            // Populate the DefaultTableModel with data from the ResultSet&#xa;            while (resultSet.next()) {&#xa;                int id = resultSet.getInt(&quot;id&quot;);&#xa;                String username = resultSet.getString(&quot;username&quot;);&#xa;                String role = resultSet.getString(&quot;password&quot;);&#xa;                String password = resultSet.getString(&quot;role&quot;);&#xa;&#xa;                // Create buttons for delete and edit&#xa;                JButton deleteButton = new JButton(&quot;Delete&quot;);&#xa;                JButton editButton = new JButton(&quot;Edit&quot;);&#xa;&#xa;                // Add action listeners to the buttons&#xa;       deleteButton.addActionListener(new ActionListener() {&#xa;        public void actionPerformed(ActionEvent e) {&#xa;}&#xa;    });&#xa;&#xa;                editButton.addActionListener(new ActionListener() {&#xa;                    @Override&#xa;                    public void actionPerformed(ActionEvent e) {&#xa;                        // Handle edit button click&#xa;                        int selectedRow = jTable1.getSelectedRow();&#xa;                        // Implement your edit logic here using the selectedRow&#xa;                        // For example, you can retrieve the ID from the model&#xa;                        int idToEdit = (int) model.getValueAt(selectedRow, 0);&#xa;                        System.out.println(&quot;Edit button clicked for ID: &quot; + idToEdit);&#xa;                    }&#xa;                });&#xa;&#xa;                // Add data to the model, including buttons&#xa;                model.addRow(new Object[]{id, username, password, role, &quot;Delete&quot;, &quot;Edit&quot;});&#xa;            }&#xa;&#xa;            // Close the database connection&#xa;            connection.close();&#xa;        } catch (Exception e) {&#xa;            e.printStackTrace();&#xa;        }"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;            // Establish a database connection&#xa;             java.sql.Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/eventsystem_db&quot;, &quot;root&quot;, &quot;&quot;);&#xa;&#xa;            // Create a statement and execute a SELECT query&#xa;            java.sql.Statement statement = connection.createStatement();&#xa;             java.sql.ResultSet resultSet = statement.executeQuery(&quot;SELECT id, username, role, password from user&quot;);&#xa;&#xa;            // Populate the DefaultTableModel with data from the ResultSet&#xa;            while (resultSet.next()) {&#xa;                int id = resultSet.getInt(&quot;id&quot;);&#xa;                String username = resultSet.getString(&quot;username&quot;);&#xa;                String role = resultSet.getString(&quot;role&quot;);&#xa;               &#xa;                // Create buttons for delete and edit&#xa;                JButton deleteButton = new JButton(&quot;Delete&quot;);&#xa;                JButton editButton = new JButton(&quot;Edit&quot;);&#xa;&#xa;                // Add action listeners to the buttons&#xa;       deleteButton.addActionListener(new ActionListener() {&#xa;        public void actionPerformed(ActionEvent e) {&#xa;}&#xa;    });&#xa;&#xa;                editButton.addActionListener(new ActionListener() {&#xa;                    @Override&#xa;                    public void actionPerformed(ActionEvent e) {&#xa;                        // Handle edit button click&#xa;                        int selectedRow = jTable.getSelectedRow();&#xa;                        // Implement your edit logic here using the selectedRow&#xa;                        // For example, you can retrieve the ID from the model&#xa;                        int idToEdit = (int) model.getValueAt(selectedRow, 0);&#xa;                        System.out.println(&quot;Edit button clicked for ID: &quot; + idToEdit);&#xa;                    }&#xa;                });&#xa;&#xa;                // Add data to the model, including buttons&#xa;                model.addRow(new Object[]{id, username, role, &quot;Delete&quot;, &quot;Edit&quot;});&#xa;            }&#xa;&#xa;            // Close the database connection&#xa;            connection.close();&#xa;        } catch (Exception e) {&#xa;            e.printStackTrace();&#xa;        }"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTable1.getColumn(&quot;Delete&quot;).setCellRenderer(new ButtonRenderer());&#xa;        jTable1.getColumn(&quot;Delete&quot;).setCellEditor(new ButtonEditor(new JCheckBox()));&#xa;        jTable1.getColumn(&quot;Edit&quot;).setCellRenderer(new ButtonRenderer());&#xa;       jTable1.getColumn(&quot;Edit&quot;).setCellEditor(new ButtonEditor(new JCheckBox()));&#xa;&#xa;// Create a custom editor for the column containing buttons"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="// Create a table model with button columns&#xa;        model = new DefaultTableModel() {&#xa;            public Class&lt;?&gt; getColumnClass(int column) {&#xa;                if (column == 4 || column == 5) { // Assuming delete is column 4 and edit is column 5&#xa;                    return JButton.class;&#xa;                } else {&#xa;                    return Object.class;&#xa;                }&#xa;            }&#xa;        };&#xa;&#xa;        model.addColumn(&quot;ID&quot;);&#xa;        model.addColumn(&quot;Username&quot;);&#xa;        model.addColumn(&quot;Password&quot;);&#xa;        model.addColumn(&quot;Role&quot;);&#xa;        model.addColumn(&quot;Delete&quot;);&#xa;        model.addColumn(&quot;Edit&quot;);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTable.getColumn(&quot;Delete&quot;).setCellRenderer(new ButtonRenderer());&#xa;jTable.getColumn(&quot;Delete&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));&#xa;&#xa;// For the &quot;Edit&quot; column&#xa;jTable.getColumn(&quot;Edit&quot;).setCellRenderer(new ButtonRenderer());&#xa;jTable.getColumn(&quot;Edit&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));&#xa;&#xa;// Create a custom editor for the column containing buttons"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="// Create a table model with button columns&#xa;        model = new DefaultTableModel() {&#xa;            public Class&lt;?&gt; getColumnClass(int column) {&#xa;                if (column == 4 || column == 5) { // Assuming delete is column 4 and edit is column 5&#xa;                    return JButton.class;&#xa;                } else {&#xa;                    return Object.class;&#xa;                }&#xa;            }&#xa;        };&#xa;&#xa;        model.addColumn(&quot;ID&quot;);&#xa;        model.addColumn(&quot;Username&quot;);&#xa;        model.addColumn(&quot;Role&quot;);&#xa;        model.addColumn(&quot;Delete&quot;);&#xa;        model.addColumn(&quot;Edit&quot;);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

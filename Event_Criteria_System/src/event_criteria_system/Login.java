@@ -138,8 +138,9 @@ public class Login extends javax.swing.JFrame {
 
     private void loginbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbuttonActionPerformed
         // TODO add your handling code here:
-            new dashboard().setVisible(true);
-            dispose();
+            dashboard meow =  new dashboard();
+                    meow.setVisible(true);
+                    dispose();
     }//GEN-LAST:event_loginbuttonActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
