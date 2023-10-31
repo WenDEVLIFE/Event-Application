@@ -32,11 +32,11 @@ public class registration_user extends UserExist{
     }
 
     // MD5 function
-    private static String hashPassword(String password2, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private static String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 10000; // Number of iterations
         int keyLength = 256; // Key length in bits
 
-        PBEKeySpec spec = new PBEKeySpec(password2.toCharArray(), salt, iterations, keyLength);
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         byte[] hashedNewPassword = factory.generateSecret(spec).getEncoded();
 
@@ -66,7 +66,7 @@ public class registration_user extends UserExist{
     Object selectedItem2 = jComboBox1.getSelectedItem();
     String selectedItemString = (String) selectedItem2;
 
-    password = new String(Pass.getPassword());
+ 
 
     // Generate a random salt for each user.
     byte[] salt = generateSalt();
@@ -106,11 +106,18 @@ public class registration_user extends UserExist{
         // If the user was successfully added to the database, display a success message and clear the text fields.
         if (rowsAffected == 1) {
             JOptionPane.showMessageDialog(null, "Sign up success.");
-              
-           
-                    
+          User.setText("");
+          Pass.setText("");
+          confirmpass.setText("");
+           meow.dispose();
+          meow =  new dashboard();
+            meow.setVisible(true);
+               jTabbedPane1.setSelectedIndex(3);
+    
+    // Set the selected index to the default tab.
      
-
+           
+       
         } else {
             JOptionPane.showMessageDialog(null, "Failed to add user.");
         }
@@ -127,6 +134,8 @@ public class registration_user extends UserExist{
             Logger.getLogger(registration_user.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    // to open a new frame you need this code
 
    
 }

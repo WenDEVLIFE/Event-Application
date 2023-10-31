@@ -4,17 +4,24 @@
  */
 package event_criteria_system;
 
+import java.awt.EventQueue;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
-import menu.dashboard;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
  * @author Administrator
  */
 public class Login extends javax.swing.JFrame {
-
+public static  int time=0;
+public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
+    public static String myDB_username = "root";  // Database username
+    public static  String myDB_PASSWORD = "";  // Define your database password here
     /**
      * Creates new form Login
      */
@@ -23,11 +30,11 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         // to set icons of your titlebar
-           Image iconImage = Toolkit.getDefaultToolkit().getImage("pictures/sports.png");
+           Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
 
         // Set the icon on the frame.
        setIconImage(iconImage);
-   
+    
     }
 
     /**
@@ -41,18 +48,19 @@ public class Login extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        userfield = new javax.swing.JTextField();
+        passfield = new javax.swing.JPasswordField();
         loginbutton = new javax.swing.JButton();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PWC Event Criteria System");
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1024, 768));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(1024, 768));
@@ -67,11 +75,11 @@ public class Login extends javax.swing.JFrame {
         label1.setText("Login");
         jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 149, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 271, 340, 67));
+        userfield.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jPanel2.add(userfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 271, 340, 67));
 
-        jPasswordField1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jPanel2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 408, 340, 65));
+        passfield.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jPanel2.add(passfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 408, 340, 65));
 
         loginbutton.setBackground(new java.awt.Color(0, 153, 51));
         loginbutton.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -109,51 +117,98 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));
         jLabel2.setText("System");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 210, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 210, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel3.setText("Event Criteria ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 390, -1));
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 72)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(128, 0, 0));
+        jLabel3.setText("PWC");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 210, -1));
 
-        jLabel1.setAutoscrolls(true);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 910));
-        ImageIcon originalIcon = new ImageIcon("pictures\\pwc1.png");
-
-        // Get the original image
-        Image originalImage = originalIcon.getImage();
-
-        int newWidth = 600; // Change this to your desired width
-        int newHeight = 1100; // Change this to your desired height
-
-        Image scaledImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-
-        jLabel1.setIcon(scaledIcon);
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel4.setText("Event Criteria ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 390, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbuttonActionPerformed
         // TODO add your handling code here:
-            dashboard meow =  new dashboard();
-                    meow.setVisible(true);
-                    dispose();
+        String username = userfield.getText();
+        String password = new String(passfield.getPassword());
+        
+         if (isMySQLXAMPPOnline()) {
+	                    login(username, password);
+	                    
+	                } else // else if the database is offline
+	                {
+	                    ImageIcon imageIcon = new ImageIcon("src//pictures//database.png");
+	                    JOptionPane.showMessageDialog(null, "Permission denied. Please contanct the administrator", "Login Message", JOptionPane.PLAIN_MESSAGE, imageIcon);
+	                }
+       
+        
+            
     }//GEN-LAST:event_loginbuttonActionPerformed
 
+      public  void checkMySQLServerStatus() throws SQLException {
+        try (Connection connection = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD)) {
+            // Connection successful, MySQL is online.
+        } catch (SQLException e) {
+            // Connection failed, MySQL is offline. You can log the error or handle it as needed.
+            throw e;
+        }
+    }
+
+   
+
+    public boolean isMySQLXAMPPOnline() {
+        String jdbcUrl = "jdbc:mysql://localhost:3306/eventsystem_db";
+        String username = "root";
+        String password = "";
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void login(String username, String password) {
+        try {
+            if (!isMySQLXAMPPOnline()) {
+                ImageIcon imageIcon = new ImageIcon("src//pictures//attention.png");
+                JOptionPane.showMessageDialog(null, "MySQL XAMPP is offline. Please try again later.", "Login Message", JOptionPane.PLAIN_MESSAGE, imageIcon);
+                return;
+            }
+            
+            // call the database class
+            database_user_verification meowc =new database_user_verification();
+            meowc.login_authentication(username, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
           // Check if the checkbox is selected.
                 if (jCheckBox1.isSelected()) {
                     // Set the JPasswordField to echo the password.
-                   jPasswordField1.setEchoChar((char) 0);
+                   passfield.setEchoChar((char) 0);
                 } else {
                     // Set the JPasswordField to not echo the password.
-                    jPasswordField1.setEchoChar('*');
+                    passfield.setEchoChar('*');
                 }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+  
+    // to check mysql online
+  
+   
+
 
     /**
      * @param args the command line arguments
@@ -183,22 +238,25 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Login().setVisible(true);
+          EventQueue.invokeLater(() -> {
+              Login user = new Login();
+             user.setVisible(true);
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
     private java.awt.Label label3;
     private java.awt.Label label4;
     private javax.swing.JButton loginbutton;
+    public static javax.swing.JPasswordField passfield;
+    public static javax.swing.JTextField userfield;
     // End of variables declaration//GEN-END:variables
 }

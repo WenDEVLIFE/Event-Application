@@ -47,12 +47,11 @@ public class UserExist extends dashboard {
         // Check if the username already exists in the database.
         if (doesUsernameExist(username)) {
             JOptionPane.showMessageDialog(null, "The user already exists.");
-          User.setText("");
-            Pass.setText("");
-            confirmpass.setText("");
-             dispose();
-             dashboard meow =  new dashboard();
-             meow.setVisible(true);
+                meow.dispose();
+          meow =  new dashboard();
+            meow.setVisible(true);
+               jTabbedPane1.setSelectedIndex(3);
+
         } else {
             try {
                 
@@ -65,5 +64,7 @@ public class UserExist extends dashboard {
     } catch (SQLException | ClassNotFoundException ex) {
         JOptionPane.showMessageDialog(null, "An error occurred while checking the username.");
     }
+    
 }
+    
 }

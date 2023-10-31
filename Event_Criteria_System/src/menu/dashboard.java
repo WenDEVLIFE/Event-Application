@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 /**
@@ -33,10 +34,15 @@ public class dashboard extends javax.swing.JFrame {
     /**
      *
      */
+     // this the jframe of class
+    public static dashboard meow;
+    
     public static String confirmpassword;
 private DefaultTableModel model;
  public static String username;
     public static String password;
+    
+    public static  dashboard currentFrame;
     /**
      * Creates new form dashboard
      */
@@ -69,17 +75,20 @@ private DefaultTableModel model;
         //</editor-fold>
 
         /* Create and display the form */
-        EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-                                    
-				 dashboard meow =  new dashboard();
-                                 meow.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+        EventQueue.invokeLater(() -> {
+            try {
+                
+                meow =  new dashboard();
+                meow.setVisible(true);
+               meow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                
+          
+                 
+                 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 	
       
     }
@@ -88,7 +97,7 @@ private DefaultTableModel model;
 
         initComponents();
           // to set icons of your titlebar
-           Image iconImage = Toolkit.getDefaultToolkit().getImage("pictures/sports.png");
+           Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
 
         // Set the icon on the frame.
        setIconImage(iconImage);
@@ -151,11 +160,7 @@ private DefaultTableModel model;
         label5 = new java.awt.Label();
         searchingbar = new javax.swing.JTextField();
         addev = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        label6 = new java.awt.Label();
-        jPanel12 = new PanelRound();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
+        adminpanel = new javax.swing.JPanel();
         jPanel15 = new PanelRound();
         jPanel16 = new javax.swing.JPanel();
         label7 = new java.awt.Label();
@@ -173,6 +178,10 @@ private DefaultTableModel model;
         label8 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        reports = new javax.swing.JPanel();
+        label6 = new java.awt.Label();
+        jPanel12 = new PanelRound();
+        jPanel13 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PWC Event Criteria System");
@@ -430,38 +439,12 @@ private DefaultTableModel model;
 
         jTabbedPane1.addTab("tab2", events);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        label6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label6.setText("Reports");
-        jPanel4.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 50));
-
-        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1090, 10));
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
-        );
-
-        jPanel4.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1050, 860));
-
-        jTabbedPane1.addTab("tab3", jPanel4);
-
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        adminpanel.setBackground(new java.awt.Color(255, 255, 255));
+        adminpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel15.setBackground(new java.awt.Color(0, 0, 0));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel14.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1090, 10));
+        adminpanel.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1090, 10));
 
         jPanel16.setBackground(new java.awt.Color(128, 0, 0));
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -544,11 +527,11 @@ private DefaultTableModel model;
         });
         jPanel16.add(adduser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 231, 78));
 
-        jPanel14.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 360, 910));
+        adminpanel.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 360, 910));
 
         label8.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         label8.setText("Admin");
-        jPanel14.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
+        adminpanel.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
 
         // Create a table model with button columns
         model = new DefaultTableModel() {
@@ -623,11 +606,41 @@ private DefaultTableModel model;
             e.printStackTrace();
         }
 
-        jPanel14.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 730, 910));
+        adminpanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 730, 910));
 
-        jTabbedPane1.addTab("tab4", jPanel14);
+        jTabbedPane1.addTab("tab4", adminpanel);
+
+        reports.setBackground(new java.awt.Color(255, 255, 255));
+        reports.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        label6.setText("Reports");
+        reports.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        reports.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1090, 10));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1050, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 860, Short.MAX_VALUE)
+        );
+
+        reports.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1050, 860));
+
+        jTabbedPane1.addTab("tab3", reports);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, -30, 1110, 1030));
+        jTabbedPane1.addTab("Tab 1", dashboards);
+        jTabbedPane1.addTab("Tab 2", events);
+        jTabbedPane1.addTab("Tab 3", reports);
+        jTabbedPane1.addTab("Tab 4", adminpanel);
 
         getAccessibleContext().setAccessibleDescription("");
 
@@ -759,13 +772,17 @@ public class ButtonEditor extends DefaultCellEditor {
      
     private void AdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminActionPerformed
         // TODO add your handling code here:
-         jTabbedPane1.setSelectedIndex(3);
+                          jTabbedPane1.setSelectedIndex(3);
+        
+        
 
     }//GEN-LAST:event_AdminActionPerformed
 
     private void dashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashActionPerformed
         // TODO add your handling code here:
-               jTabbedPane1.setSelectedIndex(0);
+           jTabbedPane1.setSelectedIndex(0);
+      
+           
      
     }//GEN-LAST:event_dashActionPerformed
 
@@ -776,8 +793,10 @@ public class ButtonEditor extends DefaultCellEditor {
 
 if (result == JOptionPane.YES_OPTION) {
   // Delete the file.
-    new Login().setVisible(true);
-       dispose();
+   meow.dispose();
+       Login user = new Login();
+        user.setVisible(true);
+      
 } else if (result == JOptionPane.NO_OPTION) {
   // Cancel the operation.
 } else {
@@ -787,13 +806,19 @@ if (result == JOptionPane.YES_OPTION) {
 
     private void evbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evbActionPerformed
         // TODO add your handling code here:
-         jTabbedPane1.setSelectedIndex(1);
+        
+                jTabbedPane1.setSelectedIndex(1);
+            
+         
            
     }//GEN-LAST:event_evbActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-         jTabbedPane1.setSelectedIndex(2);
+           jTabbedPane1.setSelectedIndex(2);
+        
+         
+         
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -820,43 +845,38 @@ if (result == JOptionPane.YES_OPTION) {
 
     private void adduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adduserActionPerformed
         // TODO add your handling code here:
-      
-    username = User.getText();
-    password = new String(Pass.getPassword());
-    confirmpassword = new String(confirmpass.getPassword());
-    if (username.isEmpty()) {
+   username = User.getText();
+password = new String(Pass.getPassword());
+confirmpassword = new String(confirmpass.getPassword());
+
+if (username.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Username cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+} else if (password.isEmpty() || confirmpassword.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Password fields cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+} else if (!password.equals(confirmpassword)) {
+    JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+} else if (!verifyPasswordLength(confirmpassword)) {
+    JOptionPane.showMessageDialog(null, "Password must be at least X characters long.", "Error", JOptionPane.ERROR_MESSAGE);
 } else {
-       if(password.isEmpty() || confirmpassword.isEmpty()){
-             JOptionPane.showMessageDialog(null, "Empty Password!", "Error", JOptionPane.ERROR_MESSAGE);
-       }
-       else {
-           if (!password.equals(confirmpassword)) {
-        JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
-        if (verifyPasswordLength(confirmpassword)) {
-            boolean hasCapsLock = false;
-            boolean hasSpecialCharacters = false;
+    boolean hasCapsLock = false;
+    boolean hasSpecialCharacters = false;
 
-            for (char character : confirmpassword.toCharArray()) {
-                if (Character.isUpperCase(character)) {
-                    hasCapsLock = true;
-                } else if (!Character.isLetterOrDigit(character)) {
-                    hasSpecialCharacters = true;
-                }
-            }
-
-            if (!hasCapsLock || !hasSpecialCharacters) {
-                JOptionPane.showMessageDialog(null, "The password must contain at least one uppercase letter and one special character.");
-            } else {
-                UserExist meow = new UserExist();
-                meow.user_identification();
-          
-              }
+    for (char character : confirmpassword.toCharArray()) {
+        if (Character.isUpperCase(character)) {
+            hasCapsLock = true;
+        } else if (!Character.isLetterOrDigit(character)) {
+            hasSpecialCharacters = true;
         }
     }
-       }
+
+    if (!hasCapsLock || !hasSpecialCharacters) {
+        JOptionPane.showMessageDialog(null, "The password must contain at least one uppercase letter and one special character.");
+    } else {
+        // All checks passed, user registration or other actions can proceed here
+        UserExist meow2 = new UserExist();
+        meow2.user_identification();
     }
+}
     
     }//GEN-LAST:event_adduserActionPerformed
 
@@ -875,7 +895,7 @@ if (result == JOptionPane.YES_OPTION) {
   
 public static boolean verifyPasswordLength(String password) {
     int length = password.length();
-    return length >= 8 && length <= 20;
+    return length >= 8 && length <=20;
 } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Admin;
@@ -883,6 +903,7 @@ public static boolean verifyPasswordLength(String password) {
     public static javax.swing.JTextField User;
     private javax.swing.JButton addev;
     private javax.swing.JButton adduser;
+    private javax.swing.JPanel adminpanel;
     private javax.swing.JButton clear;
     public static javax.swing.JPasswordField confirmpass;
     private javax.swing.JButton dash;
@@ -924,12 +945,10 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -947,6 +966,7 @@ public static boolean verifyPasswordLength(String password) {
     private java.awt.Label label7;
     private java.awt.Label label8;
     private javax.swing.JPanel participants;
+    private javax.swing.JPanel reports;
     private javax.swing.JTextField searchingbar;
     // End of variables declaration//GEN-END:variables
 }
