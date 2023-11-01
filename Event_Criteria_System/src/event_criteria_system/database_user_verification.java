@@ -4,6 +4,9 @@
  */
 package event_criteria_system;
 
+import static event_criteria_system.Login.myDB_PASSWORD;
+import static event_criteria_system.Login.myDB_username;
+import static event_criteria_system.Login.mydb_url;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -16,12 +19,25 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
-
+import menu.dashboard;
+import static menu.dashboard.meow;
 /**
  *
  * @author Administrator
- */public class database_user_verification extends Login {
+ */public class database_user_verification {
+     // store the data from the main
+private final String username;
+private final String password;
+
+// to receive the value from the main jframe
+      public static Login user;
+ 
+    public database_user_verification(String username, String password,Login user) {
+           this.username = username; // Initialize the username instance variable
+    this.password = password; // Initialize the password instance variable
+    this.user = user;  // Initialize the user jframe instance variable
+    }
+     
     public void login_authentication(String username, String password) {
         Connection con = null;
         try {
@@ -74,6 +90,14 @@ import javax.swing.JOptionPane;
         }
     
 }
+      public  void checkMySQLServerStatus() throws SQLException {
+        try (Connection connection = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD)) {
+            // Connection successful, MySQL is online.
+        } catch (SQLException e) {
+            // Connection failed, MySQL is offline. You can log the error or handle it as needed.
+            throw e;
+        }
+    }
 
 private void displayErrorMessage(String message) {
     ImageIcon imageIcon1 = new ImageIcon("src//pictures//attention.png");
@@ -85,7 +109,9 @@ private void displayWelcomeMessage(String username) {
     ImageIcon imageIcon = new ImageIcon("src//pictures//cloudy-day.png");
     JOptionPane.showMessageDialog(null, "Welcome, " + username, "Login Message", JOptionPane.PLAIN_MESSAGE, imageIcon);
     System.out.println("Authentication successful!");
-    String activity = "Login";
+    user.dispose();
+  meow =  new dashboard(username);
+  meow.setVisible(true);
 }
 
 public boolean validatePassword(String enteredPassword, byte[] storedSalt, String storedHashedPassword) {

@@ -15,10 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static menu.registration_user.password;
-import static menu.registration_user.username;
 import java.sql.DriverManager;
-import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -37,10 +34,11 @@ public class dashboard extends javax.swing.JFrame {
      // this the jframe of class
     public static dashboard meow;
     
-    public static String confirmpassword;
+    public static String confirmpassword1;
 private DefaultTableModel model;
  public static String username;
-    public static String password;
+ public static String username1;
+    public static String password1;
     
     public static  dashboard currentFrame;
     /**
@@ -78,7 +76,7 @@ private DefaultTableModel model;
         EventQueue.invokeLater(() -> {
             try {
                 
-                meow =  new dashboard();
+                meow =  new dashboard(username);
                 meow.setVisible(true);
                meow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 
@@ -93,8 +91,9 @@ private DefaultTableModel model;
       
     }
     
-    public dashboard() {
-
+    public dashboard(String username) {
+      this.username = username;
+        
         initComponents();
           // to set icons of your titlebar
            Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
@@ -121,6 +120,7 @@ private DefaultTableModel model;
         evb = new javax.swing.JButton();
         label4 = new java.awt.Label();
         jButton5 = new javax.swing.JButton();
+        label9 = new java.awt.Label();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         dashboards = new javax.swing.JPanel();
         eventboard1 = new PanelRound();
@@ -191,7 +191,7 @@ private DefaultTableModel model;
         jPanel1.setBackground(new java.awt.Color(128, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-admin-48.png"))); // NOI18N
+        Admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-admin-48.png"))); // NOI18N
         Admin.setText("Admin");
         Admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +200,7 @@ private DefaultTableModel model;
         });
         jPanel1.add(Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 170, 67));
 
-        dash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-dashboard-48.png"))); // NOI18N
+        dash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-dashboard-48.png"))); // NOI18N
         dash.setText("Dashboard");
         dash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,10 +222,10 @@ private DefaultTableModel model;
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 30));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-user-60.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-user-60.png"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, 100));
 
-        evb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/sports.png"))); // NOI18N
+        evb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/sports.png"))); // NOI18N
         evb.setText("Events");
         evb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,12 +234,12 @@ private DefaultTableModel model;
         });
         jPanel1.add(evb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 170, 67));
 
-        label4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label4.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         label4.setForeground(new java.awt.Color(255, 255, 255));
-        label4.setText("User:");
-        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 130, 40));
+        label4.setText(username);
+        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 60, 40));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-reports-58.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-reports-58.png"))); // NOI18N
         jButton5.setText("Reports");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,6 +247,11 @@ private DefaultTableModel model;
             }
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 170, 67));
+
+        label9.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label9.setForeground(new java.awt.Color(255, 255, 255));
+        label9.setText("User:");
+        jPanel1.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 1000));
 
@@ -257,7 +262,7 @@ private DefaultTableModel model;
         eventboard1.setForeground(new java.awt.Color(255, 255, 255));
         eventboard1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/sports.png"))); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/sports.png"))); // NOI18N
         eventboard1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -281,7 +286,7 @@ private DefaultTableModel model;
         jLabel1.setText("Participants");
         participants.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, 20));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-conference-foreground-selected-48.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-conference-foreground-selected-48.png"))); // NOI18N
         participants.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -307,7 +312,7 @@ private DefaultTableModel model;
         jLabel8.setText("Judges");
         jPanel8.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, 30));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-conference-foreground-selected-48.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-conference-foreground-selected-48.png"))); // NOI18N
         jPanel8.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -325,7 +330,7 @@ private DefaultTableModel model;
         jLabel9.setText("Reports");
         jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, 20));
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-reports-58.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-reports-58.png"))); // NOI18N
         jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -373,7 +378,7 @@ private DefaultTableModel model;
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, 310, 180));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-score-48.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-score-48.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 50, 50));
 
         jLabel15.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -384,8 +389,8 @@ private DefaultTableModel model;
         dashboards.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, 320, 180));
 
         label3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label3.setText("Welcome User");
-        dashboards.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 460, 40));
+        label3.setText("Welcome User " + username);
+        dashboards.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 630, 40));
 
         jTabbedPane1.addTab("tab1", dashboards);
 
@@ -411,13 +416,13 @@ private DefaultTableModel model;
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"))); // NOI18N
         jButton1.setText("Delete a event");
         events.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 170, 40));
 
         jButton2.setBackground(new java.awt.Color(0, 153, 51));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/search_954591 (1).png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/search_954591 (1).png"))); // NOI18N
         jButton2.setText("Search");
         events.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 170, 40));
 
@@ -428,7 +433,7 @@ private DefaultTableModel model;
 
         addev.setBackground(new java.awt.Color(0, 153, 51));
         addev.setForeground(new java.awt.Color(255, 255, 255));
-        addev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-plus-32.png"))); // NOI18N
+        addev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         addev.setText("Create a event");
         addev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -506,7 +511,7 @@ private DefaultTableModel model;
         clear.setBackground(new java.awt.Color(153, 0, 0));
         clear.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         clear.setForeground(new java.awt.Color(255, 255, 255));
-        clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"))); // NOI18N
+        clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"))); // NOI18N
         clear.setText("Clear All");
         clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -518,7 +523,7 @@ private DefaultTableModel model;
         adduser.setBackground(new java.awt.Color(0, 153, 51));
         adduser.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         adduser.setForeground(new java.awt.Color(255, 255, 255));
-        adduser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-plus-32.png"))); // NOI18N
+        adduser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         adduser.setText("Add User");
         adduser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -687,28 +692,44 @@ public class ButtonEditor extends DefaultCellEditor {
     }
 
     @Override
-    public Component getTableCellEditorComponent(JTable jTable, Object value, boolean isSelected, int row, int column) {
+     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         if (isSelected) {
-            button.setForeground(jTable.getSelectionForeground());
-            button.setBackground(jTable.getSelectionBackground());
+            button.setForeground(table.getSelectionForeground());
+            button.setBackground(table.getSelectionBackground());
         } else {
-            button.setForeground(jTable.getForeground());
-            button.setBackground(jTable.getBackground());
+            button.setForeground(table.getForeground());
+            button.setBackground(table.getBackground());
         }
+
         label = (value == null) ? "" : value.toString();
+        button.setText(label);
         isPushed = true;
         selectedRow = row;
+        
+        String usernameInRow = (String) model.getValueAt(selectedRow, 1); // Assumes username is in column 1
+        if (usernameInRow.equals(username)) {
+            // Disable the button for the user in the title bar
+                JOptionPane.showMessageDialog(null, "You cannot delete yourself.", "Error", JOptionPane.ERROR_MESSAGE);
+            button.setEnabled(false);
+        } else {
+            button.setEnabled(true);
+        }
+        
         return button;
     }
 
     @Override
-    public Object getCellEditorValue() {
-        if (isPushed) {
-            if (label.equals("Delete")) {
+   public Object getCellEditorValue() {
+    if (isPushed) {
+        
+        
+     
+        
+        } 
+            if ("Delete".equals(label)) {
                 if (selectedRow >= 0 && selectedRow < model.getRowCount()) {
                     try {
                         int idToDelete = (int) model.getValueAt(selectedRow, 0);
-
                         int confirmResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this user?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
                         if (confirmResult == JOptionPane.YES_OPTION) {
                             String deleteQuery = "DELETE FROM user WHERE id = ?";
@@ -717,11 +738,12 @@ public class ButtonEditor extends DefaultCellEditor {
                                 deleteStatement.setInt(1, idToDelete);
                                 int rowsDeleted = deleteStatement.executeUpdate();
                                 if (rowsDeleted > 0) {
-                                    System.out.println("User with ID " + idToDelete + " deleted from the database.");
-                                   
-                                    dispose();
-                                     new dashboard().setVisible(true);
-                                         jTabbedPane1.setSelectedIndex(3);
+                                    System.out.println("User with ID " + idToDelete + " deleted from the database."); 
+                                    
+                                    meow.dispose();
+                                    meow =  new dashboard(username);
+                                    meow.setVisible(true);
+                                     jTabbedPane1.setSelectedIndex(3);
                                 } else {
                                     System.out.println("User deletion failed.");
                                 }
@@ -735,13 +757,15 @@ public class ButtonEditor extends DefaultCellEditor {
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         ex.printStackTrace();
                     }
-                }
-            }
         }
-        isPushed = false;
-        return label;
     }
-
+    isPushed = false;
+    return label;
+}
+ private String retrieveUsernameFromDatabase() {
+        // Simulated database retrieval
+        return username;
+    }
     // Method to remove marked rows
     public void removeMarkedRows(List<Integer> rowsToDelete) {
         for (int i = rowsToDelete.size() - 1; i >= 0; i--) {
@@ -845,23 +869,26 @@ if (result == JOptionPane.YES_OPTION) {
 
     private void adduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adduserActionPerformed
         // TODO add your handling code here:
-   username = User.getText();
-password = new String(Pass.getPassword());
-confirmpassword = new String(confirmpass.getPassword());
+           Object selectedItem2 = jComboBox1.getSelectedItem();
+    String selectedItemString = (String) selectedItem2;
+    
+   username1 = User.getText();
+password1 = new String(Pass.getPassword());
+confirmpassword1 = new String(confirmpass.getPassword());
 
-if (username.isEmpty()) {
+if (username1.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Username cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-} else if (password.isEmpty() || confirmpassword.isEmpty()) {
+} else if (password1.isEmpty() || confirmpassword1.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Password fields cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-} else if (!password.equals(confirmpassword)) {
+} else if (!password1.equals(confirmpassword1)) {
     JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-} else if (!verifyPasswordLength(confirmpassword)) {
+} else if (!verifyPasswordLength(confirmpassword1)) {
     JOptionPane.showMessageDialog(null, "Password must be at least X characters long.", "Error", JOptionPane.ERROR_MESSAGE);
 } else {
     boolean hasCapsLock = false;
     boolean hasSpecialCharacters = false;
 
-    for (char character : confirmpassword.toCharArray()) {
+    for (char character : confirmpassword1.toCharArray()) {
         if (Character.isUpperCase(character)) {
             hasCapsLock = true;
         } else if (!Character.isLetterOrDigit(character)) {
@@ -873,8 +900,18 @@ if (username.isEmpty()) {
         JOptionPane.showMessageDialog(null, "The password must contain at least one uppercase letter and one special character.");
     } else {
         // All checks passed, user registration or other actions can proceed here
-        UserExist meow2 = new UserExist();
+        UserExist meow2 = new UserExist(username1, password1, selectedItemString);
         meow2.user_identification();
+         User.setText("");
+          Pass.setText("");
+          confirmpass.setText("");
+          meow.repaint();
+          meow.dispose();
+          meow =  new dashboard(username);
+          meow.setVisible(true);
+            jTabbedPane1.setSelectedIndex(3);
+        
+
     }
 }
     
@@ -965,6 +1002,7 @@ public static boolean verifyPasswordLength(String password) {
     private java.awt.Label label6;
     private java.awt.Label label7;
     private java.awt.Label label8;
+    private java.awt.Label label9;
     private javax.swing.JPanel participants;
     private javax.swing.JPanel reports;
     private javax.swing.JTextField searchingbar;

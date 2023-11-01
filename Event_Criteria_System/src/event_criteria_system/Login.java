@@ -17,11 +17,13 @@ import java.sql.SQLException;
  *
  * @author Administrator
  */
+
 public class Login extends javax.swing.JFrame {
 public static  int time=0;
 public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
     public static String myDB_username = "root";  // Database username
     public static  String myDB_PASSWORD = "";  // Define your database password here
+    public static Login user;
     /**
      * Creates new form Login
      */
@@ -152,14 +154,6 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
             
     }//GEN-LAST:event_loginbuttonActionPerformed
 
-      public  void checkMySQLServerStatus() throws SQLException {
-        try (Connection connection = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD)) {
-            // Connection successful, MySQL is online.
-        } catch (SQLException e) {
-            // Connection failed, MySQL is offline. You can log the error or handle it as needed.
-            throw e;
-        }
-    }
 
    
 
@@ -185,8 +179,9 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
             }
             
             // call the database class
-            database_user_verification meowc =new database_user_verification();
+            database_user_verification meowc =new database_user_verification(username,password,user);
             meowc.login_authentication(username, password);
+       
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -239,7 +234,7 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
 
         /* Create and display the form */
           EventQueue.invokeLater(() -> {
-              Login user = new Login();
+              user = new Login();
              user.setVisible(true);
         });
         

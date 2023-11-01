@@ -139,7 +139,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/menu/icons8-plus-32.png"/>
+              <Image iconType="3" name="/pictures/icons8-plus-32.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Create an event"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>

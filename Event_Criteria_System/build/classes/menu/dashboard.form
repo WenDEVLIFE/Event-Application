@@ -49,7 +49,7 @@
         <Component class="javax.swing.JButton" name="Admin">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/menu/icons8-admin-48.png"/>
+              <Image iconType="3" name="/pictures/icons8-admin-48.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Admin"/>
           </Properties>
@@ -65,7 +65,7 @@
         <Component class="javax.swing.JButton" name="dash">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/menu/icons8-dashboard-48.png"/>
+              <Image iconType="3" name="/pictures/icons8-dashboard-48.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Dashboard"/>
           </Properties>
@@ -110,7 +110,7 @@
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/menu/icons8-user-60.png"/>
+              <Image iconType="3" name="/pictures/icons8-user-60.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -122,7 +122,7 @@
         <Component class="javax.swing.JButton" name="evb">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/menu/sports.png"/>
+              <Image iconType="3" name="/pictures/sports.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Events"/>
           </Properties>
@@ -143,7 +143,9 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="User:"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="username" type="code"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -154,7 +156,7 @@
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/menu/icons8-reports-58.png"/>
+              <Image iconType="3" name="/pictures/icons8-reports-58.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Reports"/>
           </Properties>
@@ -243,7 +245,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/menu/sports.png"/>
+                      <Image iconType="3" name="/pictures/sports.png"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -327,7 +329,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/menu/icons8-conference-foreground-selected-48.png"/>
+                      <Image iconType="3" name="/pictures/icons8-conference-foreground-selected-48.png"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -424,7 +426,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel14">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/menu/icons8-conference-foreground-selected-48.png"/>
+                      <Image iconType="3" name="/pictures/icons8-conference-foreground-selected-48.png"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -489,7 +491,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel12">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/menu/icons8-reports-58.png"/>
+                      <Image iconType="3" name="/pictures/icons8-reports-58.png"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -665,7 +667,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/menu/icons8-score-48.png"/>
+                      <Image iconType="3" name="/pictures/icons8-score-48.png"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -697,11 +699,13 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Welcome User"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;Welcome User &quot; + username" type="code"/>
+                </Property>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="130" width="460" height="40"/>
+                  <AbsoluteConstraints x="20" y="130" width="630" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -776,7 +780,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/menu/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"/>
+                  <Image iconType="3" name="/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Delete a event"/>
               </Properties>
@@ -795,7 +799,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/menu/search_954591 (1).png"/>
+                  <Image iconType="3" name="/pictures/search_954591 (1).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
@@ -834,7 +838,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/menu/icons8-plus-32.png"/>
+                  <Image iconType="3" name="/pictures/icons8-plus-32.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Create a event"/>
               </Properties>
@@ -1092,7 +1096,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/menu/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"/>
+                      <Image iconType="3" name="/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Clear All"/>
                   </Properties>
@@ -1117,7 +1121,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/menu/icons8-plus-32.png"/>
+                      <Image iconType="3" name="/pictures/icons8-plus-32.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Add User"/>
                   </Properties>

@@ -22,8 +22,33 @@ import java.util.logging.Logger;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.swing.JOptionPane;
+import static menu.dashboard.Pass;
+import static menu.dashboard.User;
+import static menu.dashboard.confirmpass;
+import static menu.dashboard.confirmpassword1;
+import static menu.dashboard.password1;
+import static menu.dashboard.username1;
 
-public class registration_user extends UserExist{
+public class registration_user {
+ private  static String username1;
+ private static String password1;
+ private static String confirmpass;
+private  static String selectedItemString;
+
+  
+ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
+    public static String myDB_username = "root";  // Database username
+    public static  String myDB_PASSWORD = "";  // Define your database password here
+    
+    public static javax.swing.JPasswordField Pass;
+    public static javax.swing.JTextField User;
+    public static javax.swing.JTextField confirmpassword1;
+  
+    public static javax.swing.JComboBox<String> jComboBox1;
+   
+    public static javax.swing.JTabbedPane jTabbedPane1;
+  
+    
     private static byte[] generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16]; // You can adjust the salt size as needed
@@ -32,11 +57,11 @@ public class registration_user extends UserExist{
     }
 
     // MD5 function
-    private static String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private static String hashPassword(String password1, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 10000; // Number of iterations
         int keyLength = 256; // Key length in bits
 
-        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+        PBEKeySpec spec = new PBEKeySpec(password1.toCharArray(), salt, iterations, keyLength);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         byte[] hashedNewPassword = factory.generateSecret(spec).getEncoded();
 
@@ -52,27 +77,23 @@ public class registration_user extends UserExist{
         return hexString.toString();
     }
     
-    public static void refresh(){
-
-     // Clear the text fields.
-            User.setText("");
-            Pass.setText("");
-            confirmpass.setText("");
-     
+   
+    public registration_user (String username1, String password1, String selectedItemString) {
+              this.username1 = username1; // Initialize the username instance variable
+    this.password1 = password1; // Initialize the password instance variable
+                  this.selectedItemString= selectedItemString; // Initialize the username instance variable
+        
     }
   // Move the create() method outside of the main() method.
- public static void create() throws NoSuchAlgorithmException, InvalidKeySpecException, ClassNotFoundException {
+ public static void create(String username1, String password1, String selectedItemString) throws NoSuchAlgorithmException, InvalidKeySpecException, ClassNotFoundException {
         
-    Object selectedItem2 = jComboBox1.getSelectedItem();
-    String selectedItemString = (String) selectedItem2;
-
- 
+   
 
     // Generate a random salt for each user.
     byte[] salt = generateSalt();
 
     // Hash the password using PBKDF2.
-    String hashedPassword = hashPassword(password, salt);
+    String hashedPassword = hashPassword(password1, salt);
 
     // Create a connection to the database.
     Class.forName("com.mysql.cj.jdbc.Driver");
@@ -95,7 +116,7 @@ public class registration_user extends UserExist{
 
         // Set the values for the prepared statement.
         insertStatement.setInt(1, newId);
-        insertStatement.setString(2, username);
+        insertStatement.setString(2, username1);
         insertStatement.setString(3, hashedPassword);
         insertStatement.setBytes(4, salt);
         insertStatement.setString(5, selectedItemString);
@@ -106,14 +127,9 @@ public class registration_user extends UserExist{
         // If the user was successfully added to the database, display a success message and clear the text fields.
         if (rowsAffected == 1) {
             JOptionPane.showMessageDialog(null, "Sign up success.");
-          User.setText("");
-          Pass.setText("");
-          confirmpass.setText("");
-           meow.dispose();
-          meow =  new dashboard();
-            meow.setVisible(true);
-               jTabbedPane1.setSelectedIndex(3);
-    
+         
+
+      
     // Set the selected index to the default tab.
      
            
@@ -129,7 +145,7 @@ public class registration_user extends UserExist{
     public static void main(String[] args) {
         try {
             
-            create();
+            create(username1, password1, selectedItemString);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | ClassNotFoundException ex) {
             Logger.getLogger(registration_user.class.getName()).log(Level.SEVERE, null, ex);
         }

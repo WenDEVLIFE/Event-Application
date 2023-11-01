@@ -21,7 +21,7 @@ public class create_event extends java.awt.Dialog {
         initComponents();
          setLocationRelativeTo(null);
            // to set icons of your titlebar
-                  Image iconImage = Toolkit.getDefaultToolkit().getImage("pictures/sports.png");
+                  Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
 
                  // Set the icon on the frame.
                   setIconImage(iconImage);
@@ -82,7 +82,7 @@ public class create_event extends java.awt.Dialog {
         jButton1.setBackground(new java.awt.Color(0, 153, 0));
         jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/icons8-plus-32.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         jButton1.setText("Create an event");
         jButton1.setToolTipText("");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
