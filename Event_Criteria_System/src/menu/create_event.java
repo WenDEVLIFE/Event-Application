@@ -6,25 +6,40 @@ package menu;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author Administrator
  */
 public class create_event extends java.awt.Dialog {
-
+public static String tableName, event, loc, selectedString_month, selectedString_day, selectedString_year,selectedString_participants;
     /**
      * Creates new form create_user
      */
     public create_event(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-         setLocationRelativeTo(null);
-           // to set icons of your titlebar
-                  Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
+     
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            setLocationRelativeTo(null);
+            setResizable(false);
 
-                 // Set the icon on the frame.
-                  setIconImage(iconImage);
+            // Set the icon for the dialog
+            Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
+            setIconImage(iconImage);
+
+            initComponents();
+            setSize(575, 658);
+        } catch (Exception ex) {
+            Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -36,12 +51,20 @@ public class create_event extends java.awt.Dialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        label4 = new java.awt.Label();
-        label5 = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
+        location = new javax.swing.JTextField();
         label1 = new java.awt.Label();
         jButton1 = new javax.swing.JButton();
+        tablename = new javax.swing.JTextField();
+        label2 = new java.awt.Label();
+        maxparti = new javax.swing.JComboBox<>();
+        year = new javax.swing.JComboBox<>();
+        month = new javax.swing.JComboBox<>();
+        label3 = new java.awt.Label();
+        label4 = new java.awt.Label();
+        eventtype = new javax.swing.JTextField();
+        Day = new javax.swing.JComboBox<>();
+        label5 = new java.awt.Label();
+        clear = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -49,35 +72,26 @@ public class create_event extends java.awt.Dialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMinimumSize(new java.awt.Dimension(400, 400));
+        jPanel1.setBackground(new java.awt.Color(128, 0, 0));
+        jPanel1.setMinimumSize(new java.awt.Dimension(575, 658));
         jPanel1.setName("create event"); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(560, 395));
+        jPanel1.setPreferredSize(new java.awt.Dimension(575, 658));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(128, 0, 0));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        label4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label4.setForeground(new java.awt.Color(255, 255, 255));
-        label4.setText("User:");
-        jPanel2.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 130, 40));
-
-        label5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label5.setForeground(new java.awt.Color(255, 255, 255));
-        label5.setText("Create an event");
-        jPanel2.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 210, 40));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 60));
-
-        jTextField1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 390, 80));
+        location.setBackground(new java.awt.Color(51, 51, 51));
+        location.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        location.setForeground(new java.awt.Color(255, 255, 255));
+        location.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locationActionPerformed(evt);
+            }
+        });
+        jPanel1.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 450, 50));
 
         label1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        label1.setText("Name of the Event");
-        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 410, 50));
+        label1.setForeground(new java.awt.Color(255, 255, 255));
+        label1.setText("Max Participants");
+        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 410, 50));
 
         jButton1.setBackground(new java.awt.Color(0, 153, 0));
         jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -87,7 +101,85 @@ public class create_event extends java.awt.Dialog {
         jButton1.setToolTipText("");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.setFocusTraversalPolicyProvider(true);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 280, 80));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 230, 50));
+
+        tablename.setBackground(new java.awt.Color(51, 51, 51));
+        tablename.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        tablename.setForeground(new java.awt.Color(255, 255, 255));
+        tablename.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tablenameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(tablename, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 440, 50));
+
+        label2.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        label2.setForeground(new java.awt.Color(255, 255, 255));
+        label2.setText("Name of the Event");
+        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 390, 50));
+
+        maxparti.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        maxparti.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a number", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        jPanel1.add(maxparti, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, 220, 40));
+
+        year.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        jPanel1.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 160, 40));
+
+        month.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthActionPerformed(evt);
+            }
+        });
+        jPanel1.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 150, 40));
+
+        label3.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        label3.setForeground(new java.awt.Color(255, 255, 255));
+        label3.setText("Event Date");
+        jPanel1.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 410, 50));
+
+        label4.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        label4.setForeground(new java.awt.Color(255, 255, 255));
+        label4.setText("Event Type");
+        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 410, 50));
+
+        eventtype.setBackground(new java.awt.Color(51, 51, 51));
+        eventtype.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        eventtype.setForeground(new java.awt.Color(255, 255, 255));
+        eventtype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventtypeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(eventtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 450, 50));
+
+        Day.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        Day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jPanel1.add(Day, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 90, 40));
+
+        label5.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        label5.setForeground(new java.awt.Color(255, 255, 255));
+        label5.setText("Location");
+        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 410, 50));
+
+        clear.setBackground(new java.awt.Color(153, 0, 0));
+        clear.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        clear.setForeground(new java.awt.Color(255, 255, 255));
+        clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"))); // NOI18N
+        clear.setText("Clear All");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+        jPanel1.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, 231, 50));
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -101,8 +193,79 @@ public class create_event extends java.awt.Dialog {
         setVisible(false);
         dispose();
          
-     
+          
     }//GEN-LAST:event_closeDialog
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     // event name
+        tableName = tablename.getText();
+        
+        // type
+    event = eventtype.getText();
+    
+    // eventlocation
+    loc = location.getText();
+
+    selectedString_month = (String) month.getSelectedItem();
+    selectedString_day = (String) Day.getSelectedItem();
+    selectedString_year = (String) year.getSelectedItem();
+    selectedString_participants = (String) maxparti.getSelectedItem();
+
+    if (tableName.isEmpty() || event.isEmpty() || loc.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Table name, event, and location cannot be empty.");
+    } else if (selectedString_month.equals("Select a month") || selectedString_day.equals("Day") || selectedString_year.equals("Year") || selectedString_participants.equals("Select a number")) {
+        JOptionPane.showMessageDialog(this, "Please select a value from the month, day, year, and max participant value section.");
+    } else {
+        CreateEventFunction c = new CreateEventFunction(tableName, event, loc, selectedString_month, selectedString_day, selectedString_year, selectedString_participants);
+        try {
+            c.createTable();
+              tablename.setText("");
+          eventtype.setText("");
+          location.setText("");
+          String itemToSelect = "Select a month"; // Replace with the item you want to select
+         month.setSelectedItem(itemToSelect);
+           String itemToSelect1 = "Day"; // Replace with the item you want to select
+         Day.setSelectedItem(itemToSelect1);
+           String itemToSelect2 = "Year"; // Replace with the item you want to select
+         year.setSelectedItem(itemToSelect2);
+            String itemToSelect3 = "Select a number"; // Replace with the item you want to select
+         maxparti.setSelectedItem(itemToSelect3);
+        } catch (SQLException ex) {
+            Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void locationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_locationActionPerformed
+
+    private void tablenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablenameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablenameActionPerformed
+
+    private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_monthActionPerformed
+
+    private void eventtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventtypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eventtypeActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+         tablename.setText("");
+          eventtype.setText("");
+          location.setText("");
+          String itemToSelect = "Select a month"; // Replace with the item you want to select
+         month.setSelectedItem(itemToSelect);
+           String itemToSelect1 = "Day"; // Replace with the item you want to select
+         Day.setSelectedItem(itemToSelect1);
+           String itemToSelect2 = "Year"; // Replace with the item you want to select
+         year.setSelectedItem(itemToSelect2);
+            String itemToSelect3 = "Select a number"; // Replace with the item you want to select
+         maxparti.setSelectedItem(itemToSelect3);
+    }//GEN-LAST:event_clearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,28 +273,47 @@ public class create_event extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                create_event dialog = new create_event(new java.awt.Frame(), true);
-                 dialog.setTitle("Create Event");
-         
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+                    create_event dialog = new create_event(new java.awt.Frame(), true);
+                    dialog.setTitle("Create Event");
+                    
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Day;
+    private javax.swing.JButton clear;
+    private javax.swing.JTextField eventtype;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
+    private java.awt.Label label2;
+    private java.awt.Label label3;
     private java.awt.Label label4;
     private java.awt.Label label5;
+    private javax.swing.JTextField location;
+    private javax.swing.JComboBox<String> maxparti;
+    private javax.swing.JComboBox<String> month;
+    private javax.swing.JTextField tablename;
+    private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 
     void showDialog() {
