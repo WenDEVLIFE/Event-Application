@@ -73,6 +73,5 @@ public class UserExist   {
         JOptionPane.showMessageDialog(null, "An error occurred while checking the username.");
     }
     
-}
-    
+}   
 }

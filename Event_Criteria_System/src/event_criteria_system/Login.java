@@ -4,6 +4,7 @@
  */
 package event_criteria_system;
 
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import java.awt.EventQueue;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
@@ -12,6 +13,10 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -48,7 +53,7 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        jPanel2 = new PanelRound1();
         label1 = new java.awt.Label();
         userfield = new javax.swing.JTextField();
         passfield = new javax.swing.JPasswordField();
@@ -56,9 +61,12 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new ShadowPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PWC Event Criteria System");
@@ -69,21 +77,25 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 255, 255));
+        label1.setForeground(new java.awt.Color(128, 0, 0));
         label1.setText("Login");
-        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 149, -1, -1));
+        jPanel2.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
+        userfield.setBackground(new java.awt.Color(51, 51, 51));
         userfield.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jPanel2.add(userfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 271, 340, 67));
+        userfield.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(userfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 420, 50));
 
+        passfield.setBackground(new java.awt.Color(51, 51, 51));
         passfield.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jPanel2.add(passfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 408, 340, 65));
+        passfield.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(passfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 420, 50));
 
-        loginbutton.setBackground(new java.awt.Color(0, 153, 51));
+        loginbutton.setBackground(new java.awt.Color(128, 0, 0));
         loginbutton.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         loginbutton.setForeground(new java.awt.Color(255, 255, 255));
         loginbutton.setText("Sign in");
@@ -92,46 +104,70 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
                 loginbuttonActionPerformed(evt);
             }
         });
-        jPanel2.add(loginbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 560, 231, 78));
+        jPanel2.add(loginbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 231, 60));
 
         label3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label3.setForeground(new java.awt.Color(255, 255, 255));
+        label3.setForeground(new java.awt.Color(128, 0, 0));
         label3.setText("Password");
-        jPanel2.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 364, -1, -1));
+        jPanel2.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
         label4.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label4.setForeground(new java.awt.Color(255, 255, 255));
+        label4.setForeground(new java.awt.Color(128, 0, 0));
         label4.setText("Username");
-        jPanel2.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 227, -1, -1));
+        jPanel2.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setForeground(new java.awt.Color(128, 0, 0));
         jCheckBox1.setText("Check to see the password");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 499, -1, -1));
+        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 110, 90));
+        try {
+            BufferedImage originalImage = ImageIO.read(getClass().getResource("/pictures/pwclogo.jpg"));
+            BufferedImage resizedImage = resizeImage(originalImage,72, 72);  // Adjust the dimensions as needed
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 420, 730));
+            ImageIcon imageIcon = new ImageIcon(resizedImage);
+            jLabel5.setIcon(imageIcon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 490, 500));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));
         jLabel2.setText("System");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 210, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, 210, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 72)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(128, 0, 0));
         jLabel3.setText("PWC");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 210, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 210, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 0));
         jLabel4.setText("Event Criteria ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 390, 60));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 390, 60));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 510, 520));
+
+        jLabel1.setText("");
+        // this is how to resize the picture in JLabel
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 730));
+        try {
+            BufferedImage originalImage = ImageIO.read(getClass().getResource("/pictures/PWC.jpg"));
+            BufferedImage resizedImage = resizeImage(originalImage, 1024, 768);  // Adjust the dimensions as needed
+
+            ImageIcon imageIcon = new ImageIcon(resizedImage);
+            jLabel1.setIcon(imageIcon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -232,6 +268,12 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
         }
         //</editor-fold>
 
+         try {
+	    	FlatSolarizedLightIJTheme.setup();
+	    } catch (Exception e) {
+	    	
+	        e.printStackTrace();
+	    }
         /* Create and display the form */
           EventQueue.invokeLater(() -> {
               user = new Login();
@@ -243,9 +285,12 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private java.awt.Label label1;
     private java.awt.Label label3;
@@ -254,4 +299,13 @@ public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
     public static javax.swing.JPasswordField passfield;
     public static javax.swing.JTextField userfield;
     // End of variables declaration//GEN-END:variables
+
+  private BufferedImage resizeImage(BufferedImage originalImage, int newWidth, int newHeight) {
+    BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
+    Graphics2D g = resizedImage.createGraphics();
+    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
+    g.dispose();
+    return resizedImage;
+}
 }

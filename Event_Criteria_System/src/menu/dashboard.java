@@ -3,20 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package menu;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import java.util.List;
 import java.sql.SQLException;
 import javax.swing.UIManager;
 import event_criteria_system.Login;
+import event_criteria_system.PanelRound1;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.DriverManager;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -73,6 +81,13 @@ private DefaultTableModel model;
         //</editor-fold>
 
         /* Create and display the form */
+        
+         try {
+	    	FlatSolarizedLightIJTheme.setup();
+	    } catch (Exception e) {
+	    	
+	        e.printStackTrace();
+	    }
         EventQueue.invokeLater(() -> {
             try {
                 
@@ -131,8 +146,6 @@ private DefaultTableModel model;
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jPanel3 = new PanelRound();
-        label1 = new java.awt.Label();
         jPanel8 = new PanelRound();
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -151,17 +164,17 @@ private DefaultTableModel model;
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        label3 = new java.awt.Label();
+        jPanel10 = new javax.swing.JPanel();
+        label1 = new java.awt.Label();
         events = new javax.swing.JPanel();
-        jPanel10 = new PanelRound();
-        jPanel11 = new javax.swing.JPanel();
+        jPanel11 = new PanelRound1();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        label5 = new java.awt.Label();
         searchingbar = new javax.swing.JTextField();
         addev = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        label10 = new java.awt.Label();
         adminpanel = new javax.swing.JPanel();
-        jPanel15 = new PanelRound();
         jPanel16 = new javax.swing.JPanel();
         label7 = new java.awt.Label();
         User = new javax.swing.JTextField();
@@ -175,13 +188,15 @@ private DefaultTableModel model;
         jCheckBox1 = new javax.swing.JCheckBox();
         clear = new javax.swing.JButton();
         adduser = new javax.swing.JButton();
-        label8 = new java.awt.Label();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        label8 = new java.awt.Label();
         reports = new javax.swing.JPanel();
-        label6 = new java.awt.Label();
-        jPanel12 = new PanelRound();
         jPanel13 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        label6 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PWC Event Criteria System");
@@ -191,6 +206,8 @@ private DefaultTableModel model;
         jPanel1.setBackground(new java.awt.Color(128, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        Admin.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        Admin.setForeground(new java.awt.Color(128, 0, 0));
         Admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-admin-48.png"))); // NOI18N
         Admin.setText("Admin");
         Admin.addActionListener(new java.awt.event.ActionListener() {
@@ -200,6 +217,8 @@ private DefaultTableModel model;
         });
         jPanel1.add(Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 170, 67));
 
+        dash.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        dash.setForeground(new java.awt.Color(128, 0, 0));
         dash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-dashboard-48.png"))); // NOI18N
         dash.setText("Dashboard");
         dash.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +233,8 @@ private DefaultTableModel model;
         label2.setText("@Copyright  2023");
         jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 960, 150, 40));
 
+        jButton3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(128, 0, 0));
         jButton3.setText("logout");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,6 +246,8 @@ private DefaultTableModel model;
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-user-60.png"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, 100));
 
+        evb.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        evb.setForeground(new java.awt.Color(128, 0, 0));
         evb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/sports.png"))); // NOI18N
         evb.setText("Events");
         evb.addActionListener(new java.awt.event.ActionListener() {
@@ -239,6 +262,8 @@ private DefaultTableModel model;
         label4.setText(username);
         jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 60, 40));
 
+        jButton5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(128, 0, 0));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-reports-58.png"))); // NOI18N
         jButton5.setText("Reports");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +300,7 @@ private DefaultTableModel model;
         jLabel18.setText("0");
         eventboard1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 70, 20));
 
-        dashboards.add(eventboard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 320, 180));
+        dashboards.add(eventboard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 320, 180));
 
         participants.setBackground(new java.awt.Color(128, 0, 0));
         participants.setForeground(new java.awt.Color(255, 255, 255));
@@ -294,15 +319,7 @@ private DefaultTableModel model;
         jLabel19.setText("0");
         participants.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 70, 20));
 
-        dashboards.add(participants, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 320, 180));
-
-        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        dashboards.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1090, 10));
-
-        label1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label1.setText("Dashboard");
-        dashboards.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, 50));
+        dashboards.add(participants, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 320, 180));
 
         jPanel8.setBackground(new java.awt.Color(128, 0, 0));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -320,7 +337,7 @@ private DefaultTableModel model;
         jLabel20.setText("0");
         jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 70, 20));
 
-        dashboards.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 320, 180));
+        dashboards.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 320, 180));
 
         jPanel9.setBackground(new java.awt.Color(128, 0, 0));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -338,7 +355,7 @@ private DefaultTableModel model;
         jLabel21.setText("0");
         jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 70, 20));
 
-        dashboards.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 320, 180));
+        dashboards.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 320, 180));
 
         jPanel2.setBackground(new java.awt.Color(128, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -386,20 +403,24 @@ private DefaultTableModel model;
         jLabel15.setText("0");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 70, 20));
 
-        dashboards.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, 320, 180));
+        dashboards.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 320, 180));
 
-        label3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label3.setText("Welcome User " + username);
-        dashboards.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 630, 40));
+        jPanel10.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label1.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
+        label1.setText("Dashboard");
+        jPanel10.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 350, 50));
+
+        dashboards.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 90));
 
         jTabbedPane1.addTab("tab1", dashboards);
 
         events.setBackground(new java.awt.Color(255, 255, 255));
         events.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel10.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        events.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1090, 10));
+        jPanel11.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel11.setForeground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -425,10 +446,6 @@ private DefaultTableModel model;
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/search_954591 (1).png"))); // NOI18N
         jButton2.setText("Search");
         events.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 170, 40));
-
-        label5.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label5.setText("Events");
-        events.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
         events.add(searchingbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 240, 40));
 
         addev.setBackground(new java.awt.Color(0, 153, 51));
@@ -442,71 +459,82 @@ private DefaultTableModel model;
         });
         events.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 170, 40));
 
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label10.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
+        label10.setText("Event");
+        jPanel4.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 210, 50));
+
+        events.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 90));
+
         jTabbedPane1.addTab("tab2", events);
 
         adminpanel.setBackground(new java.awt.Color(255, 255, 255));
         adminpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel15.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        adminpanel.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1090, 10));
-
-        jPanel16.setBackground(new java.awt.Color(128, 0, 0));
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label7.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label7.setForeground(new java.awt.Color(255, 255, 255));
+        label7.setForeground(new java.awt.Color(128, 0, 0));
         label7.setText("Add User");
-        jPanel16.add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 190, 50));
+        jPanel16.add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 190, 50));
         label7.getAccessibleContext().setAccessibleName("Admin");
 
+        User.setBackground(new java.awt.Color(51, 51, 51));
         User.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        User.setForeground(new java.awt.Color(255, 255, 255));
         User.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UserActionPerformed(evt);
             }
         });
-        jPanel16.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 50));
+        jPanel16.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 310, 50));
         User.getAccessibleContext().setAccessibleName("");
 
         jLabel22.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setForeground(new java.awt.Color(128, 0, 0));
         jLabel22.setText("Roles");
-        jPanel16.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, 20));
+        jPanel16.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, -1));
 
         jComboBox1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Judge" }));
-        jPanel16.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 310, 40));
+        jPanel16.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 310, 40));
 
+        confirmpass.setBackground(new java.awt.Color(51, 51, 51));
         confirmpass.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPanel16.add(confirmpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 310, 50));
+        confirmpass.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel16.add(confirmpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 310, 50));
 
         jLabel23.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setForeground(new java.awt.Color(128, 0, 0));
         jLabel23.setText("Username");
-        jPanel16.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
+        jPanel16.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 20));
 
         jLabel24.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setForeground(new java.awt.Color(128, 0, 0));
         jLabel24.setText("Password");
-        jPanel16.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 20));
+        jPanel16.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, 20));
 
+        Pass.setBackground(new java.awt.Color(51, 51, 51));
         Pass.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jPanel16.add(Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 310, 50));
+        Pass.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel16.add(Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 310, 50));
 
         jLabel25.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setForeground(new java.awt.Color(128, 0, 0));
         jLabel25.setText("Confirmed password");
-        jPanel16.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, 20));
+        jPanel16.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, 20));
 
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setForeground(new java.awt.Color(128, 0, 0));
         jCheckBox1.setText("Check to see the password");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        jPanel16.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, -1, -1));
+        jPanel16.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, -1, -1));
 
         clear.setBackground(new java.awt.Color(153, 0, 0));
         clear.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -518,7 +546,7 @@ private DefaultTableModel model;
                 clearActionPerformed(evt);
             }
         });
-        jPanel16.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, 231, 78));
+        jPanel16.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 730, 231, 78));
 
         adduser.setBackground(new java.awt.Color(0, 153, 51));
         adduser.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -530,13 +558,12 @@ private DefaultTableModel model;
                 adduserActionPerformed(evt);
             }
         });
-        jPanel16.add(adduser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 231, 78));
+        jPanel16.add(adduser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 620, 231, 78));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/add-friend.png"))); // NOI18N
+        jPanel16.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 70, 80));
 
         adminpanel.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 360, 910));
-
-        label8.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label8.setText("Admin");
-        adminpanel.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
 
         // Create a table model with button columns
         model = new DefaultTableModel() {
@@ -554,8 +581,12 @@ private DefaultTableModel model;
         model.addColumn("Role");
         model.addColumn("Delete");
         model.addColumn("Edit");
+        jTable.setBackground(new java.awt.Color(204, 204, 204));
+        jTable.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jTable.setForeground(new java.awt.Color(128, 0, 0));
         jTable.setModel(model
         );
+        jTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jTable.getColumn("Delete").setCellRenderer(new ButtonRenderer());
         jTable.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));
 
@@ -613,18 +644,19 @@ private DefaultTableModel model;
 
         adminpanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 730, 910));
 
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label8.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
+        label8.setText("Admin");
+        jPanel3.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 210, 60));
+
+        adminpanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 90));
+
         jTabbedPane1.addTab("tab4", adminpanel);
 
         reports.setBackground(new java.awt.Color(255, 255, 255));
         reports.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        label6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label6.setText("Reports");
-        reports.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 50));
-
-        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        reports.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1090, 10));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -639,6 +671,16 @@ private DefaultTableModel model;
 
         reports.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1050, 860));
 
+        jPanel12.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel12.setForeground(new java.awt.Color(153, 153, 153));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label6.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
+        label6.setText("Reports");
+        jPanel12.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 250, 70));
+
+        reports.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
+
         jTabbedPane1.addTab("tab3", reports);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, -30, 1110, 1030));
@@ -651,6 +693,17 @@ private DefaultTableModel model;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     *
+     * @param originalImage
+     * @param i
+     * @param i0
+     * @return
+     */
+    private BufferedImage resizeImage(BufferedImage originalImage, int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
   // Custom button renderer for JTable
    
 class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -925,15 +978,18 @@ if (username1.isEmpty()) {
          
     }//GEN-LAST:event_addevActionPerformed
 
+    
     private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserActionPerformed
 
-  
+
 public static boolean verifyPasswordLength(String password) {
     int length = password.length();
     return length >= 8 && length <=20;
 } 
+
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Admin;
     public static javax.swing.JPasswordField Pass;
@@ -973,6 +1029,7 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -982,10 +1039,10 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -995,10 +1052,9 @@ public static boolean verifyPasswordLength(String password) {
     public static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
     private java.awt.Label label1;
+    private java.awt.Label label10;
     private java.awt.Label label2;
-    private java.awt.Label label3;
     private java.awt.Label label4;
-    private java.awt.Label label5;
     private java.awt.Label label6;
     private java.awt.Label label7;
     private java.awt.Label label8;

@@ -4,15 +4,19 @@
  */
 package menu;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 /**
  *
  * @author Administrator
@@ -25,20 +29,18 @@ public static String tableName, event, loc, selectedString_month, selectedString
     public create_event(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
      
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+ 
+      
             setLocationRelativeTo(null);
             setResizable(false);
-
-            // Set the icon for the dialog
-            Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
+ Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
             setIconImage(iconImage);
+            // Set the icon for the dialog
+           
 
             initComponents();
             setSize(575, 658);
-        } catch (Exception ex) {
-            Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
         
     }
 
@@ -65,6 +67,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
         Day = new javax.swing.JComboBox<>();
         label5 = new java.awt.Label();
         clear = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -72,26 +75,26 @@ public static String tableName, event, loc, selectedString_month, selectedString
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(128, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(575, 658));
         jPanel1.setName("create event"); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(575, 658));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         location.setBackground(new java.awt.Color(51, 51, 51));
-        location.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        location.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         location.setForeground(new java.awt.Color(255, 255, 255));
         location.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 locationActionPerformed(evt);
             }
         });
-        jPanel1.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 450, 50));
+        jPanel1.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 450, 40));
 
-        label1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 255, 255));
+        label1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label1.setForeground(new java.awt.Color(128, 0, 0));
         label1.setText("Max Participants");
-        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 410, 50));
+        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 410, 30));
 
         jButton1.setBackground(new java.awt.Color(0, 153, 0));
         jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -109,27 +112,27 @@ public static String tableName, event, loc, selectedString_month, selectedString
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 230, 50));
 
         tablename.setBackground(new java.awt.Color(51, 51, 51));
-        tablename.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        tablename.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         tablename.setForeground(new java.awt.Color(255, 255, 255));
         tablename.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tablenameActionPerformed(evt);
             }
         });
-        jPanel1.add(tablename, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 440, 50));
+        jPanel1.add(tablename, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 450, 40));
 
-        label2.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        label2.setForeground(new java.awt.Color(255, 255, 255));
+        label2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label2.setForeground(new java.awt.Color(128, 0, 0));
         label2.setText("Name of the Event");
-        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 390, 50));
+        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 220, 30));
 
         maxparti.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         maxparti.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a number", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-        jPanel1.add(maxparti, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, 220, 40));
+        jPanel1.add(maxparti, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 210, 40));
 
         year.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-        jPanel1.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 160, 40));
+        jPanel1.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 160, 40));
 
         month.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
@@ -138,36 +141,36 @@ public static String tableName, event, loc, selectedString_month, selectedString
                 monthActionPerformed(evt);
             }
         });
-        jPanel1.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 150, 40));
+        jPanel1.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 150, 40));
 
-        label3.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        label3.setForeground(new java.awt.Color(255, 255, 255));
+        label3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label3.setForeground(new java.awt.Color(128, 0, 0));
         label3.setText("Event Date");
-        jPanel1.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 410, 50));
+        jPanel1.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 120, 30));
 
-        label4.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        label4.setForeground(new java.awt.Color(255, 255, 255));
+        label4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label4.setForeground(new java.awt.Color(128, 0, 0));
         label4.setText("Event Type");
-        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 410, 50));
+        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 130, 30));
 
         eventtype.setBackground(new java.awt.Color(51, 51, 51));
-        eventtype.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        eventtype.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         eventtype.setForeground(new java.awt.Color(255, 255, 255));
         eventtype.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventtypeActionPerformed(evt);
             }
         });
-        jPanel1.add(eventtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 450, 50));
+        jPanel1.add(eventtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 450, 40));
 
         Day.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         Day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jPanel1.add(Day, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 90, 40));
+        jPanel1.add(Day, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 90, 40));
 
-        label5.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        label5.setForeground(new java.awt.Color(255, 255, 255));
+        label5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label5.setForeground(new java.awt.Color(128, 0, 0));
         label5.setText("Location");
-        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 410, 50));
+        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 410, -1));
 
         clear.setBackground(new java.awt.Color(153, 0, 0));
         clear.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -180,6 +183,16 @@ public static String tableName, event, loc, selectedString_month, selectedString
             }
         });
         jPanel1.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, 231, 50));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 110, 90));
+        try {
+            BufferedImage originalImage = ImageIO.read(getClass().getResource("/pictures/pwclogo.jpg"));
+            BufferedImage resizedImage = resizeImage(originalImage,72, 72);  // Adjust the dimensions as needed
+
+            ImageIcon imageIcon = new ImageIcon(resizedImage);
+            jLabel5.setIcon(imageIcon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -271,10 +284,16 @@ public static String tableName, event, loc, selectedString_month, selectedString
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+          try {
+	    	FlatSolarizedLightIJTheme.setup();
+	    } catch (Exception e) {
+	    	
+	        e.printStackTrace();
+	    }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+                
+    
                     create_event dialog = new create_event(new java.awt.Frame(), true);
                     dialog.setTitle("Create Event");
                     
@@ -284,15 +303,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
                         }
                     });
                     dialog.setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
-                }
+             
             }
         });
     }
@@ -303,6 +314,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
     private javax.swing.JButton clear;
     private javax.swing.JTextField eventtype;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
@@ -321,4 +333,13 @@ public static String tableName, event, loc, selectedString_month, selectedString
         setVisible(true);
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    private BufferedImage resizeImage(BufferedImage originalImage, int newWidth, int newHeight) {
+    BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
+    Graphics2D g = resizedImage.createGraphics();
+    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
+    g.dispose();
+    return resizedImage;
+}
 }
