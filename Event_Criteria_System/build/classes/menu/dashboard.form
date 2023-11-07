@@ -64,7 +64,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="490" width="170" height="67"/>
+              <AbsoluteConstraints x="0" y="310" width="170" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -86,7 +86,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="240" width="170" height="67"/>
+              <AbsoluteConstraints x="0" y="170" width="170" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -114,14 +114,17 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="80" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="logout"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/pictures/logout.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Logout"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="150" width="130" height="30"/>
+              <AbsoluteConstraints x="0" y="380" width="170" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -133,7 +136,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="50" y="10" width="90" height="100"/>
+              <AbsoluteConstraints x="50" y="10" width="60" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -155,7 +158,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="320" width="170" height="67"/>
+              <AbsoluteConstraints x="0" y="240" width="170" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -173,29 +176,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="70" y="100" width="60" height="40"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Verdana" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="80" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/pictures/icons8-reports-58.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Reports"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="400" width="170" height="67"/>
+              <AbsoluteConstraints x="0" y="120" width="170" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -207,11 +188,14 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="User:"/>
+            <Property name="text" type="java.lang.String" value="User"/>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="User"/>
+          </AccessibilityProperties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="100" width="60" height="40"/>
+              <AbsoluteConstraints x="60" y="80" width="60" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -723,6 +707,48 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="30" y="621" width="1060" height="360"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="4" rowCount="4">
+                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="java.awt.Label" name="label3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Verdana" size="24" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Reports"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="40" y="580" width="250" height="30"/>
+                </Constraint>
+              </Constraints>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="events">
@@ -1199,7 +1225,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;            // Establish a database connection&#xa;             java.sql.Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/eventsystem_db&quot;, &quot;root&quot;, &quot;&quot;);&#xa;&#xa;            // Create a statement and execute a SELECT query&#xa;            java.sql.Statement statement = connection.createStatement();&#xa;             java.sql.ResultSet resultSet = statement.executeQuery(&quot;SELECT id, username, role, password from user&quot;);&#xa;&#xa;            // Populate the DefaultTableModel with data from the ResultSet&#xa;            while (resultSet.next()) {&#xa;                int id = resultSet.getInt(&quot;id&quot;);&#xa;                String username = resultSet.getString(&quot;username&quot;);&#xa;                String role = resultSet.getString(&quot;role&quot;);&#xa;               &#xa;                // Create buttons for delete and edit&#xa;                JButton deleteButton = new JButton(&quot;Delete&quot;);&#xa;                JButton editButton = new JButton(&quot;Edit&quot;);&#xa;&#xa;                // Add action listeners to the buttons&#xa;       deleteButton.addActionListener(new ActionListener() {&#xa;        public void actionPerformed(ActionEvent e) {&#xa;}&#xa;    });&#xa;&#xa;                editButton.addActionListener(new ActionListener() {&#xa;                    @Override&#xa;                    public void actionPerformed(ActionEvent e) {&#xa;                        // Handle edit button click&#xa;                        int selectedRow = jTable.getSelectedRow();&#xa;                        // Implement your edit logic here using the selectedRow&#xa;                        // For example, you can retrieve the ID from the model&#xa;                        int idToEdit = (int) model.getValueAt(selectedRow, 0);&#xa;                        System.out.println(&quot;Edit button clicked for ID: &quot; + idToEdit);&#xa;                    }&#xa;                });&#xa;&#xa;                // Add data to the model, including buttons&#xa;                model.addRow(new Object[]{id, username, role, &quot;Delete&quot;, &quot;Edit&quot;});&#xa;            }&#xa;&#xa;            // Close the database connection&#xa;            connection.close();&#xa;        } catch (Exception e) {&#xa;            e.printStackTrace();&#xa;        }"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;            // Establish a database connection&#xa;             java.sql.Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/eventsystem_db&quot;, &quot;root&quot;, &quot;&quot;);&#xa;&#xa;            // Create a statement and execute a SELECT query&#xa;            java.sql.Statement statement = connection.createStatement();&#xa;             java.sql.ResultSet resultSet = statement.executeQuery(&quot;SELECT id, username, role, password from user&quot;);&#xa;&#xa;            // Populate the DefaultTableModel with data from the ResultSet&#xa;            while (resultSet.next()) {&#xa;                int id = resultSet.getInt(&quot;id&quot;);&#xa;                String username = resultSet.getString(&quot;username&quot;);&#xa;                String role = resultSet.getString(&quot;role&quot;);&#xa;               &#xa;                // Create buttons for delete and edit&#xa;                JButton deleteButton = new JButton(&quot;Delete&quot;);&#xa;                JButton editButton = new JButton(&quot;Edit&quot;);&#xa;&#xa;                // Add action listeners to the buttons&#xa;       deleteButton.addActionListener(new ActionListener() {&#xa;        public void actionPerformed(ActionEvent e) {&#xa;}&#xa;    });&#xa;&#xa;                editButton.addActionListener(new ActionListener() {&#xa;                    @Override&#xa;                    public void actionPerformed(ActionEvent e) {&#xa;                              Object[] options = {&quot;Option 1&quot;, &quot;Option 2&quot;, &quot;Option 3&quot;};&#xa;&#xa;        // Show the JOptionPane with three buttons&#xa;        int choice = JOptionPane.showOptionDialog(&#xa;            null,&#xa;            &quot;Select an option:&quot;,&#xa;            &quot;Options&quot;,&#xa;            JOptionPane.DEFAULT_OPTION,&#xa;            JOptionPane.QUESTION_MESSAGE,&#xa;            null,&#xa;            options,&#xa;            options[0] // Default selection&#xa;        );&#xa;&#xa;        // Handle the user&apos;s choice&#xa;        if (choice == 0) {&#xa;            // User selected &quot;Option 1&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 1&quot;);&#xa;        } else if (choice == 1) {&#xa;            // User selected &quot;Option 2&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 2&quot;);&#xa;        } else if (choice == 2) {&#xa;            // User selected &quot;Option 3&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 3&quot;);&#xa;        }&#xa;                    }&#xa;                });&#xa;&#xa;                // Add data to the model, including buttons&#xa;                model.addRow(new Object[]{id, username, role, &quot;Delete&quot;, &quot;Edit&quot;});&#xa;            }&#xa;&#xa;            // Close the database connection&#xa;            connection.close();&#xa;        } catch (Exception e) {&#xa;            e.printStackTrace();&#xa;        }"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTable.getColumn(&quot;Delete&quot;).setCellRenderer(new ButtonRenderer());&#xa;jTable.getColumn(&quot;Delete&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));&#xa;&#xa;// For the &quot;Edit&quot; column&#xa;jTable.getColumn(&quot;Edit&quot;).setCellRenderer(new ButtonRenderer());&#xa;jTable.getColumn(&quot;Edit&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));&#xa;&#xa;// Create a custom editor for the column containing buttons"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="// Create a table model with button columns&#xa;        model = new DefaultTableModel() {&#xa;            public Class&lt;?&gt; getColumnClass(int column) {&#xa;                if (column == 4 || column == 5) { // Assuming delete is column 4 and edit is column 5&#xa;                    return JButton.class;&#xa;                } else {&#xa;                    return Object.class;&#xa;                }&#xa;            }&#xa;        };&#xa;&#xa;        model.addColumn(&quot;ID&quot;);&#xa;        model.addColumn(&quot;Username&quot;);&#xa;        model.addColumn(&quot;Role&quot;);&#xa;        model.addColumn(&quot;Delete&quot;);&#xa;        model.addColumn(&quot;Edit&quot;);"/>

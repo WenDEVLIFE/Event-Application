@@ -37,7 +37,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
             setIconImage(iconImage);
             // Set the icon for the dialog
            
-
+        setTitle("Create a event");
             initComponents();
             setSize(575, 658);
       
@@ -68,6 +68,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
         label5 = new java.awt.Label();
         clear = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        label6 = new java.awt.Label();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -89,12 +90,12 @@ public static String tableName, event, loc, selectedString_month, selectedString
                 locationActionPerformed(evt);
             }
         });
-        jPanel1.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 450, 40));
+        jPanel1.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 450, 40));
 
         label1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         label1.setForeground(new java.awt.Color(128, 0, 0));
         label1.setText("Max Participants");
-        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 410, 30));
+        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 410, 30));
 
         jButton1.setBackground(new java.awt.Color(0, 153, 0));
         jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -119,20 +120,20 @@ public static String tableName, event, loc, selectedString_month, selectedString
                 tablenameActionPerformed(evt);
             }
         });
-        jPanel1.add(tablename, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 450, 40));
+        jPanel1.add(tablename, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 450, 40));
 
-        label2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         label2.setForeground(new java.awt.Color(128, 0, 0));
-        label2.setText("Name of the Event");
-        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 220, 30));
+        label2.setText("Create a event");
+        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 250, 30));
 
         maxparti.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         maxparti.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a number", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-        jPanel1.add(maxparti, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 210, 40));
+        jPanel1.add(maxparti, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 210, 40));
 
         year.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-        jPanel1.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 160, 40));
+        jPanel1.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 160, 40));
 
         month.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
@@ -141,17 +142,17 @@ public static String tableName, event, loc, selectedString_month, selectedString
                 monthActionPerformed(evt);
             }
         });
-        jPanel1.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 150, 40));
+        jPanel1.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 150, 40));
 
         label3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         label3.setForeground(new java.awt.Color(128, 0, 0));
         label3.setText("Event Date");
-        jPanel1.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 120, 30));
+        jPanel1.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 120, 30));
 
         label4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         label4.setForeground(new java.awt.Color(128, 0, 0));
         label4.setText("Event Type");
-        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 130, 30));
+        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 130, 30));
 
         eventtype.setBackground(new java.awt.Color(51, 51, 51));
         eventtype.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -161,16 +162,16 @@ public static String tableName, event, loc, selectedString_month, selectedString
                 eventtypeActionPerformed(evt);
             }
         });
-        jPanel1.add(eventtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 450, 40));
+        jPanel1.add(eventtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 450, 40));
 
         Day.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         Day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jPanel1.add(Day, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 90, 40));
+        jPanel1.add(Day, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 90, 40));
 
         label5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         label5.setForeground(new java.awt.Color(128, 0, 0));
         label5.setText("Location");
-        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 410, -1));
+        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 410, -1));
 
         clear.setBackground(new java.awt.Color(153, 0, 0));
         clear.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -193,6 +194,11 @@ public static String tableName, event, loc, selectedString_month, selectedString
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        label6.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label6.setForeground(new java.awt.Color(128, 0, 0));
+        label6.setText("Name of the Event");
+        jPanel1.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 220, 30));
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -321,6 +327,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
     private java.awt.Label label3;
     private java.awt.Label label4;
     private java.awt.Label label5;
+    private java.awt.Label label6;
     private javax.swing.JTextField location;
     private javax.swing.JComboBox<String> maxparti;
     private javax.swing.JComboBox<String> month;
