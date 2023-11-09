@@ -25,6 +25,8 @@ public class create_event extends java.awt.Dialog {
 public static String tableName, event, loc, selectedString_month, selectedString_day, selectedString_year,selectedString_participants;
     /**
      * Creates new form create_user
+     * @param parent
+     * @param modal
      */
     public create_event(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -296,22 +298,17 @@ public static String tableName, event, loc, selectedString_month, selectedString
 	    	
 	        e.printStackTrace();
 	    }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-    
-                    create_event dialog = new create_event(new java.awt.Frame(), true);
-                    dialog.setTitle("Create Event");
-                    
-                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                        public void windowClosing(java.awt.event.WindowEvent e) {
-                            System.exit(0);
-                        }
-                    });
-                    dialog.setVisible(true);
-             
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> {
+            create_event dialog = new create_event(new java.awt.Frame(), true);
+            dialog.setTitle("Create Event");
+            
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
+          });
     }
 
 

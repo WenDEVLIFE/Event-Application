@@ -7,6 +7,8 @@ package event_criteria_system;
 import static event_criteria_system.Login.myDB_PASSWORD;
 import static event_criteria_system.Login.myDB_username;
 import static event_criteria_system.Login.mydb_url;
+import java.awt.Color;
+import java.awt.Image;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -18,7 +20,9 @@ import java.sql.SQLException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import menu.dashboard;
 import static menu.dashboard.meow;
 /**
@@ -106,12 +110,30 @@ private void displayErrorMessage(String message) {
 }
 
 private void displayWelcomeMessage(String username) {
-    ImageIcon imageIcon = new ImageIcon("src//pictures//cloudy-day.png");
-    JOptionPane.showMessageDialog(null, "Welcome, " + username, "Login Message", JOptionPane.PLAIN_MESSAGE, imageIcon);
+    JPanel panel = new JPanel();
+    Color customColor = new Color(255, 255, 240, 128); // RGBA: White with 50% transparency (0-255 range)
+
+// Set the background color of the panel
+panel.setBackground(customColor);
+    ImageIcon imageIcon = new ImageIcon("src/pictures/pwclogo.jpg");
+    int width = 64; // Set your desired width
+    int height = 64; // Set your desired height
+    Image scaledImage = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+    // Create a label with an ImageIcon and text
+    JLabel label = new JLabel("Welcome, " + username, scaledIcon, JLabel.CENTER);
+
+    // Add the label to the custom panel
+    panel.add(label);
+
+    // Create a JOptionPane with the custom panel as the message component
+    JOptionPane.showMessageDialog(null, panel, "Login Message", JOptionPane.PLAIN_MESSAGE);
+
     System.out.println("Authentication successful!");
     user.dispose();
-  meow =  new dashboard(username);
-  meow.setVisible(true);
+    meow = new dashboard(username);
+    meow.setVisible(true);
 }
 
 public boolean validatePassword(String enteredPassword, byte[] storedSalt, String storedHashedPassword) {

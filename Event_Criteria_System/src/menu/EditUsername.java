@@ -3,35 +3,71 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package menu;
-
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+import java.awt.Frame;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
+import javax.swing.JOptionPane;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.SecureRandom;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import static menu.dashboard.meow;
+import static menu.dashboard.username;
 /**
  *
  * @author Administrator
  */
-public class  EditUsername extends javax.swing.JDialog {
 
+public class  EditUsername extends javax.swing.JDialog {
+public static String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
+    public static String myDB_username = "root";  // Database username
+    public static  String myDB_PASSWORD = "";  // Define your database password here
+   private String currentUsername;
+   public static String username_table;
+     public static String captchaValue;
+   
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     /**
      * Creates new form NewJDialog
      */
-    public EditUsername(java.awt.Frame parent, boolean modal) {
+    public EditUsername(Frame parent, boolean modal, String username_table) {
         super(parent, modal);
+        this.username_table = username_table; 
         initComponents();
         setLocationRelativeTo(null);
             setResizable(false);
             setTitle("Edit Username");
 
-
+                 captchaValue = captcha_Generator(8);
+                 captcha.setText(captchaValue);
+     
     }
+    
+   public static String captcha_Generator(int length) {
+    SecureRandom random = new SecureRandom();
+    StringBuilder captcha = new StringBuilder();
+
+    for (int i = 0; i < length; i++) {
+        int index = random.nextInt(CHARACTERS.length());
+        captcha.append(CHARACTERS.charAt(index));
+    }
+
+    return captcha.toString();
+}
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,18 +80,17 @@ public class  EditUsername extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        label2 = new java.awt.Label();
-        Oldname = new javax.swing.JTextField();
+        captcha = new javax.swing.JTextField();
         label3 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
-        Newname = new javax.swing.JTextField();
+        changeuser = new javax.swing.JButton();
+        captchaenter = new javax.swing.JTextField();
         label4 = new java.awt.Label();
-        label5 = new java.awt.Label();
         clear = new javax.swing.JButton();
-        confirmpassword = new javax.swing.JPasswordField(20);
-        password = new javax.swing.JPasswordField(20);
         label6 = new java.awt.Label();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        Oldname = new javax.swing.JTextField();
+        label5 = new java.awt.Label();
+        Newname = new javax.swing.JTextField();
+        label7 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,11 +113,70 @@ public class  EditUsername extends javax.swing.JDialog {
             e.printStackTrace();
         }
 
-        label2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label2.setForeground(new java.awt.Color(128, 0, 0));
-        label2.setText("Confirmed password");
-        jPanel2.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 290, 30));
+        captcha.setText(captchaValue);
+        captcha.setEditable(false);
+        captcha.setBackground(new java.awt.Color(51, 51, 51));
+        captcha.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        captcha.setForeground(new java.awt.Color(255, 255, 255));
+        captcha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                captchaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(captcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 450, 40));
 
+        label3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label3.setForeground(new java.awt.Color(128, 0, 0));
+        label3.setText("Your current username");
+        jPanel2.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 290, 30));
+
+        changeuser.setBackground(new java.awt.Color(0, 153, 0));
+        changeuser.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        changeuser.setForeground(new java.awt.Color(255, 255, 255));
+        changeuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-conference-foreground-selected-48.png"))); // NOI18N
+        changeuser.setText("Change Username");
+        changeuser.setToolTipText("");
+        changeuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        changeuser.setFocusTraversalPolicyProvider(true);
+        changeuser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeuserActionPerformed(evt);
+            }
+        });
+        jPanel2.add(changeuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 230, 50));
+
+        captchaenter.setBackground(new java.awt.Color(51, 51, 51));
+        captchaenter.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        captchaenter.setForeground(new java.awt.Color(255, 255, 255));
+        captchaenter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                captchaenterActionPerformed(evt);
+            }
+        });
+        jPanel2.add(captchaenter, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 450, 40));
+
+        label4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label4.setForeground(new java.awt.Color(128, 0, 0));
+        label4.setText("Captcha");
+        jPanel2.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 290, 30));
+
+        clear.setBackground(new java.awt.Color(153, 0, 0));
+        clear.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        clear.setForeground(new java.awt.Color(255, 255, 255));
+        clear.setText("Close");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+        jPanel2.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 560, 231, 50));
+
+        label6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        label6.setForeground(new java.awt.Color(128, 0, 0));
+        label6.setText("Edit Username");
+        jPanel2.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 250, 30));
+
+        Oldname.setText(username_table);
         Oldname.setEditable(false);
         Oldname.setBackground(new java.awt.Color(51, 51, 51));
         Oldname.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -94,25 +188,10 @@ public class  EditUsername extends javax.swing.JDialog {
         });
         jPanel2.add(Oldname, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 450, 40));
 
-        label3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label3.setForeground(new java.awt.Color(128, 0, 0));
-        label3.setText("Your current username");
-        jPanel2.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 290, 30));
-
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-conference-foreground-selected-48.png"))); // NOI18N
-        jButton1.setText("Change Username");
-        jButton1.setToolTipText("");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.setFocusTraversalPolicyProvider(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 230, 50));
+        label5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label5.setForeground(new java.awt.Color(128, 0, 0));
+        label5.setText("Type the captcha");
+        jPanel2.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 290, 30));
 
         Newname.setBackground(new java.awt.Color(51, 51, 51));
         Newname.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -124,52 +203,10 @@ public class  EditUsername extends javax.swing.JDialog {
         });
         jPanel2.add(Newname, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 450, 40));
 
-        label4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label4.setForeground(new java.awt.Color(128, 0, 0));
-        label4.setText("New username");
-        jPanel2.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 290, 30));
-
-        label5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label5.setForeground(new java.awt.Color(128, 0, 0));
-        label5.setText("Password");
-        jPanel2.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 290, 30));
-
-        clear.setBackground(new java.awt.Color(153, 0, 0));
-        clear.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        clear.setForeground(new java.awt.Color(255, 255, 255));
-        clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"))); // NOI18N
-        clear.setText("Clear All");
-        clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearActionPerformed(evt);
-            }
-        });
-        jPanel2.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 560, 231, 50));
-
-        confirmpassword.setBackground(new java.awt.Color(51, 51, 51));
-        confirmpassword.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        confirmpassword.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(confirmpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 450, 40));
-
-        password.setBackground(new java.awt.Color(51, 51, 51));
-        password.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        password.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 450, 40));
-
-        label6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label6.setForeground(new java.awt.Color(128, 0, 0));
-        label6.setText("Create a event");
-        jPanel2.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 250, 30));
-
-        jCheckBox2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(128, 0, 0));
-        jCheckBox2.setText("Check to see the password");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, 210, -1));
+        label7.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label7.setForeground(new java.awt.Color(128, 0, 0));
+        label7.setText("New username");
+        jPanel2.add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 290, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,44 +228,72 @@ public class  EditUsername extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void captchaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_captchaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_captchaActionPerformed
+
+    private void changeuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeuserActionPerformed
+                currentUsername = Oldname.getText();
+        String newUsername = Newname.getText();
+        String captchatype =captchaenter.getText();
+         if (captchatype.equals(captchaValue)) {
+            System.out.println("CAPTCHA matched. Proceed.");
+        
+        if (currentUsername.isEmpty() || newUsername.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please don't leave a single field empty", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                // Check if the new username already exists in the database
+                if (doesUsernameExist(newUsername)) {
+                    JOptionPane.showMessageDialog(null, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Update the current username in the database
+                    if (updateUsername(currentUsername, newUsername)) {
+                        JOptionPane.showMessageDialog(null, "Username successfully changed", "", JOptionPane.INFORMATION_MESSAGE);
+                              meow.dispose();
+                            meow =  new dashboard(username);
+                meow.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to change the username", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "An error occurred while checking the username.");
+            }
+       
+        }
+           } 
+         else {
+              System.out.println("CAPTCHA did not match. Regenerating a new CAPTCHA.");
+            captchaValue = captcha_Generator(8);
+            System.out.println("Generated CAPTCHA: " + captchaValue);
+            captcha.setText( captchaValue);
+                
+                }
+    
+
+    
+    }//GEN-LAST:event_changeuserActionPerformed
+
+    private void captchaenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_captchaenterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_captchaenterActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+     dispose();
+        
+
+    }//GEN-LAST:event_clearActionPerformed
+
     private void OldnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OldnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_OldnameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String username = Oldname.getText();
-        String username1 = Newname.getText();
-        String passwordj = new String(password.getPassword());
-        String passwordj1 = new String(confirmpassword.getPassword());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void NewnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NewnameActionPerformed
-
-    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_clearActionPerformed
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-
-        // TODO add your handling code here:
-        // Check if the checkbox is selected.
-        if (jCheckBox2.isSelected()) {
-            // Set the JPasswordField to echo the password.
-            password.setEchoChar((char) 0);
-            confirmpassword.setEchoChar((char) 0);
-
-        } else {
-            // Set the JPasswordField to not echo the password.
-            password.setEchoChar('\u2022'); // Use the bullet character as the echo character
-            confirmpassword.setEchoChar('\u2022');
-
-        }
-
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,7 +332,7 @@ public class  EditUsername extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                  Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
-                 EditUsername dialog = new  EditUsername(new javax.swing.JFrame(), true);
+                 EditUsername dialog = new  EditUsername(new javax.swing.JFrame(), true, username_table);
                    dialog.setIconImage(iconImage);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -283,18 +348,17 @@ public class  EditUsername extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Newname;
     private javax.swing.JTextField Oldname;
+    public static javax.swing.JTextField captcha;
+    private javax.swing.JTextField captchaenter;
+    private javax.swing.JButton changeuser;
     private javax.swing.JButton clear;
-    private javax.swing.JPasswordField confirmpassword;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
     private java.awt.Label label5;
     private java.awt.Label label6;
-    private javax.swing.JPasswordField password;
+    private java.awt.Label label7;
     // End of variables declaration//GEN-END:variables
 
      private BufferedImage resizeImage(BufferedImage originalImage, int newWidth, int newHeight) {
@@ -310,4 +374,64 @@ public class  EditUsername extends javax.swing.JDialog {
         setVisible(true);
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+       
+       // this is where to change the username
+  private boolean updateUsername(String currentUsername, String newUsername) {
+        try {
+            Connection connection = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD);
+            Statement statement = connection.createStatement();
+
+            // Check if the current username exists
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE username = '" + currentUsername + "'");
+
+            if (!resultSet.next()) {
+                // The current username does not exist
+                JOptionPane.showMessageDialog(null, "Current username does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+            // Close the previous ResultSet before executing another query
+            resultSet.close();
+
+            // Check if the new username already exists
+            resultSet = statement.executeQuery("SELECT * FROM user WHERE username = '" + newUsername + "'");
+
+            if (resultSet.next()) {
+                // The new username already exists
+                JOptionPane.showMessageDialog(null, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+            // Update the current username in the database
+            statement.executeUpdate("UPDATE user SET username = '" + newUsername + "' WHERE username = '" + currentUsername + "'");
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "An error occurred while updating the username.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+  
+// to check if user exist
+   public boolean doesUsernameExist(String username) throws SQLException, ClassNotFoundException {
+	    Class.forName("com.mysql.cj.jdbc.Driver");
+            
+
+	    try (Connection connection = DriverManager.getConnection(mydb_url,  myDB_username, myDB_PASSWORD)) {
+	        String selectSQL = "SELECT COUNT(*) FROM user WHERE username = ?";
+	        try (PreparedStatement selectStatement = connection.prepareStatement(selectSQL)) {
+	            selectStatement.setString(1, username);
+
+	            try (ResultSet resultSet = selectStatement.executeQuery()) {
+	                if (resultSet.next()) {
+	                    int count = resultSet.getInt(1);
+	                    return count > 0;
+	                }
+	            }
+	        }
+	    }
+	    return false;
+	}
+
+
 }

@@ -19,13 +19,19 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.sql.DriverManager;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 /**
  *
  * @author Administrator
@@ -43,7 +49,7 @@ private DefaultTableModel model;
  public static String username;
  public static String username1;
     public static String password1;
-    
+ 
     public static  dashboard currentFrame;
     /**
      * Creates new form dashboard
@@ -259,13 +265,12 @@ private DefaultTableModel model;
         label4.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         label4.setForeground(new java.awt.Color(255, 255, 255));
         label4.setText(username);
-        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 170, 40));
+        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 140, 40));
 
         label9.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         label9.setForeground(new java.awt.Color(255, 255, 255));
         label9.setText("User");
         jPanel1.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 60, 40));
-        label9.getAccessibleContext().setAccessibleName("User");
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 1000));
 
@@ -595,6 +600,13 @@ private DefaultTableModel model;
         jTable.setForeground(new java.awt.Color(128, 0, 0));
         jTable.setModel(model
         );
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Apply the centerRenderer to all columns in your JTable
+        for (int i = 0; i < jTable.getColumnCount(); i++) {
+            jTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
         jTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jTable.getColumn("Delete").setCellRenderer(new ButtonRenderer());
         jTable.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));
@@ -761,9 +773,10 @@ public class ButtonEditor extends DefaultCellEditor {
     private int selectedRow;
     private JTable jTable;
     private DefaultTableModel model;
-
+   public static String username_table;
     public ButtonEditor(JCheckBox checkBox, JTable jTable, DefaultTableModel model) {
         super(checkBox);
+        this.username_table = username_table;
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener((ActionEvent e) -> {
@@ -774,36 +787,42 @@ public class ButtonEditor extends DefaultCellEditor {
     }
 
     @Override
-     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        if (isSelected) {
-            button.setForeground(table.getSelectionForeground());
-            button.setBackground(table.getSelectionBackground());
-        } else {
-            button.setForeground(table.getForeground());
-            button.setBackground(table.getBackground());
-        }
 
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        isPushed = true;
-        selectedRow = row;
-        
+public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+    if (isSelected) {
+        button.setForeground(table.getSelectionForeground());
+        button.setBackground(table.getSelectionBackground());
+    } else {
+        button.setForeground(table.getForeground());
+        button.setBackground(table.getBackground());
+    }
+
+    label = (value == null) ? "" : value.toString();
+    button.setText(label);
+    isPushed = true;
+    selectedRow = row;
+
+    // Check if it's the "Delete" button
+    if ("Delete".equals(label)) {
         String usernameInRow = (String) model.getValueAt(selectedRow, 1); // Assumes username is in column 1
+
         if (usernameInRow.equals(username)) {
             // Disable the button for the user in the title bar
-                JOptionPane.showMessageDialog(null, "You cannot delete yourself.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You cannot delete yourself.", "Error", JOptionPane.ERROR_MESSAGE);
             button.setEnabled(false);
         } else {
             button.setEnabled(true);
         }
-        
-        return button;
     }
+
+    return button;
+}
 
     @Override
    public Object getCellEditorValue() {
     if (isPushed) {
              if ("Edit".equals(label)){
+                 
                  System.out.println("hehee");
                                        Object[] options = {"Change Username", "Change Password", "Cancel"};
 
@@ -821,10 +840,51 @@ public class ButtonEditor extends DefaultCellEditor {
 
         // Handle the user's choice
         if (choice == 0) {
-        EditUsername dialog = new  EditUsername(new javax.swing.JFrame(), true);
-        dialog.showDialog();
+              int selectedRow = jTable.getSelectedRow();
+
+            if (selectedRow >= 0 && selectedRow < model.getRowCount()) {
+                // Assuming the username is in the second column (index 1)
+                String usernameInRow = (String) model.getValueAt(selectedRow, 1);
+
+                // Now you can use usernameInRow to retrieve the corresponding username from the database
+                // Perform a database query here and store the result in a variable
+                String usernameFromDatabase = retrieveUsernameFromDatabase(usernameInRow);
+
+                if (usernameFromDatabase != null) {
+                    // Do something with the retrieved username
+                    System.out.println("Retrieved username: " + usernameFromDatabase);
+                       EditUsername dialog = new  EditUsername(new javax.swing.JFrame(), true , username_table);
+                     dialog.showDialog();
+                } else {
+                    System.out.println("Username not found in the database.");
+                }
+            }
+        
+     
         } else if (choice == 1) {
-      
+             int selectedRow = jTable.getSelectedRow();
+
+            if (selectedRow >= 0 && selectedRow < model.getRowCount()) {
+                // Assuming the username is in the second column (index 1)
+                String usernameInRow = (String) model.getValueAt(selectedRow, 1);
+
+                // Now you can use usernameInRow to retrieve the corresponding username from the database
+                // Perform a database query here and store the result in a variable
+                String usernameFromDatabase = retrieveUsernameFromDatabase(usernameInRow);
+
+                if (usernameFromDatabase != null) {
+                    // Do something with the retrieved username
+                    System.out.println("Retrieved username: " + usernameFromDatabase);
+                         Newpasswordgui dialog2 = new Newpasswordgui(new javax.swing.JFrame(), true, username_table);
+                    Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
+                    dialog2.setIconImage(iconImage);
+                    dialog2.showDialog();
+                } else {
+                    System.out.println("Username not found in the database.");
+                }
+            }
+    
+             
         } else if (choice == 2) {
           
         }
@@ -868,9 +928,35 @@ public class ButtonEditor extends DefaultCellEditor {
 }
    
    // this is also connected to the table database
- private String retrieveUsernameFromDatabase() {
-        // Simulated database retrieval
-        return username;
+  private String retrieveUsernameFromDatabase(String username) {
+        String retrievedUsername = null;
+        
+        // Define your database connection parameters
+        String dbUrl = "jdbc:mysql://localhost:3306/eventsystem_db";
+        String dbUser = "root";
+        String dbPassword = "";
+
+        // Define the SQL query to retrieve the username
+        String sql = "SELECT username FROM user WHERE username = ?";
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, username);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Username found in the database
+                    retrievedUsername = resultSet.getString("username");
+                   username_table= retrievedUsername;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle any database-related exceptions here
+        }
+
+        return retrievedUsername;
     }
     // Method to remove marked rows
     public void removeMarkedRows(List<Integer> rowsToDelete) {
