@@ -30,6 +30,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 /**
@@ -46,6 +47,8 @@ public class dashboard extends javax.swing.JFrame {
     
     public static String confirmpassword1;
 private DefaultTableModel model;
+
+    private DefaultTableModel tableModel;
  public static String username;
  public static String username1;
     public static String password1;
@@ -95,7 +98,7 @@ private DefaultTableModel model;
                 
                 meow =  new dashboard(username);
                 meow.setVisible(true);
-               meow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            
                 
           
                  
@@ -110,11 +113,11 @@ private DefaultTableModel model;
     
     public dashboard(String username) {
       this.username = username;
-        
         initComponents();
           // to set icons of your titlebar
            Image iconImage = Toolkit.getDefaultToolkit().getImage("src/pictures/sports.png");
-
+     
+  
         // Set the icon on the frame.
        setIconImage(iconImage);
     }
@@ -171,8 +174,29 @@ private DefaultTableModel model;
         jTable1 = new javax.swing.JTable();
         label3 = new java.awt.Label();
         events = new javax.swing.JPanel();
-        jPanel11 = new PanelRound1();
-        jButton1 = new javax.swing.JButton();
+        jPanel11 = new JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableModel = new DefaultTableModel() {
+            @Override
+            public Class<?> getColumnClass(int column) {
+                return (column == 6 || column == 7) ? JButton.class : Object.class;
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 6 || column == 7;
+            }
+        };
+
+        tableModel.addColumn("Event_ID");
+        tableModel.addColumn("Event_Name");
+        tableModel.addColumn("Event_Date");
+        tableModel.addColumn("Event_Type");
+        tableModel.addColumn("Location");
+        tableModel.addColumn("Max_Participants");
+        tableModel.addColumn("Delete");
+        tableModel.addColumn("Open");
+        jTable2 = new javax.swing.JTable(tableModel);
         jButton2 = new javax.swing.JButton();
         searchingbar = new javax.swing.JTextField();
         addev = new javax.swing.JButton();
@@ -433,27 +457,33 @@ private DefaultTableModel model;
         events.setBackground(new java.awt.Color(255, 255, 255));
         events.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel11.setBackground(new java.awt.Color(204, 204, 204));
+        events.setVisible(true);
+        jPanel11.setBackground(new java.awt.Color(153, 0, 51));
         jPanel11.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1070, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
-        );
+        jTable2.setModel(tableModel);
+        // Apply the centerRenderer to all columns in your JTable
+        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+        centerRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
 
-        events.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1070, 830));
+        for (int i = 0; i < jTable2.getColumnCount(); i++) {
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer1);
+        }
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png"))); // NOI18N
-        jButton1.setText("Delete a event");
-        events.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 170, 40));
+        jTable2.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jTable2.getColumn("Delete").setCellRenderer(new ButtonRenderer());
+        jTable2.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox(), jTable2, tableModel));
+
+        // For the "Open" column
+        jTable2.getColumn("Open").setCellRenderer(new ButtonRenderer());
+        jTable2.getColumn("Open").setCellEditor(new ButtonEditor(new JCheckBox(), jTable2, tableModel));
+        populateTableFromDatabase();
+        jScrollPane3.setViewportView(jTable2);
+
+        jPanel11.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 830));
+
+        events.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 1070, 830));
 
         jButton2.setBackground(new java.awt.Color(0, 153, 51));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -471,7 +501,7 @@ private DefaultTableModel model;
                 addevActionPerformed(evt);
             }
         });
-        events.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 170, 40));
+        events.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 170, 40));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -716,8 +746,8 @@ private DefaultTableModel model;
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label6.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
-        label6.setText("Reports");
-        jPanel12.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 250, 70));
+        label6.setText("Event Name:");
+        jPanel12.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 400, 70));
 
         reports.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
 
@@ -764,15 +794,141 @@ class ButtonRenderer extends JButton implements TableCellRenderer {
         return this;
     }
 }
+private void populateTableFromDatabase() {
+        try {
+            // Establish a database connection
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "");
 
+            // Create a statement and execute a SELECT query
+            java.sql.Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT Event_ID, Event_Name, Event_Date, Event_Type, Location, Max_Participants FROM pwc_event_table");
+
+            // Populate the DefaultTableModel with data from the ResultSet
+            while (resultSet.next()) {
+                int id = resultSet.getInt("Event_ID");
+                String eventName = resultSet.getString("Event_Name");
+                String date = resultSet.getString("Event_Date");
+                String eventType = resultSet.getString("Event_Type");
+                String location = resultSet.getString("Location");
+                String maxParticipants = resultSet.getString("Max_Participants");
+
+                tableModel.addRow(new Object[]{id, eventName, date, eventType, location, maxParticipants, "Delete", "Open"});
+            }
+
+            // Close the database connection
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+  // The ButtonRenderer1 class
+    public class ButtonRenderer1 extends JButton implements TableCellRenderer {
+        public ButtonRenderer1() {
+            setOpaque(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+
+    // The ButtonEditor1 class
+    public class ButtonEditor1 extends DefaultCellEditor {
+        protected JButton editButton;
+        private String label;
+        private boolean isPushed;
+        private final JTable jTable2;
+        private final DefaultTableModel tableModel;
+
+        public ButtonEditor1(JCheckBox checkBox, JTable jTable2, DefaultTableModel tableModel) {
+            super(checkBox);
+            editButton = new JButton();
+            editButton.setOpaque(true);
+            editButton.addActionListener((ActionEvent e) -> fireEditingStopped());
+            this.jTable2 = jTable2;
+            this.tableModel= tableModel;
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable jTable2, Object value, boolean isSelected, int row, int column) {
+            label = (value == null) ? "" : value.toString();
+            editButton.setText(label);
+            isPushed = true;
+            return editButton;
+        }
+
+        @Override
+   public Object getCellEditorValue() {
+    if (isPushed) {
+        int selectedRow = jTable2.getSelectedRow();
+        String eventID = tableModel.getValueAt(selectedRow, 0).toString();
+        String buttonLabel = tableModel.getValueAt(selectedRow, tableModel.getColumnCount() - 2).toString();
+
+        // Stop cell editing before performing any actions
+        stopCellEditing();
+
+        if ("Delete".equals(buttonLabel)) {
+            int confirmResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+            if (confirmResult == JOptionPane.YES_OPTION) {
+                // Handle delete button click
+                System.out.println("Delete button clicked for Event ID: " + eventID);
+                deleteEventFromDatabase(eventID);
+                tableModel.removeRow(selectedRow);
+            }
+        } else if ("Open".equals(buttonLabel)) {
+            // Handle open button click
+            System.out.println("Open button clicked for Event ID: " + eventID);
+        }
+    }
+    isPushed = false;
+    return label;
+}
+
+ private void deleteEventFromDatabase(String eventID) {
+    try {
+        // Establish a database connection
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "")) {
+            // Create a statement and execute a DELETE query
+            String deleteQuery = "DELETE FROM pwc_event_table WHERE Event_ID = ?";
+            try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+                deleteStatement.setInt(1, Integer.parseInt(eventID));
+                int rowsDeleted = deleteStatement.executeUpdate();
+
+                if (rowsDeleted > 0) {
+                    System.out.println("Event with ID " + eventID + " deleted from the database.");
+                } else {
+                    System.out.println("Event deletion failed. No rows deleted.");
+                }
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Error deleting event from the database: " + e.getMessage());
+    } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("An unexpected error occurred: " + e.getMessage());
+    }
+}
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+    }
+    
+    // for usertable
 public class ButtonEditor extends DefaultCellEditor {
     
     protected JButton button;
     private String label;
     private boolean isPushed;
     private int selectedRow;
-    private JTable jTable;
-    private DefaultTableModel model;
+    private final JTable jTable;
+    private final DefaultTableModel model;
    public static String username_table;
     public ButtonEditor(JCheckBox checkBox, JTable jTable, DefaultTableModel model) {
         super(checkBox);
@@ -1107,10 +1263,10 @@ else {
         
 
     }
-}
-    
+} 
     }//GEN-LAST:event_adduserActionPerformed
 
+     
     private void addevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addevActionPerformed
         // TODO add your handling code here:
           create_event dialog = new create_event(new java.awt.Frame(), true);
@@ -1129,9 +1285,6 @@ public static boolean verifyPasswordLength(String password) {
     int length = password.length();
     return length >= 8 && length <=20;
 } 
-
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Admin;
     public static javax.swing.JPasswordField Pass;
@@ -1146,7 +1299,6 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JButton evb;
     public static transient volatile javax.swing.JPanel eventboard1;
     private javax.swing.JPanel events;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
@@ -1191,9 +1343,11 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private java.awt.Label label1;
     private java.awt.Label label10;
     private java.awt.Label label2;
@@ -1207,4 +1361,12 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JPanel reports;
     private javax.swing.JTextField searchingbar;
     // End of variables declaration//GEN-END:variables
+
+  // this is where you code
+    
+    
+
+
+
+
 }
