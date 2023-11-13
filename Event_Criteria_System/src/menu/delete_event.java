@@ -4,12 +4,53 @@
  */
 package menu;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import static menu.dashboard.jTabbedPane1;
+import static menu.dashboard.meow;
+import static menu.dashboard.username;
+
 /**
  *
  * @author Administrator
  */
 public class delete_event {
-    public static void main (String [] args){
-        
+    private final int eventID;
+
+    public delete_event(int eventID) {
+        this.eventID = eventID;
+    }
+
+    void deleteEventFromDatabase() {
+        try {
+            // Establish a database connection
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventsystem_db", "root", "")) {
+                // Create a statement and execute a DELETE query
+                String deleteQuery = "DELETE FROM pwc_event_table WHERE Event_ID = ?";
+                try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+                    deleteStatement.setInt(1, eventID);  // No need to parse to int
+                    int rowsDeleted = deleteStatement.executeUpdate();
+
+                    if (rowsDeleted > 0) {
+                        System.out.println("Event with ID " + eventID + " deleted from the database.");
+                        meow.dispose();
+                        meow =  new dashboard(username);
+                meow.setVisible(true);
+                 jTabbedPane1.setSelectedIndex(1);
+                    } else {
+                        System.out.println("Event deletion failed. No rows deleted.");
+                        
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error deleting event from the database: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
     }
 }

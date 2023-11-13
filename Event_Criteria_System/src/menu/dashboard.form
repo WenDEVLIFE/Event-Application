@@ -803,7 +803,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="jTable2">
                       <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="// Apply the centerRenderer to all columns in your JTable&#xa;        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();&#xa;        centerRenderer1.setHorizontalAlignment(SwingConstants.CENTER);&#xa;&#xa;        for (int i = 0; i &lt; jTable2.getColumnCount(); i++) {&#xa;            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer1);&#xa;        }&#xa;&#xa;        jTable2.setSelectionForeground(new java.awt.Color(0, 0, 0));&#xa;        jTable2.getColumn(&quot;Delete&quot;).setCellRenderer(new ButtonRenderer());&#xa;        jTable2.getColumn(&quot;Delete&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable2, tableModel));&#xa;&#xa;        // For the &quot;Open&quot; column&#xa;        jTable2.getColumn(&quot;Open&quot;).setCellRenderer(new ButtonRenderer());&#xa;        jTable2.getColumn(&quot;Open&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable2, tableModel));">
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="// Apply the centerRenderer to all columns in your JTable&#xa;        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();&#xa;        centerRenderer1.setHorizontalAlignment(SwingConstants.CENTER);&#xa;&#xa;        for (int i = 0; i &lt; jTable2.getColumnCount(); i++) {&#xa;            jTable2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer1);&#xa;        }&#xa;&#xa;        jTable2.setSelectionForeground(new java.awt.Color(0, 0, 0));&#xa;        jTable2.getColumn(&quot;Delete&quot;).setCellRenderer(new ButtonRenderer1());&#xa;        jTable2.getColumn(&quot;Delete&quot;).setCellEditor(new ButtonEditor1(new JCheckBox(), jTable2, tableModel));&#xa;&#xa;        // For the &quot;Open&quot; column&#xa;        jTable2.getColumn(&quot;Open&quot;).setCellRenderer(new ButtonRenderer1());&#xa;        jTable2.getColumn(&quot;Open&quot;).setCellEditor(new ButtonEditor1(new JCheckBox(), jTable2, tableModel));&#xa; sorter = new TableRowSorter&lt;&gt;(tableModel);&#xa;jTable2.setRowSorter(sorter);">
                           <Connection code="tableModel" type="code"/>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -867,6 +867,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="660" y="90" width="170" height="40"/>
@@ -1361,7 +1364,7 @@
                 <Property name="useNullLayout" type="boolean" value="false"/>
               </Layout>
               <SubComponents>
-                <Component class="java.awt.Label" name="label6">
+                <Component class="java.awt.Label" name="eventlabels">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="48" style="1"/>
@@ -1370,7 +1373,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="110" y="10" width="400" height="70"/>
+                      <AbsoluteConstraints x="100" y="10" width="940" height="70"/>
                     </Constraint>
                   </Constraints>
                 </Component>
