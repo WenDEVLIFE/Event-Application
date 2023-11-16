@@ -22,12 +22,6 @@ import java.util.logging.Logger;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.swing.JOptionPane;
-import static menu.dashboard.Pass;
-import static menu.dashboard.User;
-import static menu.dashboard.confirmpass;
-import static menu.dashboard.confirmpassword1;
-import static menu.dashboard.password1;
-import static menu.dashboard.username1;
 
 public class registration_user {
  private  static String username1;

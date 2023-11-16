@@ -17,9 +17,9 @@ import java.sql.SQLException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static menu.dashboard.jTabbedPane1;
 import static menu.dashboard.meow;
 import static menu.dashboard.username;
+import static menu.dashboard.jTabbedPane1;
 /**
  *
  * @author Administrator
@@ -249,7 +249,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
                 meow.dispose();
                   meow =  new dashboard(username);
                 meow.setVisible(true);
-                 jTabbedPane1.setSelectedIndex(1);
+                                 jTabbedPane1.setSelectedIndex(3);
           String itemToSelect = "Select a month"; // Replace with the item you want to select
          month.setSelectedItem(itemToSelect);
            String itemToSelect1 = "Day"; // Replace with the item you want to select

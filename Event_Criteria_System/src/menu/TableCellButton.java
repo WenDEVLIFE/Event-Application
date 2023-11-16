@@ -14,7 +14,8 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import static menu.dashboard.jTabbedPane1;
+import static menu.registration_user.jTabbedPane1;
+
 
 /**
  *

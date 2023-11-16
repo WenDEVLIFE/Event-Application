@@ -5,17 +5,17 @@
 package menu;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import java.util.List;
-import java.sql.SQLException;
 import javax.swing.UIManager;
 import event_criteria_system.Login;
 import static event_criteria_system.Login.user;
-import event_criteria_system.PanelRound1;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -35,8 +35,6 @@ import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
-import menu.ButtonRenderer1;
-import menu.ButtonEditor1;
 /**
  *
  * @author Administrator
@@ -102,7 +100,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 
                 meow =  new dashboard(username);
                 meow.setVisible(true);
-            
+    jTabbedPane1.setSelectedIndex(2);
                 
           
                  
@@ -143,7 +141,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel11 = new javax.swing.JLabel();
         evb = new javax.swing.JButton();
         label4 = new java.awt.Label();
-        label9 = new java.awt.Label();
+        label11 = new java.awt.Label();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         dashboards = new javax.swing.JPanel();
         eventboard1 = new PanelRound();
@@ -203,9 +201,9 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jTable2 = new javax.swing.JTable(tableModel);
         jButton2 = new javax.swing.JButton();
         searchingbar = new javax.swing.JTextField();
-        addev = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         label10 = new java.awt.Label();
+        addev4 = new javax.swing.JButton();
         adminpanel = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         label7 = new java.awt.Label();
@@ -229,6 +227,34 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel13 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         eventlabels = new java.awt.Label();
+        eventlabels1 = new java.awt.Label();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        label9 = new java.awt.Label();
+        addev1 = new javax.swing.JButton();
+        addev = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        eventlabels2 = new java.awt.Label();
+        eventlabels5 = new java.awt.Label();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        eventlabels8 = new java.awt.Label();
+        eventlabels9 = new java.awt.Label();
+        addev3 = new javax.swing.JButton();
+        label13 = new java.awt.Label();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        addev5 = new javax.swing.JButton();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        eventlabels6 = new java.awt.Label();
+        eventlabels7 = new java.awt.Label();
+        jComboBox8 = new javax.swing.JComboBox<>();
+        addev2 = new javax.swing.JButton();
+        label12 = new java.awt.Label();
+        addev6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PWC Event Criteria System");
@@ -295,10 +321,10 @@ public static TableRowSorter <DefaultTableModel> sorter;
         label4.setText(username);
         jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 140, 40));
 
-        label9.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        label9.setForeground(new java.awt.Color(255, 255, 255));
-        label9.setText("User");
-        jPanel1.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 60, 40));
+        label11.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label11.setForeground(new java.awt.Color(255, 255, 255));
+        label11.setText("User");
+        jPanel1.add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 60, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 1000));
 
@@ -466,6 +492,9 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel11.setForeground(new java.awt.Color(51, 51, 51));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTable2.setBackground(new java.awt.Color(204, 204, 204));
+        jTable2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jTable2.setForeground(new java.awt.Color(51, 51, 51));
         jTable2.setModel(tableModel);
         // Apply the centerRenderer to all columns in your JTable
         DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
@@ -503,17 +532,6 @@ public static TableRowSorter <DefaultTableModel> sorter;
         events.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 170, 40));
         events.add(searchingbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 240, 40));
 
-        addev.setBackground(new java.awt.Color(0, 153, 51));
-        addev.setForeground(new java.awt.Color(255, 255, 255));
-        addev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
-        addev.setText("Create a event");
-        addev.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addevActionPerformed(evt);
-            }
-        });
-        events.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 170, 40));
-
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -522,6 +540,17 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel4.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 210, 50));
 
         events.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 90));
+
+        addev4.setBackground(new java.awt.Color(0, 153, 51));
+        addev4.setForeground(new java.awt.Color(255, 255, 255));
+        addev4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addev4.setText("Create a event");
+        addev4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addev4ActionPerformed(evt);
+            }
+        });
+        events.add(addev4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 170, 40));
 
         jTabbedPane1.addTab("tab2", events);
 
@@ -638,7 +667,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         model.addColumn("Edit");
         jTable.setBackground(new java.awt.Color(204, 204, 204));
         jTable.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jTable.setForeground(new java.awt.Color(128, 0, 0));
+        jTable.setForeground(new java.awt.Color(51, 51, 51));
         jTable.setModel(model
         );
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -747,22 +776,268 @@ public static TableRowSorter <DefaultTableModel> sorter;
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
 
-        reports.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1050, 860));
+        reports.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 850));
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 204));
         jPanel12.setForeground(new java.awt.Color(153, 153, 153));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        eventlabels.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
-        eventlabels.setText("Event Name:");
-        jPanel12.add(eventlabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 940, 70));
+        eventlabels.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels.setText("Participant Table");
+        jPanel12.add(eventlabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 660, 70));
+
+        eventlabels1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels1.setText("Participant Table");
+        jPanel12.add(eventlabels1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 440, 70));
 
         reports.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
 
+        jComboBox6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Participant Table", "Team Table", "Score Table" }));
+        reports.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, 230, 30));
+        jComboBox6.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                // Get the selected item
+                String selectedTable23 = (String) jComboBox6.getSelectedItem();
+
+                // Perform action based on the selected item
+                if ("Participant Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(4);
+                } else if ("Team Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(1);
+                } else if ("Score Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(0);
+                }
+            }
+        });
+
+        label9.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label9.setForeground(new java.awt.Color(128, 0, 0));
+        label9.setText("Select Table");
+        reports.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, -1, 20));
+
+        addev1.setBackground(new java.awt.Color(0, 153, 51));
+        addev1.setForeground(new java.awt.Color(255, 255, 255));
+        addev1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addev1.setText("Add Participants");
+        addev1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addev1ActionPerformed(evt);
+            }
+        });
+        reports.add(addev1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 170, 40));
+
+        addev.setBackground(new java.awt.Color(0, 153, 51));
+        addev.setForeground(new java.awt.Color(255, 255, 255));
+        addev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addev.setText("Print");
+        reports.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 190, 40));
+
         jTabbedPane1.addTab("tab3", reports);
+
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel19.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel19.setForeground(new java.awt.Color(153, 153, 153));
+        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eventlabels2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels2.setText("Score Table");
+        jPanel19.add(eventlabels2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 660, 70));
+
+        eventlabels5.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels5.setText("Event Name:");
+        jPanel19.add(eventlabels5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
+
+        jPanel14.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
+
+        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel20.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1050, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 859, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel20.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 850));
+
+        jPanel23.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel23.setForeground(new java.awt.Color(153, 153, 153));
+        jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eventlabels8.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels8.setText("Team table");
+        jPanel23.add(eventlabels8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 660, 70));
+
+        eventlabels9.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels9.setText("Event Name:");
+        jPanel23.add(eventlabels9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
+
+        jPanel20.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
+
+        addev3.setBackground(new java.awt.Color(0, 153, 51));
+        addev3.setForeground(new java.awt.Color(255, 255, 255));
+        addev3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addev3.setText("Add Score");
+        addev3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addev3ActionPerformed(evt);
+            }
+        });
+        jPanel20.add(addev3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 170, 40));
+
+        label13.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label13.setForeground(new java.awt.Color(128, 0, 0));
+        label13.setText("Select Table");
+        jPanel20.add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, -1, 20));
+
+        jComboBox7.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Participant Table", "Team Table", "Score Table" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
+        jPanel20.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 230, 30));
+        jComboBox7.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                // Get the selected item
+                String selectedTable23 = (String) jComboBox7.getSelectedItem();
+
+                // Perform action based on the selected item
+                if ("Participant Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(4);
+                } else if ("Team Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(1);
+                } else if ("Score Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(0);
+                }
+            }
+        });
+
+        addev5.setBackground(new java.awt.Color(0, 153, 51));
+        addev5.setForeground(new java.awt.Color(255, 255, 255));
+        addev5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addev5.setText("Print");
+        jPanel20.add(addev5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 170, 40));
+
+        jPanel14.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jTabbedPane1.addTab("tab5", jPanel14);
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1050, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 850, Short.MAX_VALUE)
+        );
+
+        jPanel15.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 850));
+
+        jPanel22.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel22.setForeground(new java.awt.Color(153, 153, 153));
+        jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eventlabels6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels6.setText("Team table");
+        jPanel22.add(eventlabels6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 660, 70));
+
+        eventlabels7.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels7.setText("Event Name:");
+        jPanel22.add(eventlabels7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
+
+        jPanel15.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
+
+        jComboBox8.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Participant Table", "Team Table", "Score Table" }));
+        jPanel15.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 230, 30));
+        jComboBox8.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)  {
+                // Get the selected item
+                String selectedTable23 = (String) jComboBox8.getSelectedItem();
+
+                // Perform action based on the selected item
+                if ("Participant Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(4);
+                } else if ("Team Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(1);
+                } else if ("Score Table".equals(selectedTable23)) {
+                    // Replace this line with your desired action
+                    jTabbedPane1.setSelectedIndex(0);
+                }
+            }
+        });
+
+        addev2.setBackground(new java.awt.Color(0, 153, 51));
+        addev2.setForeground(new java.awt.Color(255, 255, 255));
+        addev2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addev2.setText("Add Score");
+        addev2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addev2ActionPerformed(evt);
+            }
+        });
+        jPanel15.add(addev2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 170, 40));
+
+        label12.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        label12.setForeground(new java.awt.Color(128, 0, 0));
+        label12.setText("Select Table");
+        jPanel15.add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, -1, 20));
+
+        addev6.setBackground(new java.awt.Color(0, 153, 51));
+        addev6.setForeground(new java.awt.Color(255, 255, 255));
+        addev6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addev6.setText("Print");
+        jPanel15.add(addev6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 170, 40));
+
+        jTabbedPane1.addTab("tab6", jPanel15);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, -30, 1110, 1030));
         jTabbedPane1.addTab("Tab 1", dashboards);
@@ -806,6 +1081,8 @@ class ButtonRenderer extends JButton implements TableCellRenderer {
         return this;
     }
 }
+
+// to display the eventtable
 private void populateTableFromDatabase() {
         try {
             // Establish a database connection
@@ -834,6 +1111,7 @@ private void populateTableFromDatabase() {
         }
     }
 
+// this is for the Event Table
   // The ButtonRenderer1 class
  public class ButtonRenderer1 extends JButton implements TableCellRenderer {
         public ButtonRenderer1() {
@@ -904,8 +1182,11 @@ private void populateTableFromDatabase() {
                             System.out.println("Retrieved event name: " + eventdb);
 
                             // Assuming eventlabels is a JLabel, set the text
-                                 jTabbedPane1.setSelectedIndex(2);
+                
                             eventlabels.setText("Event Name:"+eventdb);
+                            eventlabels5.setText("Event Name:"+eventdb);
+                            eventlabels7.setText("Event Name:"+eventdb);
+                                   jTabbedPane1.setSelectedIndex(4);
                         } else {
                             System.out.println("Event not found in the database.");
                         }
@@ -1099,7 +1380,7 @@ public Component getTableCellEditorComponent(JTable table, Object value, boolean
                                     meow.dispose();
                                     meow =  new dashboard(username);
                                     meow.setVisible(true);
-                                     jTabbedPane1.setSelectedIndex(3);
+                                            jTabbedPane1.setSelectedIndex(5);
                                 } else {
                                     System.out.println("User deletion failed.");
                                 }
@@ -1180,7 +1461,7 @@ public Component getTableCellEditorComponent(JTable table, Object value, boolean
 // go to admin panel
     private void AdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminActionPerformed
         // TODO add your handling code here:
-                          jTabbedPane1.setSelectedIndex(3);
+                          jTabbedPane1.setSelectedIndex(5);
         
 
     }//GEN-LAST:event_AdminActionPerformed
@@ -1188,7 +1469,8 @@ public Component getTableCellEditorComponent(JTable table, Object value, boolean
     // go to dashboard
     private void dashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashActionPerformed
         // TODO add your handling code here:
-           jTabbedPane1.setSelectedIndex(0);
+        //dashboard
+           jTabbedPane1.setSelectedIndex(2);
      
     }//GEN-LAST:event_dashActionPerformed
 
@@ -1215,11 +1497,83 @@ if (result == JOptionPane.YES_OPTION) {
     private void evbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evbActionPerformed
         // TODO add your handling code here:
         
-                jTabbedPane1.setSelectedIndex(1);
+        //event
+                jTabbedPane1.setSelectedIndex(3);
             
          
            
     }//GEN-LAST:event_evbActionPerformed
+
+    private void adduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adduserActionPerformed
+        // TODO add your handling code here:
+
+        //get value from the arrays
+        Object selectedItem2 = jComboBox1.getSelectedItem();
+        String selectedItemString = (String) selectedItem2;
+
+        // get text the value from the textfields and password
+        username1 = User.getText();
+        password1 = new String(Pass.getPassword());
+        confirmpassword1 = new String(confirmpass.getPassword());
+
+        // to check if its empty
+        if (username1.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+
+            // if both passworld field is empty
+        } else if (password1.isEmpty() || confirmpassword1.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password fields cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+
+            // if password and confirm password is not equal
+        } else if (!password1.equals(confirmpassword1)) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+
+            //if the lenght is not commit on the desire value from 8 to 12 letters
+        } else if (!verifyPasswordLength(confirmpassword1)) {
+            JOptionPane.showMessageDialog(null, "Password must be at least X characters long.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+        else {
+            boolean hasCapsLock = false;
+            boolean hasSpecialCharacters = false;
+
+            for (char character : confirmpassword1.toCharArray()) {
+                if (Character.isUpperCase(character)) {
+                    hasCapsLock = true;
+                } else if (!Character.isLetterOrDigit(character)) {
+                    hasSpecialCharacters = true;
+                }
+            }
+            // if user has no capslock and special character
+            if (!hasCapsLock || !hasSpecialCharacters) {
+                JOptionPane.showMessageDialog(null, "The password must contain at least one uppercase letter and one special character.");
+            }
+
+            // the user goes here if the usercommit all the requirements
+            else {
+                // All checks passed, user registration or other actions can proceed here
+                UserExist meow2 = new UserExist(username1, password1, selectedItemString);
+                meow2.user_identification();
+                User.setText("");
+                Pass.setText("");
+                confirmpass.setText("");
+                meow.repaint();
+                meow.dispose();
+                meow =  new dashboard(username);
+                meow.setVisible(true);
+                jTabbedPane1.setSelectedIndex(5);
+
+            }
+        }
+    }//GEN-LAST:event_adduserActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+        User.setText("");
+        Pass.setText("");
+        confirmpass.setText("");
+
+    }//GEN-LAST:event_clearActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
@@ -1235,89 +1589,6 @@ if (result == JOptionPane.YES_OPTION) {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        // TODO add your handling code here:
-           User.setText("");
-            Pass.setText("");
-            confirmpass.setText("");
-    
-    }//GEN-LAST:event_clearActionPerformed
-
-    private void adduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adduserActionPerformed
-        // TODO add your handling code here:
-        
-       //get value from the arrays
-           Object selectedItem2 = jComboBox1.getSelectedItem();
-    String selectedItemString = (String) selectedItem2;
-    
-    // get text the value from the textfields and password
-   username1 = User.getText();
-password1 = new String(Pass.getPassword());
-confirmpassword1 = new String(confirmpass.getPassword());
-
-// to check if its empty
-if (username1.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Username cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-    
-    // if both passworld field is empty
-} else if (password1.isEmpty() || confirmpassword1.isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Password fields cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-    
-    // if password and confirm password is not equal
-} else if (!password1.equals(confirmpassword1)) {
-    JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-    
-    //if the lenght is not commit on the desire value from 8 to 12 letters
-} else if (!verifyPasswordLength(confirmpassword1)) {
-    JOptionPane.showMessageDialog(null, "Password must be at least X characters long.", "Error", JOptionPane.ERROR_MESSAGE);
-    
-    
-} 
-else {
-    boolean hasCapsLock = false;
-    boolean hasSpecialCharacters = false;
-
-    for (char character : confirmpassword1.toCharArray()) {
-        if (Character.isUpperCase(character)) {
-            hasCapsLock = true;
-        } else if (!Character.isLetterOrDigit(character)) {
-            hasSpecialCharacters = true;
-        }
-    }
-// if user has no capslock and special character
-    if (!hasCapsLock || !hasSpecialCharacters) {
-        JOptionPane.showMessageDialog(null, "The password must contain at least one uppercase letter and one special character.");
-    } 
-    
-    // the user goes here if the usercommit all the requirements
-    else {
-        // All checks passed, user registration or other actions can proceed here
-        UserExist meow2 = new UserExist(username1, password1, selectedItemString);
-        meow2.user_identification();
-         User.setText("");
-          Pass.setText("");
-          confirmpass.setText("");
-          meow.repaint();
-          meow.dispose();
-          meow =  new dashboard(username);
-          meow.setVisible(true);
-            jTabbedPane1.setSelectedIndex(3);
-        
-
-    }
-} 
-    }//GEN-LAST:event_adduserActionPerformed
-
-     
-    private void addevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addevActionPerformed
-        // TODO add your handling code here:
-          create_event dialog = new create_event(new java.awt.Frame(), true);
-    dialog.showDialog();
-     dialog.setTitle("Create Event");
-         
-    }//GEN-LAST:event_addevActionPerformed
-
-    
     private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserActionPerformed
@@ -1326,12 +1597,34 @@ else {
         // TODO add your handling code here:
         String search = searchingbar.getText();
 
-    RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + search); // Case-insensitive search
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + search); // Case-insensitive search
 
-    sorter.setRowFilter(rowFilter);
-        
+        sorter.setRowFilter(rowFilter);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void addev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addev1ActionPerformed
+
+    private void addev2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addev2ActionPerformed
+
+    private void addev3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addev3ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox7ActionPerformed
+
+    private void addev4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addev4ActionPerformed
+
+     
+    
 // To verify the password length
 public static boolean verifyPasswordLength(String password) {
     int length = password.length();
@@ -1342,6 +1635,12 @@ public static boolean verifyPasswordLength(String password) {
     public static javax.swing.JPasswordField Pass;
     public static javax.swing.JTextField User;
     private javax.swing.JButton addev;
+    private javax.swing.JButton addev1;
+    private javax.swing.JButton addev2;
+    private javax.swing.JButton addev3;
+    private javax.swing.JButton addev4;
+    private javax.swing.JButton addev5;
+    private javax.swing.JButton addev6;
     private javax.swing.JButton adduser;
     private javax.swing.JPanel adminpanel;
     private javax.swing.JButton clear;
@@ -1351,11 +1650,21 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JButton evb;
     public static transient volatile javax.swing.JPanel eventboard1;
     private java.awt.Label eventlabels;
+    private java.awt.Label eventlabels1;
+    private java.awt.Label eventlabels2;
+    private java.awt.Label eventlabels5;
+    private java.awt.Label eventlabels6;
+    private java.awt.Label eventlabels7;
+    private java.awt.Label eventlabels8;
+    private java.awt.Label eventlabels9;
     private javax.swing.JPanel events;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     public static javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1385,8 +1694,17 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -1403,6 +1721,9 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JTable jTable2;
     private java.awt.Label label1;
     private java.awt.Label label10;
+    private java.awt.Label label11;
+    private java.awt.Label label12;
+    private java.awt.Label label13;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;

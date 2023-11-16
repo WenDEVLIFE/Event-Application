@@ -8,9 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import static menu.dashboard.jTabbedPane1;
 import static menu.dashboard.meow;
 import static menu.dashboard.username;
+import static menu.dashboard.jTabbedPane1;
 
 /**
  *
@@ -38,7 +38,7 @@ public class delete_event {
                         meow.dispose();
                         meow =  new dashboard(username);
                 meow.setVisible(true);
-                 jTabbedPane1.setSelectedIndex(1);
+                 jTabbedPane1.setSelectedIndex(3);
                     } else {
                         System.out.println("Event deletion failed. No rows deleted.");
                         
