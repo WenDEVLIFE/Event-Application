@@ -14,8 +14,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +28,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
@@ -46,7 +45,7 @@ public class dashboard extends javax.swing.JFrame {
      */
      // this the jframe of class
     public static dashboard meow;
-    
+     private DefaultTableModel model1;
     public static String confirmpassword1;
 private DefaultTableModel model;
 public static TableRowSorter <DefaultTableModel> sorter;
@@ -156,10 +155,6 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jPanel9 = new PanelRound();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jPanel2 = new PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new PanelRound();
@@ -172,9 +167,6 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel15 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        label3 = new java.awt.Label();
         events = new javax.swing.JPanel();
         jPanel11 = new JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -225,6 +217,8 @@ public static TableRowSorter <DefaultTableModel> sorter;
         label8 = new java.awt.Label();
         reports = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         eventlabels = new java.awt.Label();
         eventlabels1 = new java.awt.Label();
@@ -233,14 +227,15 @@ public static TableRowSorter <DefaultTableModel> sorter;
         addev1 = new javax.swing.JButton();
         addev = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
-        jPanel19 = new javax.swing.JPanel();
-        eventlabels2 = new java.awt.Label();
-        eventlabels5 = new java.awt.Label();
         jPanel20 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         jPanel23 = new javax.swing.JPanel();
-        eventlabels8 = new java.awt.Label();
+        jPanel19 = new javax.swing.JPanel();
+        eventlabels5 = new java.awt.Label();
+        eventlabels11 = new java.awt.Label();
         eventlabels9 = new java.awt.Label();
         addev3 = new javax.swing.JButton();
         label13 = new java.awt.Label();
@@ -248,11 +243,19 @@ public static TableRowSorter <DefaultTableModel> sorter;
         addev5 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        model1 = new DefaultTableModel();
+        model1.addColumn("ScoreID");
+        model1.addColumn("EventID");
+        model1.addColumn("ParticipantID");
+        model1.addColumn("Score");
+        model1.addColumn("Delete");
+        jTable5 = new javax.swing.JTable( model1);
         jPanel22 = new javax.swing.JPanel();
-        eventlabels6 = new java.awt.Label();
         eventlabels7 = new java.awt.Label();
+        eventlabels6 = new java.awt.Label();
         jComboBox8 = new javax.swing.JComboBox<>();
-        addev2 = new javax.swing.JButton();
+        addscores = new javax.swing.JButton();
         label12 = new java.awt.Label();
         addev6 = new javax.swing.JButton();
 
@@ -273,7 +276,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 AdminActionPerformed(evt);
             }
         });
-        jPanel1.add(Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 170, 70));
+        jPanel1.add(Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 170, 70));
 
         dash.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         dash.setForeground(new java.awt.Color(128, 0, 0));
@@ -284,7 +287,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 dashActionPerformed(evt);
             }
         });
-        jPanel1.add(dash, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 170, 70));
+        jPanel1.add(dash, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 170, 70));
 
         label2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         label2.setForeground(new java.awt.Color(255, 255, 255));
@@ -300,7 +303,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 170, 70));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 170, 70));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-user-60.png"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 60, 70));
@@ -314,7 +317,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 evbActionPerformed(evt);
             }
         });
-        jPanel1.add(evb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 170, 70));
+        jPanel1.add(evb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 170, 70));
 
         label4.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         label4.setForeground(new java.awt.Color(255, 255, 255));
@@ -348,7 +351,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel18.setText("0");
         eventboard1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 70, 20));
 
-        dashboards.add(eventboard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 320, 180));
+        dashboards.add(eventboard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 320, 180));
 
         participants.setBackground(new java.awt.Color(128, 0, 0));
         participants.setForeground(new java.awt.Color(255, 255, 255));
@@ -367,7 +370,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel19.setText("0");
         participants.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 70, 20));
 
-        dashboards.add(participants, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 320, 180));
+        dashboards.add(participants, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, 320, 180));
 
         jPanel8.setBackground(new java.awt.Color(128, 0, 0));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -385,25 +388,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel20.setText("0");
         jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 70, 20));
 
-        dashboards.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 320, 180));
-
-        jPanel9.setBackground(new java.awt.Color(128, 0, 0));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Reports");
-        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, 20));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-reports-58.png"))); // NOI18N
-        jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
-
-        jLabel21.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("0");
-        jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 70, 20));
-
-        dashboards.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 320, 180));
+        dashboards.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 320, 180));
 
         jPanel2.setBackground(new java.awt.Color(128, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -451,36 +436,16 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel15.setText("0");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 70, 20));
 
-        dashboards.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 320, 180));
+        dashboards.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 320, 180));
 
         jPanel10.setBackground(new java.awt.Color(204, 204, 204));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         label1.setText("Dashboard");
-        jPanel10.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 350, 50));
+        jPanel10.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 350, 50));
 
         dashboards.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 90));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        dashboards.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 621, 1060, 360));
-
-        label3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        label3.setForeground(new java.awt.Color(0, 0, 0));
-        label3.setText("Reports");
-        dashboards.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 250, 30));
 
         jTabbedPane1.addTab("tab1", dashboards);
 
@@ -768,18 +733,24 @@ public static TableRowSorter <DefaultTableModel> sorter;
         reports.setBackground(new java.awt.Color(255, 255, 255));
         reports.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
-        );
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        reports.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 850));
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable3);
+
+        jPanel13.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1050, 850));
+
+        reports.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 1050, 850));
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 204));
         jPanel12.setForeground(new java.awt.Color(153, 153, 153));
@@ -787,7 +758,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         eventlabels.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         eventlabels.setText("Participant Table");
-        jPanel12.add(eventlabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 660, 70));
+        jPanel12.add(eventlabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 660, 70));
 
         eventlabels1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         eventlabels1.setText("Participant Table");
@@ -832,13 +803,13 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 addev1ActionPerformed(evt);
             }
         });
-        reports.add(addev1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 170, 40));
+        reports.add(addev1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 170, 40));
 
         addev.setBackground(new java.awt.Color(0, 153, 51));
         addev.setForeground(new java.awt.Color(255, 255, 255));
         addev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         addev.setText("Print");
-        reports.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 190, 40));
+        reports.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 190, 40));
 
         jTabbedPane1.addTab("tab3", reports);
 
@@ -846,34 +817,24 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel14.setForeground(new java.awt.Color(255, 255, 255));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel19.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel19.setForeground(new java.awt.Color(153, 153, 153));
-        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        eventlabels2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        eventlabels2.setText("Score Table");
-        jPanel19.add(eventlabels2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 660, 70));
-
-        eventlabels5.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        eventlabels5.setText("Event Name:");
-        jPanel19.add(eventlabels5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
-
-        jPanel14.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
-
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setForeground(new java.awt.Color(204, 204, 204));
         jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 859, Short.MAX_VALUE)
-        );
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable4);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -883,12 +844,22 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel21Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel21Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jPanel20.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 850));
@@ -897,13 +868,24 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel23.setForeground(new java.awt.Color(153, 153, 153));
         jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        eventlabels8.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        eventlabels8.setText("Team table");
-        jPanel23.add(eventlabels8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 660, 70));
+        jPanel19.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel19.setForeground(new java.awt.Color(153, 153, 153));
+        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eventlabels5.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels5.setText("Event Name:");
+        jPanel19.add(eventlabels5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
+
+        eventlabels11.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels11.setText("Event Name:");
+        jPanel19.add(eventlabels11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
 
         eventlabels9.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        eventlabels9.setText("Event Name:");
-        jPanel23.add(eventlabels9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
+        eventlabels9.setText("Team Table");
+        jPanel19.add(eventlabels9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 610, 70));
+        eventlabels9.getAccessibleContext().setAccessibleName("Team Table");
+
+        jPanel23.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 90));
 
         jPanel20.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
 
@@ -916,7 +898,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 addev3ActionPerformed(evt);
             }
         });
-        jPanel20.add(addev3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 170, 40));
+        jPanel20.add(addev3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 170, 40));
 
         label13.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         label13.setForeground(new java.awt.Color(128, 0, 0));
@@ -955,7 +937,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         addev5.setForeground(new java.awt.Color(255, 255, 255));
         addev5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         addev5.setText("Print");
-        jPanel20.add(addev5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 170, 40));
+        jPanel20.add(addev5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 170, 40));
 
         jPanel14.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -965,16 +947,12 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel15.setForeground(new java.awt.Color(204, 204, 204));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
-        );
+        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ButtonColumn buttonColumn = new ButtonColumn(jTable5, deleteAction, 3);
+        jScrollPane6.setViewportView(jTable5);
+
+        jPanel17.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1050, 850));
 
         jPanel15.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 850));
 
@@ -982,13 +960,13 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel22.setForeground(new java.awt.Color(153, 153, 153));
         jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        eventlabels6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        eventlabels6.setText("Team table");
-        jPanel22.add(eventlabels6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 660, 70));
-
         eventlabels7.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         eventlabels7.setText("Event Name:");
         jPanel22.add(eventlabels7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 70));
+
+        eventlabels6.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        eventlabels6.setText("Score Table");
+        jPanel22.add(eventlabels6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 660, 70));
 
         jPanel15.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1110, 90));
 
@@ -1015,16 +993,16 @@ public static TableRowSorter <DefaultTableModel> sorter;
             }
         });
 
-        addev2.setBackground(new java.awt.Color(0, 153, 51));
-        addev2.setForeground(new java.awt.Color(255, 255, 255));
-        addev2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
-        addev2.setText("Add Score");
-        addev2.addActionListener(new java.awt.event.ActionListener() {
+        addscores.setBackground(new java.awt.Color(0, 153, 51));
+        addscores.setForeground(new java.awt.Color(255, 255, 255));
+        addscores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
+        addscores.setText("Add Score");
+        addscores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addev2ActionPerformed(evt);
+                addscoresActionPerformed(evt);
             }
         });
-        jPanel15.add(addev2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 170, 40));
+        jPanel15.add(addscores, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 170, 40));
 
         label12.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         label12.setForeground(new java.awt.Color(128, 0, 0));
@@ -1035,7 +1013,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         addev6.setForeground(new java.awt.Color(255, 255, 255));
         addev6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         addev6.setText("Print");
-        jPanel15.add(addev6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 170, 40));
+        jPanel15.add(addev6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 210, 40));
 
         jTabbedPane1.addTab("tab6", jPanel15);
 
@@ -1061,7 +1039,26 @@ public static TableRowSorter <DefaultTableModel> sorter;
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
   // Custom button renderer for JTable
-   
+     private AbstractAction deleteAction = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JTable table = (JTable) e.getSource();
+            int row = Integer.parseInt(e.getActionCommand());
+
+            // Get the user ID from the selected row
+            int userId = (int) table.getValueAt(row, 0);
+
+            // Perform delete operation in the database
+            deleteUser(userId);
+
+            // Remove the row from the table
+            model1.removeRow(row);
+        }
+
+        private void deleteUser(int userId) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    };
     // this is JTABLE2
 class ButtonRenderer extends JButton implements TableCellRenderer {
     public ButtonRenderer() {
@@ -1607,9 +1604,9 @@ if (result == JOptionPane.YES_OPTION) {
         // TODO add your handling code here:
     }//GEN-LAST:event_addev1ActionPerformed
 
-    private void addev2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev2ActionPerformed
+    private void addscoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addscoresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addev2ActionPerformed
+    }//GEN-LAST:event_addscoresActionPerformed
 
     private void addev3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev3ActionPerformed
         // TODO add your handling code here:
@@ -1636,11 +1633,11 @@ public static boolean verifyPasswordLength(String password) {
     public static javax.swing.JTextField User;
     private javax.swing.JButton addev;
     private javax.swing.JButton addev1;
-    private javax.swing.JButton addev2;
     private javax.swing.JButton addev3;
     private javax.swing.JButton addev4;
     private javax.swing.JButton addev5;
     private javax.swing.JButton addev6;
+    private javax.swing.JButton addscores;
     private javax.swing.JButton adduser;
     private javax.swing.JPanel adminpanel;
     private javax.swing.JButton clear;
@@ -1651,11 +1648,10 @@ public static boolean verifyPasswordLength(String password) {
     public static transient volatile javax.swing.JPanel eventboard1;
     private java.awt.Label eventlabels;
     private java.awt.Label eventlabels1;
-    private java.awt.Label eventlabels2;
+    private java.awt.Label eventlabels11;
     private java.awt.Label eventlabels5;
     private java.awt.Label eventlabels6;
     private java.awt.Label eventlabels7;
-    private java.awt.Label eventlabels8;
     private java.awt.Label eventlabels9;
     private javax.swing.JPanel events;
     private javax.swing.JButton jButton2;
@@ -1667,7 +1663,6 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1677,7 +1672,6 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1688,7 +1682,6 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1711,21 +1704,23 @@ public static boolean verifyPasswordLength(String password) {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     public static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     private java.awt.Label label1;
     private java.awt.Label label10;
     private java.awt.Label label11;
     private java.awt.Label label12;
     private java.awt.Label label13;
     private java.awt.Label label2;
-    private java.awt.Label label3;
     private java.awt.Label label4;
     private java.awt.Label label7;
     private java.awt.Label label8;
