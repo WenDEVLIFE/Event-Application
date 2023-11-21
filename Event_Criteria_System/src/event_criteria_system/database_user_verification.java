@@ -23,8 +23,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import menu.dashboard;
-import static menu.dashboard.meow;
+import UI.dashboard;
+import static UI.dashboard.meow;
 /**
  *
  * @author Administrator
