@@ -42,7 +42,7 @@ private final String password;
     this.user = user;  // Initialize the user jframe instance variable
     }
      
-    public void login_authentication(String username, String password) {
+    public void login_authentication(String username, String password) throws ClassNotFoundException {
         Connection con = null;
         try {
             checkMySQLServerStatus(); // Check if MySQL is online before attempting to authenticate
@@ -109,7 +109,7 @@ private void displayErrorMessage(String message) {
     System.out.println("Authentication failed: " + message);
 }
 
-private void displayWelcomeMessage(String username) {
+private void displayWelcomeMessage(String username) throws SQLException, ClassNotFoundException {
     JPanel panel = new JPanel();
     Color customColor = new Color(255, 255, 240, 128); // RGBA: White with 50% transparency (0-255 range)
 

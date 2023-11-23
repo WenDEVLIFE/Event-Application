@@ -202,10 +202,12 @@ public class Newpasswordgui extends javax.swing.JDialog {
             Logger.getLogger(Newpasswordgui.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidKeySpecException ex) {
             Logger.getLogger(Newpasswordgui.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }       catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Newpasswordgui.class.getName()).log(Level.SEVERE, null, ex);
+                }
         
     }//GEN-LAST:event_jButton1ActionPerformed
-private void changePassword() throws NoSuchAlgorithmException, InvalidKeySpecException {
+private void changePassword() throws NoSuchAlgorithmException, InvalidKeySpecException, ClassNotFoundException {
     String username1 = userform.getText();
     String passwordold = new String(password.getPassword());
     String passwordnew = new String(confirmpassword.getPassword());

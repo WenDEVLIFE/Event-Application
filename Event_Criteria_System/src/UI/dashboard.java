@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.UIManager;
 import event_criteria_system.Login;
 import static event_criteria_system.Login.user;
+import functions.ButtonColumn1;
+import functions.ButtonColumn2;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -32,6 +34,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.RowFilter;
@@ -50,6 +54,8 @@ public class dashboard extends javax.swing.JFrame {
      // this the jframe of class
     public static dashboard meow;
      private DefaultTableModel model1;
+     private DefaultTableModel model2;
+     private DefaultTableModel model3;
     public static String confirmpassword1;
 private DefaultTableModel model;
 public static TableRowSorter <DefaultTableModel> sorter;
@@ -57,8 +63,22 @@ public static TableRowSorter <DefaultTableModel> sorter;
  public static String username;
  public static String username1;
     public static String password1;
- 
+ static int numberOfRows1;
+  public static String eventname;
     public static  dashboard currentFrame;
+    
+    
+    private String mydb_url = "jdbc:mysql://localhost:3306/eventsystem_db";
+		
+		@SuppressWarnings("unused")
+		//database username
+		private String myDB_username = "root";
+		@SuppressWarnings("unused")
+		
+		//database password
+		private String myDB_PASSWORD = "";
+                
+                
     /**
      * Creates new form dashboard
      */
@@ -104,6 +124,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 
                 meow =  new dashboard(username);
                 meow.setVisible(true);
+                
  
                 
           
@@ -117,7 +138,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
       
     }
     
-    public dashboard(String username) {
+    public dashboard(String username) throws SQLException, ClassNotFoundException {
       this.username = username;
         initComponents();
           // to set icons of your titlebar
@@ -126,6 +147,10 @@ public static TableRowSorter <DefaultTableModel> sorter;
           userole(username);
         // Set the icon on the frame.
        setIconImage(iconImage);
+       mysqlstudent();
+       mysql_participants();
+       mysql_judge();
+       mysql_score() ;
     }
 
     /**
@@ -223,7 +248,16 @@ public static TableRowSorter <DefaultTableModel> sorter;
         reports = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        model2 = new DefaultTableModel();
+        model2.addColumn("ParticipantID");
+        model2.addColumn("FirstName");
+        model2.addColumn("LastName");
+        model2.addColumn("Email");
+        model2.addColumn("Phone");
+        model2.addColumn("Team_ID");
+        model2.addColumn("Event_ID");
+        model2.addColumn("Delete");
+        jTable3 = new javax.swing.JTable(model2);
         jPanel12 = new javax.swing.JPanel();
         eventlabels = new java.awt.Label();
         eventlabels1 = new java.awt.Label();
@@ -236,7 +270,13 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel21 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        model3 = new DefaultTableModel();
+        model3.addColumn("Team_ID");
+        model3.addColumn("Team_Name");
+        model3.addColumn("CaptainDorPLayer_ID");
+        model3.addColumn("Event_ID");
+        model3.addColumn("Delete");
+        jTable4 = new javax.swing.JTable(model3);
         jPanel23 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         eventlabels5 = new java.awt.Label();
@@ -351,7 +391,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         jLabel18.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("0");
+        jLabel18.setText("");
         eventboard1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 70, 20));
 
         dashboards.add(eventboard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 320, 180));
@@ -437,18 +477,19 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jLabel15.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("0");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 70, 20));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 150, 20));
 
         dashboards.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 320, 180));
 
-        jPanel10.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         label1.setText("Dashboard");
         jPanel10.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 350, 50));
 
-        dashboards.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 90));
+        dashboards.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 100));
 
         jTabbedPane1.addTab("tab1", dashboards);
 
@@ -500,14 +541,15 @@ public static TableRowSorter <DefaultTableModel> sorter;
         events.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 170, 40));
         events.add(searchingbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 240, 40));
 
-        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label10.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         label10.setText("Event");
-        jPanel4.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 210, 50));
+        jPanel4.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 210, 50));
 
-        events.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 90));
+        events.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 80));
 
         addev4.setBackground(new java.awt.Color(0, 153, 51));
         addev4.setForeground(new java.awt.Color(255, 255, 255));
@@ -722,7 +764,8 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         adminpanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 730, 910));
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label8.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
@@ -738,24 +781,15 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         jScrollPane4.setViewportView(jTable3);
+        ButtonColumn1 buttonColumn1 = new ButtonColumn1(jTable3, deleteAction,7);
 
         jPanel13.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1050, 850));
 
         reports.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 1050, 850));
 
-        jPanel12.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel12.setForeground(new java.awt.Color(153, 153, 153));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -806,12 +840,17 @@ public static TableRowSorter <DefaultTableModel> sorter;
                 addev1ActionPerformed(evt);
             }
         });
-        reports.add(addev1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 250, 40));
+        reports.add(addev1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 260, 40));
 
         addev.setBackground(new java.awt.Color(0, 153, 51));
         addev.setForeground(new java.awt.Color(255, 255, 255));
         addev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         addev.setText("Print");
+        addev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addevActionPerformed(evt);
+            }
+        });
         reports.add(addev, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 240, 40));
 
         jTabbedPane1.addTab("tab3", reports);
@@ -826,17 +865,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        ButtonColumn2 buttonColumn2 = new ButtonColumn2(jTable4, deleteAction,4);
         jScrollPane5.setViewportView(jTable4);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
@@ -871,7 +900,8 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel23.setForeground(new java.awt.Color(153, 153, 153));
         jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel19.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel19.setForeground(new java.awt.Color(153, 153, 153));
         jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -940,14 +970,15 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ButtonColumn buttonColumn = new ButtonColumn(jTable5, deleteAction, 3);
+        ButtonColumn buttonColumn = new ButtonColumn(jTable5, deleteAction,4);
         jScrollPane6.setViewportView(jTable5);
 
         jPanel17.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1050, 850));
 
         jPanel15.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1050, 850));
 
-        jPanel22.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel22.setForeground(new java.awt.Color(153, 153, 153));
         jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1176,7 +1207,7 @@ private void populateTableFromDatabase() {
 
 
         private String retrieveEventFromDatabase(String eventInRow) {
-            String eventname = null;
+            eventname = null;
 
             // Define your database connection parameters
             String dbUrl = "jdbc:mysql://localhost:3306/eventsystem_db";
@@ -1196,6 +1227,9 @@ private void populateTableFromDatabase() {
                         eventname = resultSet.getString("Event_Name");
                         // Optionally, set the retrieved event name in a label or elsewhere
                         eventlabels.setText(eventname);
+                        displayScores(eventname);
+                        display_participant(eventname);
+                        display_Team(eventname);
                     }
                 }
             } catch (SQLException e) {
@@ -1363,6 +1397,8 @@ public Component getTableCellEditorComponent(JTable table, Object value, boolean
                                 }
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
                             }
 
                             model.removeRow(selectedRow);
@@ -1536,7 +1572,13 @@ if (result == JOptionPane.YES_OPTION) {
                 confirmpass.setText("");
                 meow.repaint();
                 meow.dispose();
-                meow =  new dashboard(username);
+                try {
+                    meow =  new dashboard(username);
+                } catch (SQLException ex) {
+                    Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 meow.setVisible(true);
                 jTabbedPane1.setSelectedIndex(5);
 
@@ -1582,6 +1624,8 @@ if (result == JOptionPane.YES_OPTION) {
 
     private void addev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev1ActionPerformed
         // TODO add your handling code here:
+           AddParticipantFunction dialog1 = new AddParticipantFunction(new javax.swing.JFrame(), true);
+           dialog1.showDialog();
     }//GEN-LAST:event_addev1ActionPerformed
 
     private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
@@ -1593,6 +1637,10 @@ if (result == JOptionPane.YES_OPTION) {
             create_event dialog = new create_event(new java.awt.Frame(), true);
             dialog.showDialog();
     }//GEN-LAST:event_addev4ActionPerformed
+
+    private void addevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addevActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addevActionPerformed
 
 // To verify the password length
 public static boolean verifyPasswordLength(String password) {
@@ -1627,8 +1675,210 @@ public static boolean verifyPasswordLength(String password) {
          e.printStackTrace();
      }
  }
+public int mysqlstudent() throws SQLException, ClassNotFoundException {
+   int numberOfRows1 = 0;
 
+        // Load MySQL driver
+        Class.forName("com.mysql.jdbc.Driver");
 
+        // Connect to the database using try-with-resources
+        try (Connection con = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD);
+             java.sql.Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS rowCount FROM pwc_event_table")) {
+
+            // Check if the result set has data
+            if (rs.next()) {
+                numberOfRows1 = rs.getInt("rowCount");
+                jLabel18.setText(""+numberOfRows1);
+            }
+        } // Resources are closed automatically due to try-with-resources
+
+        return numberOfRows1;
+		
+}
+
+public int mysql_participants() throws SQLException, ClassNotFoundException {
+   int numberOfRows11 = 0;
+
+        // Load MySQL driver
+        Class.forName("com.mysql.jdbc.Driver");
+
+        // Connect to the database using try-with-resources
+        try (Connection con = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD);
+             java.sql.Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS ParticipantID FROM participants_table")) {
+
+            // Check if the result set has data
+            if (rs.next()) {
+                numberOfRows11 = rs.getInt("ParticipantID");
+                jLabel19.setText(""+numberOfRows11);
+            }
+        } // Resources are closed automatically due to try-with-resources
+
+        return numberOfRows11;
+		
+}
+
+public int mysql_judge() throws SQLException, ClassNotFoundException {
+ int numberOfJudges = 0;
+
+        // Load MySQL driver
+        Class.forName("com.mysql.jdbc.Driver");
+
+        // Connect to the database using try-with-resources
+        try (Connection con = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD);
+             java.sql.Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS id FROM user WHERE role = 'Judge'")) {
+
+            // Check if the result set has data
+            if (rs.next()) {
+               numberOfJudges = rs.getInt("id");
+                jLabel20.setText(""+numberOfJudges);
+            }
+        } // Resources are closed automatically due to try-with-resources
+
+        return numberOfJudges;
+		
+}
+
+public double mysql_score() throws SQLException, ClassNotFoundException {
+double numberOfScore = 0;
+
+        // Load MySQL driver
+        Class.forName("com.mysql.jdbc.Driver");
+
+        // Connect to the database using try-with-resources
+        try (Connection con = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD);
+             java.sql.Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT SUM(Score)  AS Score FROM score_table")) {
+
+            // Check if the result set has data
+            if (rs.next()) {
+               numberOfScore = rs.getInt("Score");
+                jLabel15.setText(""+numberOfScore);
+            }
+        } // Resources are closed automatically due to try-with-resources
+
+        return numberOfScore;
+		
+}
+
+// to display the score table
+public void displayScores(String eventname) {
+  model1.setRowCount(0); // Clear existing data in the table
+
+    try (Connection con = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD)) {
+        String query = "SELECT ScoreID, Event_ID, ParticipantID, Score FROM score_table WHERE Event_ID IN (SELECT Event_ID FROM pwc_event_table WHERE Event_Name = ?)";
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, eventname);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int scoreID = rs.getInt("ScoreID");
+                    int eventID = rs.getInt("Event_ID");
+                    int participantID = rs.getInt("ParticipantID");
+                    double score = rs.getDouble("Score");
+
+                    // Assuming ButtonColumn is a class you've implemented
+                    JButton deleteButton = new JButton("Delete");
+                      ButtonColumn deleteAction = new ButtonColumn(jTable5, new AbstractAction() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Handle delete button click action
+        int row = jTable5.convertRowIndexToModel(jTable5.getEditingRow());
+     
+
+    }
+}, 4);
+
+                    model1.addRow(new Object[]{scoreID, eventID, participantID, score, deleteButton});
+                }
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+}
+
+public void display_participant(String eventname) {
+  model2.setRowCount(0); // Clear existing data in the table
+
+    try (Connection con = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD)) {
+        String query = "SELECT ParticipantID, Firstname, Lastname,email, Phone, Team_ID, Event_ID FROM participants_table WHERE Event_ID IN (SELECT Event_ID FROM pwc_event_table WHERE Event_Name = ?)";
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, eventname);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int partID = rs.getInt("ParticipantID");
+                   String fname= rs.getString("Firstname");
+                   String lname= rs.getString("Lastname");
+                   String email= rs.getString("email");
+                   String intnum= rs.getString("Phone");
+                   int participantID = rs.getInt("Team_ID");
+                  int eventID = rs.getInt("Event_ID");
+                 
+
+                    // Assuming ButtonColumn is a class you've implemented
+                    JButton deleteButton = new JButton("Delete");
+                      ButtonColumn1 deleteAction = new ButtonColumn1(jTable3, new AbstractAction() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Handle delete button click action
+        int row = jTable3.convertRowIndexToModel(jTable3.getEditingRow());
+     
+
+    }
+}, 7);
+
+                    model2.addRow(new Object[]{partID, fname, lname, email, intnum, participantID,  eventID ,deleteButton});
+                }
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+}
+
+public void display_Team(String eventname) {
+  model3.setRowCount(0); // Clear existing data in the table
+
+    try (Connection con = DriverManager.getConnection(mydb_url, myDB_username, myDB_PASSWORD)) {
+        String query = "SELECT Team_ID, Team_Name, CaptainDorPLayer_ID, Event_ID FROM team_table WHERE Event_ID IN (SELECT Event_ID FROM pwc_event_table WHERE Event_Name = ?)";
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, eventname);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int team_ID = rs.getInt("Team_ID");
+                   String teamname= rs.getString("Team_Name");
+                 
+                   int player_id = rs.getInt("CaptainDorPLayer_ID");
+                  int eventID = rs.getInt("Event_ID");
+                 
+
+                    // Assuming ButtonColumn is a class you've implemented
+                    JButton deleteButton = new JButton("Delete");
+                   ButtonColumn2 deleteAction = new ButtonColumn2(jTable4, new AbstractAction() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Handle delete button click action
+        int row = jTable4.convertRowIndexToModel(jTable4.getEditingRow());
+    }
+}, 4);
+                      
+// Assuming model3 has at least 5 columns
+                    model3.addRow(new Object[]{team_ID, teamname, player_id,  eventID ,deleteButton});
+                }
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+}
 
 
 
@@ -1715,7 +1965,7 @@ public static boolean verifyPasswordLength(String password) {
     public static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    public javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private java.awt.Label label1;
@@ -1734,10 +1984,4 @@ public static boolean verifyPasswordLength(String password) {
     // End of variables declaration//GEN-END:variables
 
   // this is where you code
-    
-    
-
-
-
-
 }

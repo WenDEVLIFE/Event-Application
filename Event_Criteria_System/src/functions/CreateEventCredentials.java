@@ -46,10 +46,10 @@ public class CreateEventCredentials {
                 int scoreid = getMaxId(connection, "Score_table", "Scoreid") + 1;
 
                 // Insert into participants_table
-                insertIntoTable(connection, "participants_table", participantID, firstn, lastn, email, phone, teamid);
+                insertIntoTable(connection, "participants_table", participantID, firstn, lastn, email, phone, teamid, eventID);
 
                 // Insert into team_table
-                insertIntoTable(connection, "team_table", teamid, team_type, playerid);
+                insertIntoTable(connection, "team_table", teamid, team_type, playerid,eventID);
 
                 // Insert into score_table
                 insertIntoTable(connection, "score_table", scoreid, eventID, participantID, score);

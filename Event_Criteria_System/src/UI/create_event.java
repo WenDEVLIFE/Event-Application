@@ -261,7 +261,9 @@ public static String tableName, event, loc, selectedString_month, selectedString
          maxparti.setSelectedItem(itemToSelect3);
         } catch (SQLException ex) {
             Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (ClassNotFoundException ex) {
+                Logger.getLogger(create_event.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 

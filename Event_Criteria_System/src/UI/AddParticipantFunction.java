@@ -340,14 +340,14 @@ public class AddParticipantFunction extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddParticipantFunction dialog = new AddParticipantFunction(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                AddParticipantFunction dialog1 = new AddParticipantFunction(new javax.swing.JFrame(), true);
+                dialog1.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
-                dialog.setVisible(true);
+                dialog1.setVisible(true);
             }
         });
     }
@@ -359,7 +359,16 @@ public class AddParticipantFunction extends javax.swing.JDialog {
     g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
     g.dispose();
     return resizedImage;
+    
 }
+  void showDialog() {
+        
+        setVisible(true);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+     
+       
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Emailtype;
     private javax.swing.JTextField EventName;
@@ -383,3 +392,4 @@ public class AddParticipantFunction extends javax.swing.JDialog {
     private javax.swing.JTextField phonenumber;
     // End of variables declaration//GEN-END:variables
 }
+
