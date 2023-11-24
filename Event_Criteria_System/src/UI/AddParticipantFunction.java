@@ -252,21 +252,38 @@ public class AddParticipantFunction extends javax.swing.JDialog {
     }//GEN-LAST:event_ScoreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // event name
-     String event =EventName.getText();
-    String firstn=Firstname1.getText();
-    String lastn=LastName.getText();
-    String email=Emailtype.getText();
-    String  phone=phonenumber.getText();
-    String  team_type = Team.getText();
-    String sco=Score.getText();
-     int score = Integer.parseInt(sco);
-    if( event.isEmpty() && firstn.isEmpty() && lastn.isEmpty() && email.isEmpty() && phone.isEmpty() && team_type.isEmpty() && sco.isEmpty()){
-         JOptionPane.showMessageDialog(this, "Please fill up firstname, secondname, email, phonenumber, team, and score");
-    }
-    else {
-        CreateEventCredentials n = new CreateEventCredentials( event, firstn,  lastn, email, phone, team_type, score );
-        n.create();
+     // event name
+    String event = EventName.getText();
+    String firstn = Firstname1.getText();
+    String lastn = LastName.getText();
+    String email = Emailtype.getText();
+    String phone = phonenumber.getText();
+    String team_type = Team.getText();
+    String sco = Score.getText();
+
+    if (event.isEmpty() || firstn.isEmpty() || lastn.isEmpty() || email.isEmpty() || phone.isEmpty() || team_type.isEmpty() || sco.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill up firstname, secondname, email, phonenumber, team, and score");
+    } else {
+        try {
+            // Try parsing the score as an integer
+            int score = Integer.parseInt(sco);
+
+            // Check if the score is greater than or equal to 0
+            if (score < 0) {
+                JOptionPane.showMessageDialog(this, "Score must be a non-negative number");
+            } else {
+                // Check if the phone number starts with 0
+                if (!phone.startsWith("0") || phone.length() != 11) {
+                    JOptionPane.showMessageDialog(this, "Phone number must start with 0 and have a length of 11");
+                } else {
+                    // Create event credentials
+                    CreateEventCredentials n = new CreateEventCredentials(event, firstn, lastn, email, phone, team_type, score);
+                    n.create();
+                }
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid score. Please enter a valid number.");
+        }
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 

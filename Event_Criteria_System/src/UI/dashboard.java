@@ -14,6 +14,7 @@ import event_criteria_system.Login;
 import static event_criteria_system.Login.user;
 import functions.ButtonColumn1;
 import functions.ButtonColumn2;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -37,6 +38,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
@@ -53,9 +55,9 @@ public class dashboard extends javax.swing.JFrame {
      */
      // this the jframe of class
     public static dashboard meow;
-     private DefaultTableModel model1;
-     private DefaultTableModel model2;
-     private DefaultTableModel model3;
+     public static DefaultTableModel model1;
+     public static DefaultTableModel model2;
+     public static DefaultTableModel model3;
     public static String confirmpassword1;
 private DefaultTableModel model;
 public static TableRowSorter <DefaultTableModel> sorter;
@@ -64,6 +66,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
  public static String username1;
     public static String password1;
  static int numberOfRows1;
+ public static String eventdb;
   public static String eventname;
     public static  dashboard currentFrame;
     
@@ -362,7 +365,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         });
         jPanel1.add(evb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 170, 70));
 
-        label4.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        label4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         label4.setForeground(new java.awt.Color(255, 255, 255));
         label4.setText(username);
         jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 140, 40));
@@ -501,7 +504,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel11.setForeground(new java.awt.Color(51, 51, 51));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable2.setBackground(new java.awt.Color(204, 204, 204));
+        jTable2.setBackground(new java.awt.Color(255, 255, 255));
         jTable2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTable2.setForeground(new java.awt.Color(51, 51, 51));
         jTable2.setModel(tableModel);
@@ -675,7 +678,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         model.addColumn("Role");
         model.addColumn("Delete");
         model.addColumn("Edit");
-        jTable.setBackground(new java.awt.Color(204, 204, 204));
+        jTable.setBackground(new java.awt.Color(255, 255, 255));
         jTable.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTable.setForeground(new java.awt.Color(51, 51, 51));
         jTable.setModel(model
@@ -782,7 +785,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane4.setViewportView(jTable3);
-        ButtonColumn1 buttonColumn1 = new ButtonColumn1(jTable3, deleteAction,7);
+        ButtonColumn buttonColumn = new ButtonColumn(jTable3, deleteAction,7);
 
         jPanel13.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1050, 850));
 
@@ -970,7 +973,7 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ButtonColumn buttonColumn = new ButtonColumn(jTable5, deleteAction,4);
+        ButtonColumn1 buttonColumn1 = new ButtonColumn1(jTable5, deleteAction,4);
         jScrollPane6.setViewportView(jTable5);
 
         jPanel17.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1050, 850));
@@ -1072,18 +1075,41 @@ public static TableRowSorter <DefaultTableModel> sorter;
     };
     // this is JTABLE2
 class ButtonRenderer extends JButton implements TableCellRenderer {
+    private ImageIcon deleteIcon;
+    private ImageIcon editIcon;
     public ButtonRenderer() {
+         // Load icons for delete and edit buttons
+        deleteIcon = new ImageIcon("src/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png");
+        editIcon = new ImageIcon("src/pictures/edituser.png");
+        
+            deleteIcon = resizeIcon(deleteIcon, 10, 10); // Adjust the size as needed
+        editIcon = resizeIcon(editIcon, 10, 10);     // Adjust the size as needed
+
+        setBackground(new Color(128, 0, 0)); // Set background color to maroon
         setOpaque(true);
+    }
+      private ImageIcon resizeIcon(ImageIcon icon, int width, int height) {
+        Image img = icon.getImage();
+        Image resizedImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImg);
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable jTable2, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+          if (column == 3) { // Assuming "Delete" column is at index 3
+            setIcon(deleteIcon);
+        } else if (column == 4) { // Assuming "Edit" column is at index 4
+            setIcon(editIcon);
+        }
+
         if (isSelected) {
             setForeground(jTable2.getSelectionForeground());
             setBackground(jTable2.getSelectionBackground());
         } else {
             setForeground(jTable2.getForeground());
+            setForeground(Color.WHITE);
             setBackground(UIManager.getColor("Button.background"));
+              setBackground(new Color(128, 0, 0));
         }
         setText((value == null) ? "" : value.toString());
         return this;
@@ -1122,12 +1148,41 @@ private void populateTableFromDatabase() {
 // this is for the Event Table
   // The ButtonRenderer1 class
  public class ButtonRenderer1 extends JButton implements TableCellRenderer {
-        public ButtonRenderer1() {
-            setOpaque(true);
-        }
+     private ImageIcon deleteIcon1;
+    private ImageIcon editIcon1;  
+    public ButtonRenderer1() {
+         // Load icons for delete and edit buttons
+        deleteIcon1 = new ImageIcon("src/pictures/icons8-trash-can-layout-for-a-indication-to-throw-trash-24.png");
+        editIcon1 = new ImageIcon("src/pictures/open.png");
+        
+            deleteIcon1 = resizeIcon(deleteIcon1, 10, 10); // Adjust the size as needed
+        editIcon1 = resizeIcon(editIcon1, 10, 10);     // Adjust the size as needed
+            setForeground(Color.WHITE);
+        setBackground(new Color(128, 0, 0)); // Set background color to maroon
+        setOpaque(true);
+    }
+      private ImageIcon resizeIcon(ImageIcon icon, int width, int height) {
+        Image img = icon.getImage();
+        Image resizedImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImg);
+    }
 
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        public Component getTableCellRendererComponent(JTable jtable2, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+              if (column == 6) { // Assuming "Delete" column is at index 3
+            setIcon(deleteIcon1);
+        } else if (column == 7) { // Assuming "Edit" column is at index 4
+            setIcon(editIcon1);
+        }
+             if (isSelected) {
+            setForeground(jTable2.getSelectionForeground());
+            setBackground(jTable2.getSelectionBackground());
+        } else {
+                setForeground(jTable2.getForeground());
+            setForeground(Color.WHITE);
+            setBackground(UIManager.getColor("Button.background"));
+              setBackground(new Color(128, 0, 0));
+        }
             setText((value == null) ? "" : value.toString());
             return this;
         }
@@ -1183,7 +1238,7 @@ private void populateTableFromDatabase() {
 
                         // Now you can use eventInRow to retrieve the corresponding event from the database
                         // Perform a database query here and store the result in a variable
-                        String eventdb = retrieveEventFromDatabase(eventInRow);
+                        eventdb = retrieveEventFromDatabase(eventInRow);
 
                         if (eventdb != null) {
                             // Do something with the retrieved event name
@@ -1263,7 +1318,9 @@ public class ButtonEditor extends DefaultCellEditor {
         super(checkBox);
         this.username_table = username_table;
         button = new JButton();
+        
         button.setOpaque(true);
+            button = new JButton();
         button.addActionListener((ActionEvent e) -> {
             fireEditingStopped();
         });
@@ -1307,7 +1364,7 @@ public Component getTableCellEditorComponent(JTable table, Object value, boolean
    public Object getCellEditorValue() {
     if (isPushed) {
              if ("Edit".equals(label)){
-                 
+
                  System.out.println("hehee");
                                        Object[] options = {"Change Username", "Change Password", "Cancel"};
 
@@ -1634,7 +1691,7 @@ if (result == JOptionPane.YES_OPTION) {
 
     private void addev4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev4ActionPerformed
         // TODO add your handling code here:
-            create_event dialog = new create_event(new java.awt.Frame(), true);
+            create_event dialog = new create_event(new java.awt.Frame(), true , username);
             dialog.showDialog();
     }//GEN-LAST:event_addev4ActionPerformed
 
@@ -1860,7 +1917,8 @@ public void display_Team(String eventname) {
                  
 
                     // Assuming ButtonColumn is a class you've implemented
-                    JButton deleteButton = new JButton("Delete");
+                      JButton deleteButton = new JButton("Delete");
+             
                    ButtonColumn2 deleteAction = new ButtonColumn2(jTable4, new AbstractAction() {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -1899,12 +1957,12 @@ public void display_Team(String eventname) {
     private javax.swing.JPanel dashboards;
     private javax.swing.JButton evb;
     public static transient volatile javax.swing.JPanel eventboard1;
-    private java.awt.Label eventlabels;
+    public static java.awt.Label eventlabels;
     private java.awt.Label eventlabels1;
     private java.awt.Label eventlabels11;
-    private java.awt.Label eventlabels5;
+    public static java.awt.Label eventlabels5;
     private java.awt.Label eventlabels6;
-    private java.awt.Label eventlabels7;
+    public static java.awt.Label eventlabels7;
     private java.awt.Label eventlabels9;
     private javax.swing.JPanel events;
     private javax.swing.JButton jButton2;

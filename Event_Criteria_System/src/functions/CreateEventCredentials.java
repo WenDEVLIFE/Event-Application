@@ -3,7 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package functions;
+import UI.dashboard;
+import static UI.dashboard.eventdb;
+import static UI.dashboard.eventlabels;
+import static UI.dashboard.eventlabels5;
+import static UI.dashboard.eventname;
+import static UI.dashboard.jTabbedPane1;
+import static UI.dashboard.meow;
+import static UI.dashboard.username;
 import java.sql.*;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,9 +66,16 @@ public class CreateEventCredentials {
 
                 // Close the connection
                 connection.close();
-
+                  eventlabels.setText("Event Name:"+eventname);
+       meow.dispose();
+      meow =  new dashboard(username);
+                meow.setVisible(true);
+                   jTabbedPane1.setSelectedIndex(3);
                 System.out.println("Record inserted successfully!");
+                ImageIcon icon1 = new ImageIcon("src/pictures/check.png");
+JOptionPane.showMessageDialog(null, "Event credentials successfully added", "Message", JOptionPane.INFORMATION_MESSAGE,icon1);
             } else {
+JOptionPane.showMessageDialog(null, "Event not found", "Message", JOptionPane.ERROR_MESSAGE);
                 System.out.println("Event not found for the provided name: " + event);
             }
 

@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package functions;
+import UI.dashboard;
+import static UI.dashboard.jTabbedPane1;
+import static UI.dashboard.meow;
+import static UI.dashboard.username;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,12 +32,12 @@ public class CreateEventFunction {
        
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         CreateEventFunction c = new CreateEventFunction(tableName, event, loc, selectedString_month, selectedString_day, selectedString_year,  selectedString_participants);
         c.createTable();
     }
     
-     public void createTable() throws SQLException {
+     public void createTable() throws SQLException, ClassNotFoundException {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String alldate = selectedString_month + "/" + selectedString_day + "/" + selectedString_year;
 
@@ -72,9 +76,15 @@ public class CreateEventFunction {
 
             // If the event was successfully added to the database, display a success message.
             if (rowsAffected == 1) {
-                JOptionPane.showMessageDialog(null, "Event added successfully.");
+                         ImageIcon icon1 = new ImageIcon("src/pictures/check.png");
+JOptionPane.showMessageDialog(null, "Succesfully added the event", "Message", JOptionPane.INFORMATION_MESSAGE,icon1);
+                 meow.dispose();
+meow =  new dashboard(username);
+                meow.setVisible(true);
+                   jTabbedPane1.setSelectedIndex(3);
             } else {
-                JOptionPane.showMessageDialog(null, "Failed to add event.");
+                        ImageIcon icon1 = new ImageIcon("src/pictures/check.png");
+JOptionPane.showMessageDialog(null, "Failed to add the event", "Message", JOptionPane.ERROR_MESSAGE,icon1);
             }
         }
     

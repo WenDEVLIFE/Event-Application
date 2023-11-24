@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static UI.dashboard.meow;
-import static UI.dashboard.username;
+
 import static UI.dashboard.jTabbedPane1;
 /**
  *
@@ -27,15 +27,16 @@ import static UI.dashboard.jTabbedPane1;
  */
 public class create_event extends java.awt.Dialog {
 public static String tableName, event, loc, selectedString_month, selectedString_day, selectedString_year,selectedString_participants;
-    /**
+  public static String username;
+/**
      * Creates new form create_user
      * @param parent
      * @param modal
      */
-    public create_event(java.awt.Frame parent, boolean modal) {
+    public create_event(java.awt.Frame parent, boolean modal, String username) {
         super(parent, modal);
      
- 
+     this.username=username;
       
             setLocationRelativeTo(null);
             setResizable(false);
@@ -217,6 +218,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         setVisible(false);
         dispose();
+    
          
           
     }//GEN-LAST:event_closeDialog
@@ -309,7 +311,7 @@ public static String tableName, event, loc, selectedString_month, selectedString
 	        e.printStackTrace();
 	    }
         java.awt.EventQueue.invokeLater(() -> {
-            create_event dialog = new create_event(new java.awt.Frame(), true);
+            create_event dialog = new create_event(new java.awt.Frame(), true, username);
             dialog.setTitle("Create Event");
             
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {

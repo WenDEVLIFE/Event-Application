@@ -168,7 +168,7 @@
         <Component class="java.awt.Label" name="label4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Verdana" size="10" style="1"/>
+              <Font name="Verdana" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -707,7 +707,7 @@
                     <Component class="javax.swing.JTable" name="jTable2">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Verdana" size="12" style="1"/>
@@ -1164,7 +1164,7 @@
                 <Component class="javax.swing.JTable" name="jTable">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="12" style="1"/>
@@ -1180,7 +1180,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;            // Establish a database connection&#xa;             java.sql.Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/eventsystem_db&quot;, &quot;root&quot;, &quot;&quot;);&#xa;&#xa;            // Create a statement and execute a SELECT query&#xa;            java.sql.Statement statement = connection.createStatement();&#xa;             java.sql.ResultSet resultSet = statement.executeQuery(&quot;SELECT id, username, role, password from user&quot;);&#xa;&#xa;            // Populate the DefaultTableModel with data from the ResultSet&#xa;            while (resultSet.next()) {&#xa;                int id = resultSet.getInt(&quot;id&quot;);&#xa;                String username = resultSet.getString(&quot;username&quot;);&#xa;                String role = resultSet.getString(&quot;role&quot;);&#xa;               &#xa;                // Create buttons for delete and edit&#xa;                JButton deleteButton = new JButton(&quot;Delete&quot;);&#xa;                JButton editButton = new JButton(&quot;Edit&quot;);&#xa;&#xa;                // Add action listeners to the buttons&#xa;       deleteButton.addActionListener(new ActionListener() {&#xa;        public void actionPerformed(ActionEvent e) {&#xa;}&#xa;    });&#xa;&#xa;                editButton.addActionListener(new ActionListener() {&#xa;                    @Override&#xa;                    public void actionPerformed(ActionEvent e) {&#xa;                              Object[] options = {&quot;Option 1&quot;, &quot;Option 2&quot;, &quot;Option 3&quot;};&#xa;&#xa;        // Show the JOptionPane with three buttons&#xa;        int choice = JOptionPane.showOptionDialog(&#xa;            null,&#xa;            &quot;Select an option:&quot;,&#xa;            &quot;Options&quot;,&#xa;            JOptionPane.DEFAULT_OPTION,&#xa;            JOptionPane.QUESTION_MESSAGE,&#xa;            null,&#xa;            options,&#xa;            options[0] // Default selection&#xa;        );&#xa;&#xa;        // Handle the user&apos;s choice&#xa;        if (choice == 0) {&#xa;            // User selected &quot;Option 1&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 1&quot;);&#xa;        } else if (choice == 1) {&#xa;            // User selected &quot;Option 2&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 2&quot;);&#xa;        } else if (choice == 2) {&#xa;            // User selected &quot;Option 3&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 3&quot;);&#xa;        }&#xa;                    }&#xa;                });&#xa;&#xa;                // Add data to the model, including buttons&#xa;                model.addRow(new Object[]{id, username, role, &quot;Delete&quot;, &quot;Edit&quot;});&#xa;            }&#xa;&#xa;            // Close the database connection&#xa;            connection.close();&#xa;        } catch (Exception e) {&#xa;            e.printStackTrace();&#xa;        }"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;            // Establish a database connection&#xa;             java.sql.Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/eventsystem_db&quot;, &quot;root&quot;, &quot;&quot;);&#xa;&#xa;            // Create a statement and execute a SELECT query&#xa;            java.sql.Statement statement = connection.createStatement();&#xa;             java.sql.ResultSet resultSet = statement.executeQuery(&quot;SELECT id, username, role, password from user&quot;);&#xa;&#xa;            // Populate the DefaultTableModel with data from the ResultSet&#xa;            while (resultSet.next()) {&#xa;                int id = resultSet.getInt(&quot;id&quot;);&#xa;                String username = resultSet.getString(&quot;username&quot;);&#xa;                String role = resultSet.getString(&quot;role&quot;);&#xa;               &#xa;                // Create buttons for delete and edit&#xa;         JButton deleteButton = new JButton(&quot;Delete&quot;);&#xa;         JButton editButton = new JButton(&quot;Edit&quot;);&#xa;&#xa;                // Add action listeners to the buttons&#xa;       deleteButton.addActionListener(new ActionListener() {&#xa;        public void actionPerformed(ActionEvent e) {&#xa;}&#xa;    });&#xa;&#xa;                editButton.addActionListener(new ActionListener() {&#xa;                    @Override&#xa;                    public void actionPerformed(ActionEvent e) {&#xa;                              Object[] options = {&quot;Option 1&quot;, &quot;Option 2&quot;, &quot;Option 3&quot;};&#xa;&#xa;        // Show the JOptionPane with three buttons&#xa;        int choice = JOptionPane.showOptionDialog(&#xa;            null,&#xa;            &quot;Select an option:&quot;,&#xa;            &quot;Options&quot;,&#xa;            JOptionPane.DEFAULT_OPTION,&#xa;            JOptionPane.QUESTION_MESSAGE,&#xa;            null,&#xa;            options,&#xa;            options[0] // Default selection&#xa;        );&#xa;&#xa;        // Handle the user&apos;s choice&#xa;        if (choice == 0) {&#xa;            // User selected &quot;Option 1&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 1&quot;);&#xa;        } else if (choice == 1) {&#xa;            // User selected &quot;Option 2&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 2&quot;);&#xa;        } else if (choice == 2) {&#xa;            // User selected &quot;Option 3&quot;&#xa;            JOptionPane.showMessageDialog(null, &quot;You selected Option 3&quot;);&#xa;        }&#xa;                    }&#xa;                });&#xa;&#xa;                // Add data to the model, including buttons&#xa;                model.addRow(new Object[]{id, username, role, &quot;Delete&quot;, &quot;Edit&quot;});&#xa;            }&#xa;&#xa;            // Close the database connection&#xa;            connection.close();&#xa;        } catch (Exception e) {&#xa;            e.printStackTrace();&#xa;        }"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTable.getColumn(&quot;Delete&quot;).setCellRenderer(new ButtonRenderer());&#xa;jTable.getColumn(&quot;Delete&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));&#xa;&#xa;// For the &quot;Edit&quot; column&#xa;jTable.getColumn(&quot;Edit&quot;).setCellRenderer(new ButtonRenderer());&#xa;jTable.getColumn(&quot;Edit&quot;).setCellEditor(new ButtonEditor(new JCheckBox(), jTable, (DefaultTableModel) jTable.getModel()));&#xa;&#xa;// Create a custom editor for the column containing buttons"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="// Create a table model with button columns&#xa;        model = new DefaultTableModel() {&#xa;            public Class&lt;?&gt; getColumnClass(int column) {&#xa;                if (column == 4 || column == 5) { // Assuming delete is column 4 and edit is column 5&#xa;                    return JButton.class;&#xa;                } else {&#xa;                    return Object.class;&#xa;                }&#xa;            }&#xa;        };&#xa;&#xa;        model.addColumn(&quot;ID&quot;);&#xa;        model.addColumn(&quot;Username&quot;);&#xa;        model.addColumn(&quot;Role&quot;);&#xa;        model.addColumn(&quot;Delete&quot;);&#xa;        model.addColumn(&quot;Edit&quot;);"/>
@@ -1272,7 +1272,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="jTable3">
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ButtonColumn1 buttonColumn1 = new ButtonColumn1(jTable3, deleteAction,7);"/>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ButtonColumn buttonColumn = new ButtonColumn(jTable3, deleteAction,7);"/>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(model2)"/>
                         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="model2 = new DefaultTableModel();&#xa;model2.addColumn(&quot;ParticipantID&quot;);&#xa;        model2.addColumn(&quot;FirstName&quot;);&#xa;         model2.addColumn(&quot;LastName&quot;);&#xa;         model2.addColumn(&quot;Email&quot;);&#xa;         model2.addColumn(&quot;Phone&quot;);&#xa;model2.addColumn(&quot;Team_ID&quot;); &#xa;model2.addColumn(&quot;Event_ID&quot;); &#xa;        model2.addColumn(&quot;Delete&quot;);"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -1313,6 +1313,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Participant Table"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="10" width="660" height="70"/>
@@ -1580,6 +1583,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Event Name:"/>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="10" y="10" width="610" height="70"/>
@@ -1732,7 +1738,7 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable( model1)"/>
                         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="model1 = new DefaultTableModel();&#xa;model1.addColumn(&quot;ScoreID&quot;);&#xa;        model1.addColumn(&quot;EventID&quot;);&#xa;        model1.addColumn(&quot;ParticipantID&quot;);&#xa;        model1.addColumn(&quot;Score&quot;);&#xa;        model1.addColumn(&quot;Delete&quot;);"/>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ButtonColumn buttonColumn = new ButtonColumn(jTable5, deleteAction,4);"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ButtonColumn1 buttonColumn1 = new ButtonColumn1(jTable5, deleteAction,4);"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
@@ -1770,6 +1776,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Event Name:"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="10" y="10" width="610" height="70"/>

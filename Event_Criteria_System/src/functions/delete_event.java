@@ -36,6 +36,7 @@ public class delete_event {
 
                     if (rowsDeleted > 0) {
                         System.out.println("Event with ID " + eventID + " deleted from the database.");
+                        
                         meow.dispose();
                         meow =  new dashboard(username);
                 meow.setVisible(true);
