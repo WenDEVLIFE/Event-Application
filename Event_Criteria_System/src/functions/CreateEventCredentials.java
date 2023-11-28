@@ -10,6 +10,9 @@ import static UI.dashboard.eventlabels5;
 import static UI.dashboard.eventname;
 import static UI.dashboard.jTabbedPane1;
 import static UI.dashboard.meow;
+import static UI.dashboard.model1;
+import static UI.dashboard.model2;
+import static UI.dashboard.model3;
 import static UI.dashboard.username;
 import java.sql.*;
 import javax.swing.ImageIcon;
@@ -65,12 +68,26 @@ public class CreateEventCredentials {
                 insertIntoTable(connection, "score_table", scoreid, eventID, participantID, score);
 
                 // Close the connection
+                Object[] rowData = { participantID, firstn, lastn, email, phone, teamid, eventID};
                 connection.close();
-                  eventlabels.setText("Event Name:"+eventname);
-       meow.dispose();
-      meow =  new dashboard(username);
-                meow.setVisible(true);
-                   jTabbedPane1.setSelectedIndex(3);
+              model2.addRow(rowData);
+
+// To refresh the table display
+model2.fireTableDataChanged();
+
+   Object[] rowData1 = {teamid, team_type, playerid,eventID};
+ 
+              model3.addRow(rowData1);
+
+// To refresh the table display
+model3.fireTableDataChanged();
+
+   Object[] rowData2 = { scoreid, eventID, participantID, score};
+
+              model1.addRow(rowData2);
+
+// To refresh the table display
+model1.fireTableDataChanged();
                 System.out.println("Record inserted successfully!");
                 ImageIcon icon1 = new ImageIcon("src/pictures/check.png");
 JOptionPane.showMessageDialog(null, "Event credentials successfully added", "Message", JOptionPane.INFORMATION_MESSAGE,icon1);

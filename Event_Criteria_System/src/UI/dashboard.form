@@ -1272,10 +1272,10 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="jTable3">
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ButtonColumn buttonColumn = new ButtonColumn(jTable3, deleteAction,7);"/>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(model2)"/>
                         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="model2 = new DefaultTableModel();&#xa;model2.addColumn(&quot;ParticipantID&quot;);&#xa;        model2.addColumn(&quot;FirstName&quot;);&#xa;         model2.addColumn(&quot;LastName&quot;);&#xa;         model2.addColumn(&quot;Email&quot;);&#xa;         model2.addColumn(&quot;Phone&quot;);&#xa;model2.addColumn(&quot;Team_ID&quot;); &#xa;model2.addColumn(&quot;Event_ID&quot;); &#xa;        model2.addColumn(&quot;Delete&quot;);"/>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ButtonColumn buttonColumn = new ButtonColumn(jTable3, deleteAction,7);"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
@@ -1527,6 +1527,7 @@
                             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(model3)"/>
                             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="model3 = new DefaultTableModel();&#xa;model3.addColumn(&quot;Team_ID&quot;); &#xa;model3.addColumn(&quot;Team_Name&quot;); &#xa;model3.addColumn(&quot;CaptainDorPLayer_ID&quot;); &#xa;model3.addColumn(&quot;Event_ID&quot;); &#xa;model3.addColumn(&quot;Delete&quot;);"/>
                             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ButtonColumn2 buttonColumn2 = new ButtonColumn2(jTable4, deleteAction,4);"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -1677,6 +1678,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Print"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addev2ActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="270" y="90" width="240" height="40"/>
@@ -1739,6 +1743,7 @@
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable( model1)"/>
                         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="model1 = new DefaultTableModel();&#xa;model1.addColumn(&quot;ScoreID&quot;);&#xa;        model1.addColumn(&quot;EventID&quot;);&#xa;        model1.addColumn(&quot;ParticipantID&quot;);&#xa;        model1.addColumn(&quot;Score&quot;);&#xa;        model1.addColumn(&quot;Delete&quot;);"/>
                         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ButtonColumn1 buttonColumn1 = new ButtonColumn1(jTable5, deleteAction,4);"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
@@ -1852,6 +1857,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Print"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addev7ActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="260" y="90" width="240" height="40"/>

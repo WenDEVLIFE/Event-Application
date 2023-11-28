@@ -14,6 +14,9 @@ import event_criteria_system.Login;
 import static event_criteria_system.Login.user;
 import functions.ButtonColumn1;
 import functions.ButtonColumn2;
+import functions.convert_pdf_file;
+import functions.convert_pdf_file_Score;
+import functions.convert_pdf_file_Team_Table;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -22,6 +25,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultCellEditor;
@@ -44,6 +48,7 @@ import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Administrator
@@ -784,8 +789,8 @@ public static TableRowSorter <DefaultTableModel> sorter;
 
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane4.setViewportView(jTable3);
         ButtonColumn buttonColumn = new ButtonColumn(jTable3, deleteAction,7);
+        jScrollPane4.setViewportView(jTable3);
 
         jPanel13.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1050, 850));
 
@@ -961,6 +966,11 @@ public static TableRowSorter <DefaultTableModel> sorter;
         addev2.setForeground(new java.awt.Color(255, 255, 255));
         addev2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         addev2.setText("Print");
+        addev2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addev2ActionPerformed(evt);
+            }
+        });
         jPanel20.add(addev2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 240, 40));
 
         jPanel14.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -1027,6 +1037,11 @@ public static TableRowSorter <DefaultTableModel> sorter;
         addev7.setForeground(new java.awt.Color(255, 255, 255));
         addev7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/icons8-plus-32.png"))); // NOI18N
         addev7.setText("Print");
+        addev7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addev7ActionPerformed(evt);
+            }
+        });
         jPanel15.add(addev7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 240, 40));
 
         jTabbedPane1.addTab("tab6", jPanel15);
@@ -1696,8 +1711,34 @@ if (result == JOptionPane.YES_OPTION) {
     }//GEN-LAST:event_addev4ActionPerformed
 
     private void addevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addevActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            convert_pdf_file p = new  convert_pdf_file(eventname);
+            p.pdf();
+        } catch (IOException ex) {
+            Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_addevActionPerformed
+
+    private void addev7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev7ActionPerformed
+        try {
+            // TODO add your handling code here:
+            convert_pdf_file_Score pdfScoreGenerator = new convert_pdf_file_Score(eventname);
+            pdfScoreGenerator.pdf();
+        } catch (IOException ex) {
+            Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addev7ActionPerformed
+
+    private void addev2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addev2ActionPerformed
+        try {
+            // TODO add your handling code here:
+            convert_pdf_file_Team_Table s = new convert_pdf_file_Team_Table(eventname);
+            s.pdf();
+        } catch (IOException ex) {
+            Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addev2ActionPerformed
 
 // To verify the password length
 public static boolean verifyPasswordLength(String password) {
@@ -2023,9 +2064,9 @@ public void display_Team(String eventname) {
     public static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JTable jTable2;
-    public javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
+    public static javax.swing.JTable jTable3;
+    public static javax.swing.JTable jTable4;
+    public static javax.swing.JTable jTable5;
     private java.awt.Label label1;
     private java.awt.Label label10;
     private java.awt.Label label11;
